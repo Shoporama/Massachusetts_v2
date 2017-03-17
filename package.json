@@ -4,17 +4,17 @@
   "description": "Theme for ShopOrama",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp-less": "~3.3.0"
-  },
-  "devDependencies": {
-    "gulp-less": "~3.3.0",
-    "less-plugin-autoprefix": "~1.5.1",
+    "clean-css": "~4.0.9"
     "gulp": "~3.9.1",
     "gulp-cli": "~1.2.2",
     "gulp-clean-css": "~3.0.3",
-    "clean-css": "~4.0.9"
+    "gulp-less": "~3.3.0",
+    "less-plugin-autoprefix": "~1.5.1"
+  },
+  "devDependencies": {
   },
   "scripts": {
+    "setup": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
