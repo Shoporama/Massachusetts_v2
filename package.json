@@ -1,5 +1,5 @@
 {
-  "name": "Massachusetts v2",
+  "name": "Massachusetts_v2",
   "version": "2.0.0",
   "description": "Theme for ShopOrama",
   "main": "gulpfile.js",
@@ -11,7 +11,8 @@
     "less-plugin-autoprefix": "~1.5.1",
     "gulp": "~3.9.1",
     "gulp-cli": "~1.2.2",
-    "gulp-clean-css": "~3.0.3"
+    "gulp-clean-css": "~3.0.3",
+    "clean-css": "~4.0.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
