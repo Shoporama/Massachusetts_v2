@@ -4,7 +4,7 @@
   "description": "Theme for ShopOrama",
   "main": "gulpfile.js",
   "dependencies": {
-    "clean-css": "~4.0.9"
+    "clean-css": "~4.0.9",
     "gulp": "~3.9.1",
     "gulp-cli": "~1.2.2",
     "gulp-clean-css": "~3.0.3",
