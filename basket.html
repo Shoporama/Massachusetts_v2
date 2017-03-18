@@ -16,15 +16,9 @@
 		            <{if $get.s == "NaN"}>
 		            <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
 					<{/if}>
-					<{if $shipping_country && intval($shipping_country->getFreeAbove())}>
-					<{if $shipping_country->getFreeAbove() gt $price}>
-					<p class="alert alert-info" role="alert"><span class="glyphicon glyphicon glyphicon-star-empty" aria-hidden="true"></span> Der er gratis fragt hvis du køber for mere end <{$shipping_country->getFreeAbove()|number_format:2:",":"."}> <{$webshop->getCurrency()|escape}>.&nbsp;
-						Få gratis fragt ved at købe for <{math equation="x - y" x=$shipping_country->getFreeAbove() y=$price}> <{$webshop->getCurrency()|escape}> mere.<p>
-					<{else}>
-					<p class="alert alert-info" role="alert"><span class="glyphicon glyphicon glyphicon-star-empty" aria-hidden="true"></span> Du har købt for mere end <{$shipping_country->getFreeAbove()|number_format:2:",":"."}> <{$webshop->getCurrency()|escape}>.&nbsp;
-						- og derved har du mulighed for at vælge gratis fragt.<p>
-					<{/if}>
-					<{/if}>
+
+					<{include file="_include_free_shipping.html"}>
+
 		            <form class="form-inline" role="form" id="form" method="post" action="">
 		                <ul id="basket-content-list">
 		                    <li class="row" id="basket-content-listhead">
