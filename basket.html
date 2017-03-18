@@ -16,6 +16,13 @@
 		            <{if $get.s == "NaN"}>
 		            <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
 					<{/if}>
+					<{if $shipping_country && intval($shipping_country->getFreeAbove())}>
+					<{if $shipping_country->getFreeAbove() gt $price}>
+					<p>Der er gratis fragt hvis du køber for mere end <{$shipping_country->getFreeAbove()|number_format:2:",":"."}> <{$webshop->getCurrency()|escape}>.
+						Du har lagt for <{$price|number_format:2:",":"."}> i kurven.
+						Så du skal købe for <{math equation="x - y" x=$shipping_country->getFreeAbove() y=$price}> for at få gratis fragt.<p>
+					<{/if}>
+					<{/if}>
 		            <form class="form-inline" role="form" id="form" method="post" action="">
 		                <ul id="basket-content-list">
 		                    <li class="row" id="basket-content-listhead">
