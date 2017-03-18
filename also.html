@@ -1,3 +1,9 @@
+<div id="site" class="">
+	<{include file="_include_header.html"}>
+
+	<div id="sitecontent">
+		<section id="page-content">
+			<div class="container"><div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
 <{if $product}>
     <h2>Du lagde <{$product->getName()|escape}> i kurven</h2>
 
@@ -88,3 +94,13 @@
     <div class="clear"></div>
 
 <{/if}>
+			</div></div></div>
+		</section>
+	</div><!--/#sitecontent-->
+	<{include file="_include_footer.html"}>
+
+	<button id="totop">Til toppen</button>
+	<{include file="_include_cookiepolicy.html"}>
+</div><!--/#site-->
+
+<{include file="_include_side-basket.html"}>
