@@ -75,7 +75,7 @@
 
 				<div id="basket-summary">
 					<span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$order->getVat()|number_format:2:",":"."}></span>
-					<span id="basket-content-shipping">Fragt : <{$webshop->getCurrency()}> <{$shipping_price|number_format:2:",":"."}></span>
+					<span id="basket-content-shipping">Fragt: <{$webshop->getCurrency()}> <{$order->getShippingPrice()|number_format:2:",":"."}></span>
 				</div>
 
 				<div>
