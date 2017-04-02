@@ -12,7 +12,8 @@
     "gulp-rename": "~1.2.2"
   },
   "devDependencies": {
-    "gulp-lesshint": "^3.0.0"
+    "gulp-lesshint": "^3.0.0",
+    "gulp-jslint": "^1.0.10"
   },
   "scripts": {
     "setup": "npm install",
