@@ -1,5 +1,18 @@
 <{strip}>
-<{assign var="splat" value=$product->getMetaValue('splat')}>
+<{assign var="innerproduct" value="product_cache_"|cat:$product->getProductId()}>
+<{assign var="randomttl" value=43200|mt_rand:86400}>
+
+<{get_cache name=$innerproduct ttl=$randomttl assign="inner_product_cached_data"}>
+
+<{if $inner_product_cached_data}>
+
+    <{$inner_product_cached_data}>
+
+<{else}>
+
+    <{cache name=$innerproduct}>
+
+<{assign var="splat" value=$product->getMetaValue('splat') }>
 <{assign var="images" value=$product->getImages()}>
 <{assign var="supplier" value=$product->getSupplier()}>
 <{assign var="profile" value=$product->getProfile()}>
@@ -130,4 +143,6 @@
             </div>
         <{/if}>
     </div>
-</li><{/strip}>
+</li>
+<{/cache}>
+<{/if}><{/strip}>
