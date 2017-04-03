@@ -5,11 +5,10 @@
     <div id="site" class="staticpage">
         <{include file="_include_header.html"}>
         <section id="sitecontent">
-
-            <{if $images|@count > 1}>
-            <section id="brandidentity" style="background-image: url(<{$images[0]->getSrc(1000, 1000, 'fit')->getSrc(1000, 1000, 'fit')}>);">
+            <{if $images|@count > 0}>
+            <section id="brandidentity" style="background-image: url(<{$images[0]->getSrc(1000, 1000, 'fit')}>);">
                 <div id="brandidentity-content">
-                    <h1><{$page->getHeadline()|escape}></h1>
+                    <h1 style="color: white;"><{$page->getHeadline()|escape}></h1>
                 </div>
             </section><!--/#brandidentity-->
             <{/if}>
