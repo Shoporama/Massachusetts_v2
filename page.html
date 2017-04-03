@@ -1,14 +1,28 @@
+<{assign var="images" value=$page->getImages()}>
+
 <{strip}><{capture name="title"}><{$page->getHeadline()}><{/capture}>
 
     <div id="site" class="staticpage">
         <{include file="_include_header.html"}>
         <section id="sitecontent">
 
+            <{if $images|@count > 1}>
+            <section id="brandidentity" style="background-image: url(<{$images[0]->getSrc(1000, 1000, 'fit')->getSrc(1000, 1000, 'fit')}>);">
+                <div id="brandidentity-content">
+                    <h1><{$page->getHeadline()|escape}></h1>
+                </div>
+            </section><!--/#brandidentity-->
+            <{/if}>
+
             <section id="page-content">
                 <div class="container"><div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <h1><{$page->getHeadline()|escape}></h1>
 
-                    <{assign var="images" value=$page->getImages()}>
+                    <{if $images|@count < 1}>
+                    <h1><{$page->getHeadline()|escape}></h1>
+                    <{/if}>
+
+                    <{$page->getText()}>
+
                     <{if $images}>
                         <div class="pageimages">
 
@@ -42,9 +56,6 @@
 
                         </div>
                     <{/if}>
-
-                    <{$page->getText()}>
-
 
                 </div></div></div><!--/.row /.container-->
             </section>
