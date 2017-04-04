@@ -1,7 +1,20 @@
-<{strip}><{capture name="title"}><{$category->getName()}><{/capture}>
+<{strip}>
+<{capture name="title"}><{$category->getName()}><{/capture}>
+<{assign var="cacheCategory" value=$category->getCategoryId()|cat:'_'|cat:$get.p}>
+<{assign var="cacheCategoryData" $category->getCategoryId()|cat:'_data_'|cat:$get.p}>
+
         <div id="site" class="">
 
             <{include file="_include_header.html"}>
+
+            <{get_cache name=$cacheCategory ttl=3600 assign="cacheCategoryData"}>
+
+            <{if $cacheCategoryData}><{$cacheCategoryData}>
+
+            <{else}>
+
+            <{cache name=$cacheCategory}>
+
             <{assign var="catimages" value=$category->getImages()}>
             <section id="sitecontent">
                 <{if $catimages}>
@@ -19,7 +32,6 @@
                         <div class="categorydescription descA"><{$category->getDescriptionA()}></div>
                     </div></div></div>
                 </section>
-
 
                 <{assign var="subcats" value=$category->getChildren()}>
                 <{if $subcats}>
@@ -50,8 +62,6 @@
 
                 <{/if}>
 
-
-
                 <section id="products">
                     <div class="container"><div class="row">
                         <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
@@ -74,10 +84,6 @@
                     </div></div><!--/.container .row-->
                 </section>
 
-
-
-
-
                 <{if $category->getDescriptionB()}>
                 <section id="product-list-foot">
                     <div class="container"><div class="row"><div class="col-xs-12">
@@ -89,6 +95,9 @@
                 <{include file="_include_page-persuasion.html"}>
 
             </section><!--/#sitecontent-->
+
+            <{/cache}>
+            <{/if}>
 
             <{include file="_include_footer.html"}>
 
