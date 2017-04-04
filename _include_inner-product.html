@@ -1,15 +1,17 @@
 <{strip}>
-<{assign var="splat" value=$product->getMetaValue('splat') }>
+<{assign var="splat" value=$product->getMetaValue('splat')}>
 <{assign var="images" value=$product->getImages()}>
 <{assign var="supplier" value=$product->getSupplier()}>
 <{assign var="profile" value=$product->getProfile()}>
 <{assign var="attr" value=$profile->getAttributeList()}>
 
-<li rel="product" title="" class="col-xs-12 col-sm-4 col-md-3 product-teaser <{$product->getCategoryNames("filter-"," ")}> <{if $supplier}> filter-<{$supplier->getName()|lower|replace:' ':'_'|replace:'.':'_'}><{/if}>" itemscope itemtype="http://schema.org/Product">
+<li rel="product" data-id="<{$product->getProductId()}>"<{if $supplier}> data-brand="<{$supplier->getName()}>" <{/if}> class="col-xs-12 col-sm-4 col-md-3 product-teaser <{$product->getCategoryNames("filter-"," ")}> <{if $supplier}> filter-<{$supplier->getName()|lower|replace:' ':'_'|replace:'.':'_'}><{/if}>" itemscope itemtype="http://schema.org/Product">
     <div class="product-teaser-inner">
         <a href="<{$product->getRemoteUrl()|escape}>" title="<{$product->getName()|escape}>">
             <{if $attr}>
             <div class="sizes">
+                <{if $product->getIsInStock() == true}>
+                <span>Varianter på lager:</span>
                 <ul>
                     <{section name="j" loop=$attr}>
                         <{if $attr[j]->getIsVariant() && $attr[j]->getDataType() == "valuelist"}>
@@ -28,10 +30,14 @@
 
                             <{/section}>
                         <{/if}>
-
                     <{/section}>
-
                 </ul>
+                <{else}>
+                <span>Produktet er i restordre:</span>
+                <ul>
+                    <li>Skriv dig op til at få besked på produktet.</li>
+                </ul>
+                <{/if}>
             </div>
             <{/if}>
         	<{section name="j" loop=$images start=0 max=1}>
@@ -112,8 +118,6 @@
 
                         <button class="product-teaser-readmore btn btn-primary" type="submit" value=" "><{$settings.Produktlister.Knaptekst_koeb}></button>
                     </div>
-
-
                 </form>
             <{else}>
                 <div class="product-teaser-cta">
@@ -125,7 +129,5 @@
                 <a href="<{$product->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_laesmere}></a>
             </div>
         <{/if}>
-
-
     </div>
 </li><{/strip}>

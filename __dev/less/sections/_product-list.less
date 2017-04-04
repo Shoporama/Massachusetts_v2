@@ -7,22 +7,22 @@
         font-weight: @headings-font-weight;
         &:after {
             content: '—';
+            display: block;
             font-weight: bold;
             font-size: 30px;
             line-height: 0;
-            display: block;
             margin: 15px;
         }
     }
 }
 
 #product-list-foot {
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 #catimg {
-    background-size: cover;
     background-position: center center;
+    background-size: cover;
     height: 200px;
 }
 
@@ -49,8 +49,8 @@
 }
 
 .morelink-container {
-    text-align: center;
     padding: 50px 0;
+    text-align: center;
 }
 
 .more {
@@ -67,9 +67,9 @@
 .product-teaser {
     .product-teaser-inner {
         background: #fff;
-        margin-bottom: 30px;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
         border-radius: @border-radius-base;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
         overflow: hidden;
 
         .transition(all 200ms ease;);
@@ -90,19 +90,19 @@
 
             .sizes {
                 background: #fff;
-                position: absolute;
-                padding: 15px;
-                text-align: center;
-                opacity: 0;
                 font-size: 12px;
+                opacity: 0;
+                padding: 15px;
+                position: absolute;
                 right: floor((@grid-gutter-width / 2));
+                text-align: center;
 
                 .transition(opacity 200ms ease;);
 
-                &:before {
-                    content: 'Varianter på lager:';
+                span {
                     font-weight: 700;
                 }
+
                 ul {
                     list-style-type: none;
                     margin: 10px 0 0 0;
@@ -114,49 +114,48 @@
             }
 
             img.product-image {
-                width: 100%;
                 border: 10px solid #fff;
+                width: 100%;
             }
 
             .product-teaser-highlight {
-                width: 60px;
-                height: 60px;
-                line-height: 56px;
-                text-align: center;
-                color: #fff;
-                position: absolute;
-                top: -5px;
-                left: 5px;
                 background: transparent url('../img/splat.svg') no-repeat;
                 background-size: cover;
-                font-weight: bold;
-                font-size: 12px;
                 box-sizing: border-box;
+                font-size: 12px;
+                font-weight: bold;
+                color: #fff;
+                height: 60px;
+                left: 5px;
+                line-height: 56px;
+                position: absolute;
+                text-align: center;
+                top: -5px;
+                width: 60px;
 
                 &.news {
                     background: #fff;
+                    border: 2px solid #31e43e;
                     border-radius: 100%;
                     color: #31e43e;
-                    border: 2px solid #31e43e;
-
                 }
 
                 &.offer {
-                    font-size: 16px;
-                    border: 2px solid #ffd200;
                     background: #ffd200;
+                    border: 2px solid #ffd200;
                     border-radius: 100%;
                     color: #333;
+                    font-size: 16px;
                 }
             }
 
             .product-teaser-meta {
-                padding: 15px;
                 height: 200px;
+                padding: 15px;
 
                 .product-teaser-title {
-                    font-weight: 600;
                     font-size: 100%;
+                    font-weight: 600;
                 }
 
                 .product-teaser-brand {
@@ -176,33 +175,33 @@
                     margin-top: 10px;
 
                     .product-teaser-price-before {
+                        color: lighten(@text-color, 60%);
                         font-size: 80%;
                         text-decoration: line-through;
-                        color: lighten(@text-color, 60%);
                     }
 
                     .product-teaser-availability {
-                        font-size: 60%;
                         display: block;
+                        font-size: 60%;
                         font-weight: 300;
 
                         &.instock {
                             &:before {
-                                font-family: 'Glyphicons Halflings';
+                                color: @brand-primary;
                                 content: "\e013";
+                                font-family: 'Glyphicons Halflings';
                                 font-size: 70%;
                                 margin-right: 5px;
-                                color: @brand-primary;
                             }
                         }
 
                         &.outofstock {
                             &:before {
-                                font-family: 'Glyphicons Halflings';
+                                color: grey;
                                 content: "\e014";
+                                font-family: 'Glyphicons Halflings';
                                 font-size: 70%;
                                 margin-right: 5px;
-                                color: grey;
                             }
                         }
                     }
@@ -218,40 +217,40 @@
         }
 
         .product-teaser-cta {
+            border-top: 1px solid #efefef;
             padding: 15px;
             text-align: center;
-            border-top: 1px solid #efefef;
 
             .product-variant-selectbox {
                 @media (max-width: @screen-xs-max) {
-                    width: 100%;
                     margin-bottom: 10px;
+                    width: 100%;
                 }
 
                 @media (min-width: @screen-sm) {
-                    margin-right: 10px;
-                    width: 40%;
+                    border: 1px solid #ccc;
                     height: 37px;
                     line-height: 37px;
+                    margin-right: 10px;
                     padding: 6px 12px;
-                    border: 1px solid #ccc;
                     vertical-align: middle;
+                    width: 40%;
                 }
             }
 
             .product-teaser-quantity {
-                width: 30px;
-                height: 34px;
                 border: 1px solid #ccc;
                 border-radius: @border-radius-base;
-                text-align: center;
                 display: inline-block;
+                height: 34px;
+                text-align: center;
+                width: 30px;
             }
 
             .product-teaser-addtobasket,
             .product-teaser-readmore {
-                display: inline-block;
                 color: #fff;
+                display: inline-block;
 
                 @media (max-width: @screen-xs-max) {
                     width: 100%;
@@ -262,33 +261,24 @@
 }
 
 #product-list-pagination {
-    text-align: center;
-    padding: 50px 0;
     clear: both;
+    padding: 50px 0;
+    text-align: center;
 
     nav {
-        display: flex;
         align-items: center;
+        display: flex;
         justify-content: center;
 
         span, a {
             display: inline-block;
             margin-bottom: 20px;
-
-            @media (max-width: @screen-sm-max) {
-                padding: 10px 16px;
-            }
-
-            @media (min-width: @screen-md) {
-                padding: 6px 10px;
-            }
-
-            border: 1px solid rgba(0, 0, 0, .1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-left: 0;
             color: #333;
 
             &:first-child {
-                border-left: 1px solid rgba(0, 0, 0, .1);
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
                 border-radius: 3px 0 0 3px;
             }
 
@@ -297,14 +287,21 @@
             }
 
             &:hover {
+                background: rgba(0, 0, 0, 0.1);
                 text-decoration: none;
-                background: rgba(0, 0, 0, .1);
             }
 
             &.current {
                 font-weight: bold;
             }
-        }
 
+            @media (max-width: @screen-sm-max) {
+                padding: 10px 16px;
+            }
+
+            @media (min-width: @screen-md) {
+                padding: 6px 10px;
+            }
+        }
     }
 }
