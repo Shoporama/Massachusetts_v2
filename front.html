@@ -1,6 +1,5 @@
 <{strip}>
-
-<div id="site" class="">
+<div id="site" class="front">
     <{include file="_include_header.html"}>
 
     <div id="sitecontent">
@@ -23,93 +22,88 @@
 
                 <{section name="i" loop=$frontpagecats}>
 
-                <{if $frontpagecats|@count == 1}>
-                <div class="col-xs-12 col-sm-4 col-sm-offset-4 category-teaser">
+                    <{if $frontpagecats|@count == 1}>
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-4 category-teaser">
                     <{elseif $frontpagecats|@count < 3}>
-                    <div class="col-xs-6 col-sm-4 category-teaser col-pusher-2">
-                        <{elseif $frontpagecats|@count < 4}>
+                        <div class="col-xs-6 col-sm-4 category-teaser col-pusher-2">
+                    <{elseif $frontpagecats|@count < 4}>
                         <div class="col-xs-4 col-sm-3 category-teaser col-pusher-3">
-                            <{elseif $frontpagecats|@count < 5}>
-                            <div class="col-xs-6 col-sm-3 category-teaser">
-                                <{elseif $frontpagecats|@count < 7}>
-                                <div class="col-xs-6 col-sm-6 col-md-2 category-teaser">
-                                    <{elseif $frontpagecats|@count > 6}>
-                                    <div class="col-xs-6 col-sm-3 col-md-2 category-teaser">
-                                        <{else}>
-                                        <div class="col-xs-12 category-teaser">
-                                            <{/if}>
-                                            <a href="<{$frontpagecats[i]->getUrl()|escape}>" class="category-teaser-inner">
-                                                <{assign var="images" value=$frontpagecats[i]->getImages()}>
-                                                <{if $images}>
-                                                <{section name="j" loop=$images start=0 max=1}>
-                                                <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$frontpagecats[i]->getName()|escape}>">
-                                                <{/section}>
-                                                <{/if}>
-                                                <div class="category-teaser-title">
-                                                    <{$frontpagecats[i]->getName()|escape}>
-                                                </div>
-                                                <div class="category-teaser-description">
-                                                    <{$frontpagecats[i]->getDescriptionA()}>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <{/section}>
+                    <{elseif $frontpagecats|@count < 5}>
+                        <div class="col-xs-6 col-sm-3 category-teaser">
+                    <{elseif $frontpagecats|@count < 7}>
+                        <div class="col-xs-6 col-sm-6 col-md-2 category-teaser">
+                    <{elseif $frontpagecats|@count > 6}>
+                        <div class="col-xs-6 col-sm-3 col-md-2 category-teaser">
+                    <{else}>
+                        <div class="col-xs-12 category-teaser">
+                    <{/if}>
 
-                                    </div></div><!--/.row /.container-->
-                                </section><!--/#categorylist-->
-                                <{/if}>
-                                <{if $category->getDescriptionA()}>
-                                <section id="front-list-head">
-                                    <div class="container"><div class="row"><div class="col-xs-12">
-                                        <div class="categorydescription descA"><{$category->getDescriptionA()}></div>
-                                    </div></div></div>
-                                </section>
-                                <{/if}>
+                    <a href="<{$frontpagecats[i]->getUrl()|escape}>" class="category-teaser-inner">
+                        <{assign var="images" value=$frontpagecats[i]->getImages()}>
+                        <{if $images}>
+                            <{section name="j" loop=$images start=0 max=1}>
+                                <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$frontpagecats[i]->getName()|escape}>">
+                            <{/section}>
+                        <{/if}>
+                        <div class="category-teaser-title">
+                            <{$frontpagecats[i]->getName()|escape}>
+                        </div>
+                        <div class="category-teaser-description">
+                            <{$frontpagecats[i]->getDescriptionA()}>
+                        </div>
+                    </a>
+                    </div>
+                <{/section}>
 
-                                <section id="highlighted-products">
-                                    <h2 class="section-header"><{if $settings.forside.Forsideproduktoverskrift}><{$settings.forside.Forsideproduktoverskrift}><{/if}></h2>
-                                    <div class="container"><div class="row">
+            </div></div><!--/.row /.container-->
+        </section><!--/#categorylist-->
+        <{/if}>
+        <{if $category->getDescriptionA()}>
+            <section id="front-list-head">
+                <div class="container"><div class="row"><div class="col-xs-12">
+                <div class="categorydescription descA"><{$category->getDescriptionA()}></div>
+                </div></div></div>
+            </section>
+        <{/if}>
 
-                                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+        <section id="highlighted-products">
+            <h2 class="section-header"><{if $settings.forside.Forsideproduktoverskrift}><{$settings.forside.Forsideproduktoverskrift}><{/if}></h2>
+            <div class="container"><div class="row">
+                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                    <{assign var="products" value=$category->getOnlineProducts()}>
+                    <{section name="i" loop=$products start=0 max=8}>
+                        <{include file="_include_inner-product.html" product=$products[i]}>
+                    <{/section}>
 
-                                            <{assign var="products" value=$category->getOnlineProducts()}>
-                                            <{section name="i" loop=$products start=0 max=8}>
-                                            <{include file="_include_inner-product.html" product=$products[i]}>
-                                            <{/section}>
+                </ul>
+             </div></div><!--/.row /.container-->
+        </section><!--/#highlighted-products-->
 
-                                        </ul>
+        <{if $category->getDescriptionB()}>
+            <section id="front-list-foot">
+                <div class="container"><div class="row"><div class="col-xs-12">
+                    <div class="categorydescription descB"><{$category->getDescriptionB()}></div>
+                </div></div></div>
+            </section>
+        <{/if}>
 
-                                    </div></div><!--/.row /.container-->
-                                </section><!--/#highlighted-products-->
+        <{include file="_include_page-persuasion.html"}>
 
-                                <{if $category->getDescriptionB()}>
-                                <section id="front-list-foot">
-                                    <div class="container"><div class="row"><div class="col-xs-12">
-                                        <div class="categorydescription descB"><{$category->getDescriptionB()}></div>
-                                    </div></div></div>
-                                </section>
-                                <{/if}>
+        <{if $settings.Instagramfeed.Aktivt == 'ja'}>
+            <section id="instafeed-container">
+                <div id="instafeed"></div>
+            </section>
+        <{/if}>
 
-                                <{include file="_include_page-persuasion.html"}>
+    </div><!--/#sitecontent-->
 
-                                <{if $settings.Instagramfeed.Aktivt == 'ja'}>
-                                <section id="instafeed-container">
-                                    <div id="instafeed"></div>
-                                </section>
-                                <{/if}>
+    <{include file="_include_footer.html"}>
 
+    <button id="totop">Scroll til toppen</button>
 
-                            </div><!--/#sitecontent-->
+    <{include file="_include_cookiepolicy.html"}>
 
-                            <{include file="_include_footer.html"}>
+</div><!--/#site-->
 
-
-                            <button id="totop">Scroll til toppen</button>
-
-                            <{include file="_include_cookiepolicy.html"}>
-
-                        </div><!--/#site-->
-
-
-                        <{include file="_include_side-basket.html"}>
-                        <{/strip}>
+<{include file="_include_side-basket.html"}>
+<{/strip}>
