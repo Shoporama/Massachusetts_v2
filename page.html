@@ -2,7 +2,7 @@
 <{capture name="title"}><{$page->getHeadline()}><{/capture}>
 <{assign var="cachePage" value=$page->getPageId()}>
 <{assign var="cachePageData" value=$page->getPageId()|cat:'_data'}>
-<{if $settings.Caching.LevetidLandingSide}>
+<{if $settings.Caching.LevetidSide}>
     <{assign var="ttl" value=$settings.Caching.LevetidSide}>
 <{else}>
     <{assign var="ttl" value="3600"}>
