@@ -2,7 +2,11 @@
 <{capture name="title"}><{$landing_page->getName()}><{/capture}>
 <{assign var="cacheLandingPage" value=$landing_page->getLandingPageId()|cat:'_'|cat:$get.p}>
 <{assign var="cacheLandingPageData" $landing_page->getLandingPageId()|cat:'_data_'|cat:$get.p}>
-<{assign var="ttl" value="3600"}>
+<{if $settings.Caching.LevetidLandingSide}>
+    <{assign var="ttl" value=$settings.Caching.LevetidLandingSide}>
+<{else}>
+    <{assign var="ttl" value="3600"}>
+<{/if}>
 
 <div id="site" class="landing-page">
 

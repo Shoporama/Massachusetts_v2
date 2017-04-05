@@ -1,5 +1,9 @@
 <{strip}>
-<{assign var="ttl" value="3600"}>
+<{if $settings.Caching.LevetidNavigation}>
+    <{assign var="ttl" value=$settings.Caching.LevetidNavigation}>
+<{else}>
+    <{assign var="ttl" value="3600"}>
+<{/if}>
 <{get_cache name="shoporama_manu" ttl=$ttl assign="shoporama_menu_data"}>
 
 <{if $shoporama_menu_data}>

@@ -1,5 +1,9 @@
 <{strip}>
-<{assign var="ttl" value="3600"}>
+<{if $settings.Caching.LevetidFooter}>
+    <{assign var="ttl" value=$settings.Caching.LevetidFooter}>
+<{else}>
+    <{assign var="ttl" value="3600"}>
+<{/if}>
 <{get_cache name="shoporama_footer" ttl=$ttl assign="shoporama_footer_data"}>
 
 <{if $shoporama_footer_data}>

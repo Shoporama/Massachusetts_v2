@@ -2,7 +2,11 @@
 <{capture name="title"}><{$page->getHeadline()}><{/capture}>
 <{assign var="cachePage" value=$page->getPageId()}>
 <{assign var="cachePageData" value=$page->getPageId()|cat:'_data'}>
-<{assign var="ttl" value="86400"}>
+<{if $settings.Caching.LevetidLandingSide}>
+    <{assign var="ttl" value=$settings.Caching.LevetidSide}>
+<{else}>
+    <{assign var="ttl" value="3600"}>
+<{/if}>
 
     <div id="site" class="staticpage">
         <{include file="_include_header.html"}>

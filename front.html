@@ -2,7 +2,11 @@
 <div id="site" class="frontpage">
     <{include file="_include_header.html"}>
 
-    <{assign var="ttl" value="3600"}>
+    <{if $settings.Caching.LevetidForside}>
+        <{assign var="ttl" value=$settings.Caching.LevetidForside}>
+    <{else}>
+        <{assign var="ttl" value="3600"}>
+    <{/if}>
     <{get_cache name="shoporama_frontpage" ttl=$ttl assign="shoporama_frontpage_data"}>
 
     <{if $shoporama_frontpage_data}>
