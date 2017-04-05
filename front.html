@@ -1,6 +1,17 @@
 <{strip}>
-<div id="site" class="front">
+<div id="site" class="frontpage">
     <{include file="_include_header.html"}>
+
+    <{assign var="ttl" value="3600"}>
+    <{get_cache name="shoporama_frontpage" ttl=$ttl assign="shoporama_frontpage_data"}>
+
+    <{if $shoporama_frontpage}>
+
+        <{$shoporama_frontpage_data}>
+
+    <{else}>
+
+    <{cache name="shoporama_frontpage"}>
 
     <div id="sitecontent">
 
@@ -96,6 +107,10 @@
         <{/if}>
 
     </div><!--/#sitecontent-->
+
+    <!-- Her skal du skrive din egen kode -->
+    <{/cache}>
+    <{/if}>
 
     <{include file="_include_footer.html"}>
 
