@@ -37,7 +37,7 @@
 											</div>
 										<{/if}>
 									</a>
-										<{if $product->hasBundleProducts()}>
+									<{if $product->hasBundleProducts()}>
 										<{assign var="bundle" value=$product->getBundleProducts()}>
 										<{if $bundle}>
 										<ul>
@@ -45,12 +45,12 @@
 											<{assign var="b_product" value=$bundle[j]}>
 											<{assign var="id" value=$b_product->getProductId()}>
 											<li>
-												<{$b_product->getName()|escape}> <{if $basket[j].bundle.$id}> (<{$basket[j].bundle.$id.val}>)<{/if}>
+												<{$b_product->getName()|escape}> <{if $basket[i].bundle.$id}> (<{$basket[i].bundle.$id.val}>)<{/if}>
 											</li>
 											<{/section}>
 										</ul>
 										<{/if}>
-										<{/if}>
+									<{/if}>
 									</div>
 									<div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
 								</li>
