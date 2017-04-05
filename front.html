@@ -5,7 +5,7 @@
     <{assign var="ttl" value="3600"}>
     <{get_cache name="shoporama_frontpage" ttl=$ttl assign="shoporama_frontpage_data"}>
 
-    <{if $shoporama_frontpage}>
+    <{if $shoporama_frontpage_data}>
 
         <{$shoporama_frontpage_data}>
 
