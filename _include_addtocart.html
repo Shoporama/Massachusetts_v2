@@ -1,12 +1,45 @@
 <{strip}>
 <{assign var="profile" value=$product->getProfile()}>
 <{assign var="attr" value=$profile->getAttributeList()}>
-<{if $product->getIsInStock()}>
+
+<{if $product->getIsInStock() || $product->hasBundleProducts()}>
 	<form action="" method="post" id="putinbasketform">
 		<input type="hidden" name="product_id" value="<{$product->getProductId()}>"/>
 		<input type="hidden" name="redirect" value="<{$product->getMetaValue('redirect')|escape}>"/>
 		<div id="product-cta-action">
-			<{if $product->hasVariant()}>
+			<{if $product->hasBundleProducts()}>
+				<{assign var="bundle" value=$product->getBundleProducts()}>
+				<{if $bundle}>
+				<p>I denne pakke</p>
+
+					<{section name="i" loop=$bundle}>
+						<{assign var="b_product" value=$bundle[i]}>
+						<{assign var="b_profile" value=$b_product->getProfile()}>
+						<{assign var="b_attr" value=$b_profile->getAttributeList()}>
+
+						<label for="attr_<{$b_product->getProductId()}>"><{$b_product->getName()|escape}></label><br/>
+
+						<{section name="j" loop=$b_attr}>
+							<{if $b_attr[j]->getIsVariant()}>
+								<{if $b_attr[j]->getDataType() == "valuelist"}>
+									<{assign var="values" value=$b_attr[j]->getValues()}>
+									<select id="attr_<{$b_product->getProductId()}>" name="b_attributes[<{$b_product->getProductId()}>][<{$b_attr[j]->getAttributeId()}>]" required="required">
+									<{section name="k" loop=$values}>
+										<{if $b_product->getInStock($b_attr[j]->getAttributeId(), $values[k]->getAttributeValueId()) > 0}>
+											<option value="<{$values[k]->getAttributeValueId()}>">
+												<{$values[k]->getVal()|escape}>
+											</option>
+										<{/if}>
+									<{/section}>
+									</select>
+									<br/>
+								<{/if}>
+							<{/if}>
+						<{/section}>
+					<{/section}>
+					<br/>
+				<{/if}>
+			<{elseif $product->hasVariant()}>
 	            <div class="product-variant-selecter">
 
 	        		<{section name="j" loop=$attr}>
@@ -40,8 +73,8 @@
 					<{/section}>
 
 				</div>
-				<{else}>
-					<input type="hidden" id="single-stock-amount" value="<{$product->getInStock($attributes[0].id, $attributes[0].value_id)}>">
+			<{else}>
+				<input type="hidden" id="single-stock-amount" value="<{$product->getInStock($attributes[0].id, $attributes[0].value_id)}>">
 	        <{/if}>
 	        <div class="input-group">
 	            <input type="text" class="form-control" name="amount" id="amount-input" value="1">
