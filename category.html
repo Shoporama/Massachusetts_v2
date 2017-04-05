@@ -8,111 +8,102 @@
     <{assign var="ttl" value="3600"}>
 <{/if}>
 
-        <div id="site" class="">
+<div id="site" class="category">
 
-            <{include file="_include_header.html"}>
+    <{include file="_include_header.html"}>
+    <{get_cache name=$cacheCategory ttl=$ttl assign="cacheCategoryData"}>
+    <{if $cacheCategoryData}>
+        <{$cacheCategoryData}>
+    <{else}>
+        <{cache name=$cacheCategory}>
 
-            <{get_cache name=$cacheCategory ttl=$ttl assign="cacheCategoryData"}>
-
-            <{if $cacheCategoryData}><{$cacheCategoryData}>
-
+        <{assign var="catimages" value=$category->getImages()}>
+        <section id="sitecontent">
+            <{if $catimages}>
+                <{section name="j" loop=$catimages start=1 max=2}>
+                    <div id="catimg" style="background-image:url(<{$catimages[j]->getSrc(1000,200,'fit')}>)"></div>
+                <{/section}>
             <{else}>
+            <{/if}>
 
-            <{cache name=$cacheCategory}>
+            <{include file="_include_breadcrumbs.html"}>
 
-            <{assign var="catimages" value=$category->getImages()}>
-            <section id="sitecontent">
-                <{if $catimages}>
-                    <{section name="j" loop=$catimages start=1 max=2}>
-                        <div id="catimg" style="background-image:url(<{$catimages[j]->getSrc(1000,200,'fit')}>)"></div>
-                    <{/section}>
-                    <{else}>
-                <{/if}>
+            <section id="product-list-head">
+                <div class="container"><div class="row"><div class="col-xs-12">
+                    <h1><{$category->getName()|escape}></h1>
+                    <div class="categorydescription descA"><{$category->getDescriptionA()}></div>
+                </div></div></div>
+            </section>
 
-                <{include file="_include_breadcrumbs.html"}>
+            <{assign var="subcats" value=$category->getChildren()}>
+            <{if $subcats}>
 
-                <section id="product-list-head">
-                    <div class="container"><div class="row"><div class="col-xs-12">
-                        <h1><{$category->getName()|escape}></h1>
-                        <div class="categorydescription descA"><{$category->getDescriptionA()}></div>
-                    </div></div></div>
-                </section>
-
-                <{assign var="subcats" value=$category->getChildren()}>
-                <{if $subcats}>
-
-                    <section id="categorylist" class="subcats">
-                        <div class="container"><div class="row">
-
-                            <{section name="i" loop=$subcats}>
-                                <div class="col-xs-6 col-sm-4 col-lg-3 category-teaser">
-                                    <div class="category-layout">
-                                        <a href="<{$subcats[i]->getUrl()|escape}>" class="category-teaser-inner">
-                                            <{assign var="images" value=$subcats[i]->getImages()}>
-                                            <{if $images}>
-                                                <{section name="j" loop=$images start=0 max=1}>
-                                                    <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$subcats[i]->getName()|escape}>">
-                                                <{/section}>
-                                            <{/if}>
-                                            <div class="category-teaser-title">
-                                                <{$subcats[i]->getName()|escape}>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <{/section}>
-
-                        </div></div><!--/.container .row-->
-                    </section>
-
-                <{/if}>
-
-                <section id="products">
+                <section id="categorylist" class="subcats">
                     <div class="container"><div class="row">
-                        <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
-                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
 
-                            <{section name="i" loop=$products}>
-                                <{include file="_include_inner-product.html" product=$products[i]}>
-                            <{/section}>
-
-                        </ul>
-
-                        <{if $pager}>
-                            <{assign var="pages" value=$pager->render()}>
-                            <{if $pages}>
-                                <div id="product-list-pagination">
-                                    <nav class="pagination"><{$pages}></nav>
+                        <{section name="i" loop=$subcats}>
+                            <div class="col-xs-6 col-sm-4 col-lg-3 category-teaser">
+                                <div class="category-layout">
+                                    <a href="<{$subcats[i]->getUrl()|escape}>" class="category-teaser-inner">
+                                        <{assign var="images" value=$subcats[i]->getImages()}>
+                                        <{if $images}>
+                                            <{section name="j" loop=$images start=0 max=1}>
+                                                <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$subcats[i]->getName()|escape}>">
+                                            <{/section}>
+                                        <{/if}>
+                                        <div class="category-teaser-title">
+                                            <{$subcats[i]->getName()|escape}>
+                                        </div>
+                                    </a>
                                 </div>
-                            <{/if}>
-                        <{/if}>
+                            </div>
+                        <{/section}>
                     </div></div><!--/.container .row-->
                 </section>
 
-                <{if $category->getDescriptionB()}>
+            <{/if}>
+
+            <section id="products">
+                <div class="container"><div class="row">
+                    <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
+                    <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                        <{section name="i" loop=$products}>
+                            <{include file="_include_inner-product.html" product=$products[i]}>
+                        <{/section}>
+                    </ul>
+
+                    <{if $pager}>
+                        <{assign var="pages" value=$pager->render()}>
+                        <{if $pages}>
+                            <div id="product-list-pagination">
+                                <nav class="pagination"><{$pages}></nav>
+                            </div>
+                        <{/if}>
+                    <{/if}>
+                </div></div><!--/.container .row-->
+            </section>
+
+            <{if $category->getDescriptionB()}>
                 <section id="product-list-foot">
                     <div class="container"><div class="row"><div class="col-xs-12">
                         <div class="categorydescription descB"><{$category->getDescriptionB()}></div>
                     </div></div></div>
                 </section>
-                <{/if}>
+            <{/if}>
 
-                <{include file="_include_page-persuasion.html"}>
+            <{include file="_include_page-persuasion.html"}>
 
             </section><!--/#sitecontent-->
 
             <{/cache}>
-            <{/if}>
 
-            <{include file="_include_footer.html"}>
+        <{/if}>
 
+        <{include file="_include_footer.html"}>
 
-            <button id="totop">Til toppen</button>
+        <button id="totop">Til toppen</button>
+        <{include file="_include_cookiepolicy.html"}>
+    </div><!--/#site-->
 
-            <{include file="_include_cookiepolicy.html"}>
-
-        </div><!--/#site-->
-
-        <{include file="_include_side-basket.html"}>
-
+    <{include file="_include_side-basket.html"}>
 <{/strip}>

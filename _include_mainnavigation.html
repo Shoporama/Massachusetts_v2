@@ -1,4 +1,15 @@
 <{strip}>
+<{assign var="ttl" value="3600"}>
+<{get_cache name="shoporama_manu" ttl=$ttl assign="shoporama_menu_data"}>
+
+<{if $shoporama_menu_data}>
+
+    <{$shoporama_menu_data}>
+
+<{else}>
+
+<{cache name="shoporama_menu"}>
+
 <nav id="sitenav" class="" aria-label="Menu" role="navigation">
     <div class="hidden-md hidden-lg" id="mobile-search">
         <form action="<{$webshop->getUrl()|escape}>/search">
@@ -35,4 +46,6 @@
     </ul>
     <button class="takeover-close">&times;</button>
 </nav>
+<{/cache}>
+<{/if}>
 <{/strip}>

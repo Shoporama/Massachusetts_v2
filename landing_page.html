@@ -1,97 +1,106 @@
-<{strip}><{capture name="title"}><{$landing_page->getName()}><{/capture}>
+<{strip}>
+<{capture name="title"}><{$landing_page->getName()}><{/capture}>
+<{assign var="cacheLandingPage" value=$landing_page->getLandingPageId()|cat:'_'|cat:$get.p}>
+<{assign var="cacheLandingPageData" $landing_page->getLandingPageId()|cat:'_data_'|cat:$get.p}>
+<{assign var="ttl" value="3600"}>
 
+<div id="site" class="landing-page">
 
-        <div id="site" class="">
+    <{include file="_include_header.html"}>
 
-            <{include file="_include_header.html"}>
-            <{assign var="lpimages" value=$landing_page->getImages()}>
-            <section id="sitecontent" <{if $catimages}><{section name="j" loop=$lpimages}><{if $lpimages|@count < 2}>style="padding-top:80px;"<{else}>data-kim="intet billede!"<{/if}><{/section}><{/if}>>
-                <{if $catimages}>
-                    <{section name="j" loop=$lpimages start=1 max=2}>
-                        <div id="catimg" style="background-image:url(<{$lpimages[j]->getSrc(1000,200,'fit')}>)"></div>
-                    <{/section}>
-                    <{else}>
-                <{/if}>
+    <{get_cache name=$cacheLandingPage ttl=$ttl assign="cacheLandingPageData"}>
+    <{if $cacheLandingPageData}>
+        <{$cacheLandingPageData}>
+    <{else}>
+    <{cache name=$cacheLandingPage}>
 
-                <section id="product-list-head">
-                    <div class="container"><div class="row"><div class="col-xs-12">
-                        <h1><{$landing_page->getName()|escape}></h1>
-                        <div class="categorydescription descA"><{$landing_page->getDescriptionA()}></div>
-                    </div></div></div>
-                </section>
+    <{assign var="lpimages" value=$landing_page->getImages()}>
 
-                <{if $landing_page->getMetaValue("categorylist")}>
+    <section id="sitecontent" <{if $lpimages}><{section name="j" loop=$lpimages}><{if $lpimages|@count < 2}>style="padding-top:80px;"<{/if}><{/section}><{/if}>>
+        <{if $lpimages}>
+            <{section name="j" loop=$lpimages start=1 max=2}>
+                <div id="catimg" style="background-image:url(<{$lpimages[j]->getSrc(1000,200,'fit')}>)"></div>
+            <{/section}>
+        <{else}>
+        <{/if}>
 
-                    <{assign var="listcats" value=$webshop->getCategories()}>
-                    <{if $listcats}>
+        <section id="product-list-head">
+            <div class="container"><div class="row"><div class="col-xs-12">
+                <h1><{$landing_page->getName()|escape}></h1>
+                <div class="categorydescription descA"><{$landing_page->getDescriptionA()}></div>
+            </div></div></div>
+        </section>
 
-                        <section id="categorylist" class="listcats">
-                            <div class="container"><div class="row">
+        <{if $landing_page->getMetaValue("categorylist")}>
 
-                                <{section name="i" loop=$listcats}>
-                                    <{if $listcats[i]->getInMenu()}>
-                                        <div class="col-xs-6 col-sm-4 col-lg-3 category-teaser">
-                                            <div class="category-layout">
-                                                <a href="<{$listcats[i]->getUrl()|escape}>" class="category-teaser-inner">
-                                                    <{assign var="images" value=$listcats[i]->getImages()}>
-                                                    <{if $images}>
-                                                        <{section name="j" loop=$images start=0 max=1}>
-                                                            <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$listcats[i]->getName()|escape}>">
-                                                        <{/section}>
-                                                    <{/if}>
-                                                    <div class="category-teaser-title">
-                                                        <{$listcats[i]->getName()|escape}>
-                                                    </div>
-                                                </a>
+            <{assign var="listcats" value=$webshop->getCategories()}>
+            <{if $listcats}>
+                <section id="categorylist" class="listcats">
+                    <div class="container"><div class="row">
+                        <{section name="i" loop=$listcats}>
+                            <{if $listcats[i]->getInMenu()}>
+                                <div class="col-xs-6 col-sm-4 col-lg-3 category-teaser">
+                                    <div class="category-layout">
+                                        <a href="<{$listcats[i]->getUrl()|escape}>" class="category-teaser-inner">
+                                            <{assign var="images" value=$listcats[i]->getImages()}>
+                                            <{if $images}>
+                                                <{section name="j" loop=$images start=0 max=1}>
+                                                    <img class="category-teaser-image" src="<{$images[j]->getSrc(400,400,'box')}>" alt="<{$listcats[i]->getName()|escape}>">
+                                                <{/section}>
+                                            <{/if}>
+                                            <div class="category-teaser-title">
+                                                <{$listcats[i]->getName()|escape}>
                                             </div>
-                                        </div>
-                                    <{/if}>
-                                <{/section}>
+                                        </a>
+                                    </div>
+                                </div>
+                            <{/if}>
+                        <{/section}>
 
-                            </div></div><!--/.container .row-->
-                        </section>
-
-                    <{/if}>
-
-                <{else}>
-
-
-                    <section id="products">
-                        <div class="container"><div class="row">
-                            <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
-                            <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-
-                                <{section name="i" loop=$products}>
-    								<{include file="_include_inner-product.html" product=$products[i]}>
-    							<{/section}>
-
-                            </ul>
-
-                        </div></div><!--/.container .row-->
-                    </section>
-
-                <{/if}>
-
-                <{if $landing_page->getDescriptionB()}>
-                <section id="product-list-foot">
-                    <div class="container"><div class="row"><div class="col-xs-12">
-                        <div class="categorydescription descB"><{$landing_page->getDescriptionB()}></div>
-                    </div></div></div>
+                    </div></div><!--/.container .row-->
                 </section>
-                <{/if}>
+            <{/if}>
 
-                <{include file="_include_page-persuasion.html"}>
+        <{else}>
 
-            </section><!--/#sitecontent-->
+            <section id="products">
+                <div class="container"><div class="row">
+                    <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
+                    <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
 
-            <{include file="_include_footer.html"}>
+                        <{section name="i" loop=$products}>
+    					    <{include file="_include_inner-product.html" product=$products[i]}>
+                        <{/section}>
 
+                    </ul>
 
-            <button id="totop">Til toppen</button>
+                </div></div><!--/.container .row-->
+            </section>
 
-            <{include file="_include_cookiepolicy.html"}>
+        <{/if}>
 
-        </div><!--/#site-->
+        <{if $landing_page->getDescriptionB()}>
+            <section id="product-list-foot">
+                <div class="container"><div class="row"><div class="col-xs-12">
+                    <div class="categorydescription descB"><{$landing_page->getDescriptionB()}></div>
+                </div></div></div>
+            </section>
+        <{/if}>
 
-        <{include file="_include_side-basket.html"}>
+        <{include file="_include_page-persuasion.html"}>
+
+    </section><!--/#sitecontent-->
+
+    <{/cache}>
+    <{/if}>
+
+    <{include file="_include_footer.html"}>
+
+    <button id="totop">Til toppen</button>
+
+    <{include file="_include_cookiepolicy.html"}>
+
+</div><!--/#site-->
+
+<{include file="_include_side-basket.html"}>
 <{/strip}>
