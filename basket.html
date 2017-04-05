@@ -36,7 +36,22 @@
 												<{/foreach}>
 											</div>
 										<{/if}>
-									</a></div>
+									</a>
+										<{if $product->hasBundleProducts()}>
+										<{assign var="bundle" value=$product->getBundleProducts()}>
+										<{if $bundle}>
+										<ul>
+											<{section name="j" loop=$bundle}>
+											<{assign var="b_product" value=$bundle[j]}>
+											<{assign var="id" value=$b_product->getProductId()}>
+											<li>
+												<{$b_product->getName()|escape}> <{if $basket[j].bundle.$id}> (<{$basket[j].bundle.$id.val}>)<{/if}>
+											</li>
+											<{/section}>
+										</ul>
+										<{/if}>
+										<{/if}>
+									</div>
 									<div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
 								</li>
 							<{/section}>
