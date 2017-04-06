@@ -2,16 +2,18 @@
 <{if $landingpages}>
 
 <section id="persuasion">
-    <div class="container"><div class="row">
-        <{section name="i" loop=$landingpages}>
-        <a href="<{$landingpages[i]->getUrl()|escape}>" title="<{$landingpages[i]->getName()|escape}>">
-            <{assign var="images" value=$landingpages[i]->getImages()}>
-            <{if $images}>
-            <{section name="j" loop=$images start=0 max=1}>
-            <img src="<{$images[j]->getSrc(235,85,'box')}>">
-            <{/section}>
-            <{/if}>
-        </a>
+        <div class="container"><div class="row">
+            <{section name="i" loop=$landingpages}>
+            <div class="col-xs-12 col-sm-6 col-sm-3 persuasion-box">
+                <a href="<{$landingpages[i]->getUrl()|escape}>" title="<{$landingpages[i]->getName()|escape}>">
+                <{assign var="images" value=$landingpages[i]->getImages()}>
+                <{if $images}>
+                    <{section name="j" loop=$images start=0 max=1}>
+                        <img src="<{$images[j]->getSrc(235,85,'box')}>">
+                    <{/section}>
+                <{/if}>
+            </a>
+            </div>
         <{/section}>
     </div></div>
 </section>
