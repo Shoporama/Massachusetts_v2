@@ -120,16 +120,18 @@
 
 		</div>
 
-		<{if $order->getComments() || $order->getPickupAddress()}>
+
 		<div class="order-section">
-			<h3>Kommentar</h3>
-			<p><{$order->getComments()|escape}></p>
+			<{if $order->getComments()}>
+				<h3>Kommentar</h3>
+				<p><{$order->getComments()|escape}></p>
+			<{/if}>
 			<{if $order->getPickupAddress()}>
 				<h3>Du kan hente din pakke hos:</h3>
 				<p><{$order->getPickupAddress()|escape|nl2br}></p>
 			<{/if}>
 		</div>
-		<{/if}>
 
 	</div>
-</div></div></div><{/if}>
+</div></div></div>
+<{/if}>
