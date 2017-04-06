@@ -81,6 +81,15 @@
                 </div></div><!--/.container .row-->
             </section>
 
+            <{if $pager}>
+                <{assign var="pages" value=$pager->render()}>
+                <{if $pages}>
+                    <div id="product-list-pagination">
+                        <nav class="pagination"><{$pages}></nav>
+                    </div>
+                <{/if}>
+            <{/if}>
+
         <{/if}>
 
         <{if $landing_page->getDescriptionB()}>
