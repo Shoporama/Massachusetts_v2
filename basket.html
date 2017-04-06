@@ -7,15 +7,14 @@
 	<section id="sitecontent">
 		<section id="page-content">
 
-
 		    <{include file="_include_breadcrumbs.html"}>
 
 		    <section id="checkout-content">
 		        <div class="container"><div class="row"><div class="col-xs-12">
 		            <h1>Indhold i kurven</h1>
-		            <{if $get.s == "NaN"}>
-		            <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
-					<{/if}>
+                    <{if $get.s == "NaN"}>
+                        <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
+                    <{/if}>
 		            <form class="form-inline" role="form" id="form" method="post" action="">
 		                <ul id="basket-content-list">
 		                    <li class="row" id="basket-content-listhead">
@@ -113,8 +112,6 @@
 		                </div>
 		            </form>
 
-
-
 		        </div></div></div>
 		    </section>
 
@@ -123,7 +120,6 @@
 
 	<{include file="_include_checkout-footer.html"}>
 </div>
-
 
 <script type="text/javascript">
 	function updateform() {

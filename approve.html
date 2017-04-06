@@ -7,7 +7,6 @@
 		</div>
 		<{/if}>
 
-
 		<div class="approve-section">
 			<h1>Godkend ordre</h1>
 		</div>
@@ -49,40 +48,38 @@
 				</div>
 
 				<div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span></div>
-
 			</div>
 
-			<div class="approve-section about-you">
+            <div class="approve-section about-you">
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-6">
-						<h4>Faktureringsadresse</h4>
-						<p><{$session_order.name|escape}><br/>
-							<{$session_order.address|escape}><br/>
-							<{$session_order.zipcode|escape}> <{$session_order.city|escape}><br/>
-							<{$session_order.country_name|escape}></p>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<h4>Leveringsadresse</h4>
-							<p><{$session_del.name|escape}><br/>
-								<{$session_del.address|escape}><br/>
-								<{$session_del.zipcode|escape}> <{$session_del.city|escape}><br/>
-								<{$session_del.country_name|escape}></p>
-							</div>
-						</div>
+		        <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <h4>Faktureringsadresse</h4>
+                        <p><{$session_order.name|escape}><br/>
+                            <{$session_order.address|escape}><br/>
+                            <{$session_order.zipcode|escape}> <{$session_order.city|escape}><br/>
+                            <{$session_order.country_name|escape}></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h4>Leveringsadresse</h4>
+                        <p><{$session_del.name|escape}><br/>
+                            <{$session_del.address|escape}><br/>
+                            <{$session_del.zipcode|escape}> <{$session_del.city|escape}><br/>
+                            <{$session_del.country_name|escape}></p>
+                    </div>
+                </div>
 
-						<div>
-							<h4>E-mail-adresse</h4>
-							<p><{$session_order.email|escape}></p>
-						</div>
+                <div>
+                    <h4>E-mail-adresse</h4>
+                    <p><{$session_order.email|escape}></p>
+                </div>
+            </div>
 
-					</div>
+            <div class="approve-section cta">
+                <input type="button" name="prev" class="btn btn-default btn-sm" value="&laquo; Tilbage" onclick="history.go(-1);"/>
+                <input type="submit" name="next" class="btn btn-primary btn-lg" value="Gå til betaling &raquo;" class="ok"/>
+            </div>
+        </form>
 
-					<div class="approve-section cta">
-						<input type="button" name="prev" class="btn btn-default btn-sm" value="&laquo; Tilbage" onclick="history.go(-1);"/>
-						<input type="submit" name="next" class="btn btn-primary btn-lg" value="Gå til betaling &raquo;" class="ok"/>
-					</div>
-				</form>
-
-			</div>
-		</div></div></div>
+	</div>
+</div></div></div>
