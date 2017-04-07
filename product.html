@@ -69,7 +69,7 @@
 
         <{include file="_include_page-persuasion.html"}>
 
-        <{assign var="related" value=$product->getRelatedProducts()}>
+        <{assign var="related" value=$product->getRelatedProducts(8)}>
         <{if $related}>
         <section id="related">
             <div class="container">
@@ -88,7 +88,7 @@
         </section>
         <{/if}>
 
-        <{assign var="related" value=$product->getAlsoBought()}>
+        <{assign var="related" value=$product->getAlsoBought(8)}>
         <{if $related}>
         <section id="related">
             <div class="container">
