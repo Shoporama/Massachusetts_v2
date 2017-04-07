@@ -10,10 +10,6 @@
         <section id="productpage-content" itemscope itemtype="http://schema.org/Product">
             <div class="container"><div class="row">
 
-                <{$product->getAttributeValue(16009)}>
-
-
-
                 <div class="col-xs-12 col-sm-5 col-md-6">
                     <div id="product-page-image">
                        <{section name="j" loop=$images start=0}>
@@ -92,28 +88,29 @@
     </div>
 </section>
 <{/if}>
-        <{assign var="related" value=$product->getAlsoBought()}>
-        <{if $related}>
-        <section id="related">
-            <div class="container">
-                <div class="col-xs-12">
 
-                    <h3>Andre kunder købte også</h3>
-                    <div class="row">
-                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                            <{section name="i" loop=$related}>
-                            <{include file="_include_inner-product.html" product=$related[i]}>
-                            <{/section}>
-                        </ul>
-                    </div>
-                </div>
+<{assign var="related" value=$product->getAlsoBought()}>
+<{if $related}>
+<section id="related">
+    <div class="container">
+        <div class="col-xs-12">
+
+            <h3>Andre kunder købte også</h3>
+            <div class="row">
+                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                    <{section name="i" loop=$related}>
+                        <{include file="_include_inner-product.html" product=$related[i]}>
+                    <{/section}>
+                </ul>
             </div>
-        </section>
-        <{/if}>
+        </div>
+    </div>
+</section>
+<{/if}>
+
 </section><!--/#sitecontent-->
 
 <{include file="_include_footer.html"}>
-
 
 <button id="totop">Til toppen</button>
 
