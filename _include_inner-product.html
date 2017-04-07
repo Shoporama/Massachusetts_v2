@@ -57,9 +57,9 @@
                 <{/if}>
             </div>
             <{/if}>
-        	<{section name="j" loop=$images start=0 max=1}>
-				<img src="<{$theme_url}>/img/spinner.gif" data-layzr="<{$images[j]->getSrc(240,240, 'box')}>" data-layzr-retina="<{$images[j]->getSrc(500,500, 'box')}>" class="product-image" itemprop="image" content="<{$images[j]->getSrc(400,400, 'box')}>" alt="<{$images[j]->getDescription()|escape}>" />
-			<{/section}>
+            <{section name="j" loop=$images start=0 max=1}>
+                <img src="<{$theme_url}>/img/spinner.gif" data-layzr="<{$images[j]->getSrc(240,240, 'box')}>" data-layzr-retina="<{$images[j]->getSrc(500,500, 'box')}>" class="product-image" itemprop="image" content="<{$images[j]->getSrc(400,400, 'box')}>" alt="<{$images[j]->getDescription()|escape}>" />
+            <{/section}>
 
             <{if $product->getSalePrice() > 0}>
                 <div class="product-teaser-highlight offer">
@@ -78,7 +78,7 @@
                 <div class="product-teaser-text" itemprop="description"><{$product->getListDescription()|escape}></div>
                 <div class="product-teaser-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                     <{if $product->getSalePrice()}>
-                    	<div class="product-teaser-price-before"><span><{$webshop->getCurrency()}></span> <span class="beforeprice"><{$product->getPrice()|number_format:2:",":"."}></span></div>
+                        <div class="product-teaser-price-before"><span><{$webshop->getCurrency()}></span> <span class="beforeprice"><{$product->getPrice()|number_format:2:",":"."}></span></div>
                     <{/if}>
                     <div class="product-teaser-price-current">
                         <span itemprop="priceCurrency" class="product-teaser-currency"><{$webshop->getCurrency()}></span>&nbsp;<span itemprop="price" class="product-teaser-price" content="<{$product->getRealPrice()|number_format:2:".":""}>"><{$product->getRealPrice()|number_format:2:",":"."}></span>

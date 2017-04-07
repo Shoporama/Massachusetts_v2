@@ -1,31 +1,31 @@
 <{strip}>
 <{if $inc}>
 
-	<{include file=$inc}>
+    <{include file=$inc}>
 
 <{elseif $category}>
 
-	<{if $category->isFront()}>
-	
-		<{include file="front.html" category=$category}>
+    <{if $category->isFront()}>
 
-	<{else}>
+        <{include file="front.html" category=$category}>
 
-		<{include file="category.html" category=$category}>
+    <{else}>
 
-	<{/if}>
-	
+        <{include file="category.html" category=$category}>
+
+    <{/if}>
+
 <{elseif $landing_page}>
 
-	<{include file="landing_page.html" landing_page=$landing_page}>
+    <{include file="landing_page.html" landing_page=$landing_page}>
 
 <{elseif $product}>
 
-	<{include file="product.html" product=$product}>
+    <{include file="product.html" product=$product}>
 
 <{elseif $page}>
 
-	<{include file="page.html" product=$page}>
+    <{include file="page.html" product=$page}>
 
 <{/if}>
 <{/strip}>

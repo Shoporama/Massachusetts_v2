@@ -135,14 +135,14 @@
                                   <div id="payment-options" class="form-row">
                                     <h3>Vælg betalingsmetode</h3>
                                   <{assign var="gateways" value=$webshop->getPaymentGateways()}>
-                                	<{section name="i" loop=$gateways}>
+                                    <{section name="i" loop=$gateways}>
                                   <div class="radio" style="clear:both">
-                                		<label>
-                                			<input type="radio" name="payment_gateway_id" value="<{$gateways[i]->getPaymentGatewayId()}>" <{if $selected_payment_gateway == $gateways[i]->getPaymentGatewayId()}>checked="checked"<{/if}>/>
-                                			<{$gateways[i]->getName()|escape}><br>
-                                		</label>
+                                        <label>
+                                            <input type="radio" name="payment_gateway_id" value="<{$gateways[i]->getPaymentGatewayId()}>" <{if $selected_payment_gateway == $gateways[i]->getPaymentGatewayId()}>checked="checked"<{/if}>/>
+                                            <{$gateways[i]->getName()|escape}><br>
+                                        </label>
                                   </div>
-                                	<{/section}>
+                                    <{/section}>
                                   </div>
                                 </div>
                                 <!--/#form-checks-->

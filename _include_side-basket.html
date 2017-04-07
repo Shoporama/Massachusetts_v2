@@ -1,5 +1,5 @@
 <{strip}><{if $basket}>
-	<div id="basket">
+    <div id="basket">
         <div id="basket-content">
 
             <h3>Indhold i kurven</h3>
@@ -12,8 +12,8 @@
                     </li>
 
                     <{section name="i" loop=$basket}>
-                    	<{assign var="product" value=$basket[i].product}>
-                    	<li class="basket-content-listitem">
+                        <{assign var="product" value=$basket[i].product}>
+                        <li class="basket-content-listitem">
                             <div class="col-xs-12 col-sm-8 col-md-9 left">
                                 <input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>">
                                 <button type="submit" name="remove_product" value="<{$basket[i].id}>" class="removefrombasket pull-left btn btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
@@ -45,7 +45,7 @@
         <button class="takeover-close">&times;</button>
     </div>
 <{else}>
-	<div id="basket">
+    <div id="basket">
         <div id="basket-content"><h3>Kurven er tom</h3></div>
         <button class="takeover-close">&times;</button>
     </div>

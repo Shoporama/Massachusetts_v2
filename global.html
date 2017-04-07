@@ -18,16 +18,16 @@
         <meta charset="UTF-8" />
         <meta name="title" content="<{if $meta_title}><{$meta_title|escape}><{elseif $smarty.capture.title}><{$smarty.capture.title|escape}><{else}><{$webshop->getName()|escape}><{/if}>" />
         <{if $noindex}>
-			<meta name="robots" content="noindex, follow">
-		<{/if}>
+            <meta name="robots" content="noindex, follow">
+        <{/if}>
 
-		<{if $meta_description}>
-			<meta name="description" content="<{$meta_description|escape}>">
-		<{/if}>
+        <{if $meta_description}>
+            <meta name="description" content="<{$meta_description|escape}>">
+        <{/if}>
 
-		<{if $canonical}>
-	        <link rel="canonical" type="text/html" href="<{$canonical|escape}>"/>
-	    <{/if}>
+        <{if $canonical}>
+            <link rel="canonical" type="text/html" href="<{$canonical|escape}>"/>
+        <{/if}>
         <meta property="og:title" content="<{if $meta_title}><{$meta_title|escape}><{elseif $smarty.capture.title}><{$smarty.capture.title|escape}><{else}><{$webshop->getName()|escape}><{/if}>"/>
         <meta property="og:description" content="<{$meta_description|escape}>" />
         <meta property="og:image" content="<{if $product}><{assign var='productimages' value=$product->getImages()}><{section name='o' loop=$productimages start=0 max=1}>/<{$productimages[o]->getSrc(770, 15000, 'fit')}><{/section}><{else}><{if $settings.OpenGraph.Standardbillede}><{$baseurl}><{$settings.OpenGraph.Standardbillede->getSrc(1000, 800, 'fit')}><{/if}><{/if}>"/>

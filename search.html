@@ -7,11 +7,11 @@
             <section id="product-list-head">
                 <div class="container"><div class="row"><div class="col-xs-12">
                     <{if $get.search}>
-						<h1>Søgeresultat for "<{$get.search|escape}>"</h1>
-					<{else}>
-						<h1>Søgning</h1>
-					<{/if}>
-					<p>Resultater: <{$count}></p>
+                        <h1>Søgeresultat for "<{$get.search|escape}>"</h1>
+                    <{else}>
+                        <h1>Søgning</h1>
+                    <{/if}>
+                    <p>Resultater: <{$count}></p>
                 </div></div></div>
             </section>
 
@@ -20,8 +20,8 @@
                     <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
 
                         <{section name="i" loop=$products}>
-							<{include file="_include_inner-product.html" product=$products[i]}>
-						<{/section}>
+                            <{include file="_include_inner-product.html" product=$products[i]}>
+                        <{/section}>
 
                     </ul>
 
@@ -42,5 +42,3 @@
     </div><!--/#site-->
 
     <{include file="_include_side-basket.html"}>
-
-
