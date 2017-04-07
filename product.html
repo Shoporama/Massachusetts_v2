@@ -18,106 +18,104 @@
                    </div>
                </div>
                <div class="col-xs-12 col-sm-7 col-md-6">
-                <div id="product-info-container">
-                    <h1 itemprop="name"><{$product->getName()|escape}></h1>
-                    <{if $product->getOwnId()}>
-                    <div id="product-info-sku">Varenr. <{$product->getOwnId()}></div>
-                    <{/if}>
-                    <{assign var="supplier" value=$product->getSupplier()}>
-                    <{if $supplier}>
-                    <div id="product-info-brand">fra <span><{$supplier->getName()}></span></div>
-                    <{/if}>
+                    <div id="product-info-container">
+                        <h1 itemprop="name"><{$product->getName()|escape}></h1>
+                        <{if $product->getOwnId()}>
+                            <div id="product-info-sku">Varenr. <{$product->getOwnId()}></div>
+                        <{/if}>
+                        <{assign var="supplier" value=$product->getSupplier()}>
+                        <{if $supplier}>
+                            <div id="product-info-brand">fra <span><{$supplier->getName()}></span></div>
+                        <{/if}>
 
-                    <{include file="_include_product_reviews.html"}>
+                        <{include file="_include_product_reviews.html"}>
 
-                    <div id="product-page-cta-container">
-                        <div id="product-page-cta" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <div id="product-cta-price">
-                                <{if $product->getSalePrice()}>
-                                <div class="product-cta-before">
-                                   <span><{$webshop->getCurrency()}></span> <span><{$product->getPrice()|number_format:2:",":"."}></span>
-                               </div>
-                               <{/if}>
-                               <div class="product-cta-current">
-                                <span itemprop="priceCurrency"><{$webshop->getCurrency()}></span> <span itemprop="price" content="<{$product->getRealPrice()|number_format:2:".":""}>"><{$product->getRealPrice()|number_format:2:",":"."}></span>
+                        <div id="product-page-cta-container">
+                            <div id="product-page-cta" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <div id="product-cta-price">
+                                    <{if $product->getSalePrice()}>
+                                        <div class="product-cta-before">
+                                            <span><{$webshop->getCurrency()}></span> <span><{$product->getPrice()|number_format:2:",":"."}></span>
+                                        </div>
+                                    <{/if}>
+                                    <div class="product-cta-current">
+                                        <span itemprop="priceCurrency"><{$webshop->getCurrency()}></span> <span itemprop="price" content="<{$product->getRealPrice()|number_format:2:".":""}>"><{$product->getRealPrice()|number_format:2:",":"."}></span>
+                                    </div>
+                                </div>
+                                <{include file="_include_addtocart.html"}>
                             </div>
+
                         </div>
-                        <{include file="_include_addtocart.html"}>
+                        <div id="product-info-description" itemprop="description">
+                            <div id="product-page-shortdescription"><{$product->getListDescription()}></div>
+                            <div id="product-page-longdescription"><{$product->getParsedDescription()}></div>
+                            <{assign var="youtube" value=$product->getMetaValue("youtube")}>
+                            <{if $youtube}>
+                            <div class="vidcontainer">
+                                <iframe src="http://www.youtube.com/embed/<{$youtube|escape}>" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <{/if}>
+                        </div>
+
+                        <div id="product-page-extras">
+
+                        </div>
+
                     </div>
-
                 </div>
-                <div id="product-info-description" itemprop="description">
-                    <div id="product-page-shortdescription"><{$product->getListDescription()}></div>
-                    <div id="product-page-longdescription"><{$product->getParsedDescription()}></div>
-                    <{assign var="youtube" value=$product->getMetaValue("youtube")}>
-                    <{if $youtube}>
-                    <div class="vidcontainer">
-                        <iframe src="http://www.youtube.com/embed/<{$youtube|escape}>" frameborder="0" allowfullscreen></iframe>
+
+            </div></div><!--/.row /.container-->
+        </section>
+
+        <{include file="_include_page-persuasion.html"}>
+
+        <{assign var="related" value=$product->getRelatedProducts()}>
+        <{if $related}>
+        <section id="related">
+            <div class="container">
+                <div class="col-xs-12">
+
+                    <h3>Relaterede</h3>
+                    <div class="row">
+                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                            <{section name="i" loop=$related}>
+                            <{include file="_include_inner-product.html" product=$related[i]}>
+                            <{/section}>
+                        </ul>
                     </div>
-                    <{/if}>
                 </div>
+            </div>
+        </section>
+        <{/if}>
 
-                <div id="product-page-extras">
+        <{assign var="related" value=$product->getAlsoBought()}>
+        <{if $related}>
+        <section id="related">
+            <div class="container">
+                <div class="col-xs-12">
 
+                    <h3>Andre kunder købte også</h3>
+                    <div class="row">
+                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                            <{section name="i" loop=$related}>
+                                <{include file="_include_inner-product.html" product=$related[i]}>
+                            <{/section}>
+                        </ul>
+                    </div>
                 </div>
-
             </div>
-        </div>
+        </section>
+        <{/if}>
 
+    </section><!--/#sitecontent-->
 
-    </div></div><!--/.row /.container-->
-</section>
+    <{include file="_include_footer.html"}>
 
-<{include file="_include_page-persuasion.html"}>
+    <button id="totop">Til toppen</button>
 
-<{assign var="related" value=$product->getRelatedProducts()}>
-<{if $related}>
-<section id="related">
-    <div class="container">
-        <div class="col-xs-12">
-
-            <h3>Relaterede</h3>
-            <div class="row">
-                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                    <{section name="i" loop=$related}>
-                    <{include file="_include_inner-product.html" product=$related[i]}>
-                    <{/section}>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-<{/if}>
-
-<{assign var="related" value=$product->getAlsoBought()}>
-<{if $related}>
-<section id="related">
-    <div class="container">
-        <div class="col-xs-12">
-
-            <h3>Andre kunder købte også</h3>
-            <div class="row">
-                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                    <{section name="i" loop=$related}>
-                        <{include file="_include_inner-product.html" product=$related[i]}>
-                    <{/section}>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-<{/if}>
-
-</section><!--/#sitecontent-->
-
-<{include file="_include_footer.html"}>
-
-<button id="totop">Til toppen</button>
-
-<{include file="_include_cookiepolicy.html"}>
+    <{include file="_include_cookiepolicy.html"}>
 
 </div><!--/#site-->
 
 <{include file="_include_side-basket.html"}>
-
 <{/strip}>
