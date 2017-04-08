@@ -86,7 +86,12 @@
             <div class="container"><div class="row">
                 <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
                     <{assign var="products" value=$category->getOnlineProducts()}>
-                    <{section name="i" loop=$products start=0 max=8}>
+                    <{if $settings.forside.KategoriAntal}>
+                        <{assign var="limit" value=$settings.forside.KategoriAntal}>
+                    <{else}>
+                        <{assign var="limit" value=8}>
+                    <{/if}>
+                    <{section name="i" loop=$products start=0 max=$limit}>
                         <{include file="_include_inner-product.html" product=$products[i]}>
                     <{/section}>
 
