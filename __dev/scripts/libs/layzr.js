@@ -1,5 +1,5 @@
 /*!
- * Layzr.js 1.4.2 - A small, fast, modern, and dependency-free library for lazy loading.
+ * Layzr.js 1.4.0 - A small, fast, modern, and dependency-free library for lazy loading.
  * Copyright (c) 2015 Michael Cavalea - http://callmecavs.github.io/layzr.js/
  * License: MIT
  */
@@ -41,9 +41,6 @@ function Layzr(options) {
   // nodelist
   this._nodes = document.querySelectorAll(this._optionsSelector);
 
-  // scroll and resize handler
-  this._handlerBind = this._requestScroll.bind(this);
-
   // call to create
   this._create();
 }
@@ -53,7 +50,7 @@ function Layzr(options) {
 
 Layzr.prototype._requestScroll = function() {
   if(this._optionsContainer === window) {
-    this._lastScroll = window.pageYOffset;
+    this._lastScroll = window.scrollY || window.pageYOffset;
   }
   else {
     this._lastScroll = this._optionsContainer.scrollTop + this._getOffset(this._optionsContainer);
@@ -70,10 +67,18 @@ Layzr.prototype._requestTick = function() {
 };
 
 // OFFSET HELPER
-// remember, getBoundingClientRect is relative to the viewport
+// borrowed from: http://stackoverflow.com/questions/5598743/finding-elements-position-relative-to-the-document
 
-Layzr.prototype._getOffset = function(node) {
-  return node.getBoundingClientRect().top + window.pageYOffset;
+Layzr.prototype._getOffset = function(element) {
+  var offsetTop = 0;
+
+  do {
+    if(!isNaN(element.offsetTop)) {
+      offsetTop += element.offsetTop;
+    }
+  } while(element = element.offsetParent);
+
+  return offsetTop;
 };
 
 // HEIGHT HELPER
@@ -87,17 +92,19 @@ Layzr.prototype._getContainerHeight = function() {
 
 Layzr.prototype._create = function() {
   // fire scroll event once
-  this._handlerBind();
+  this._requestScroll();
 
   // bind scroll and resize event
-  this._optionsContainer.addEventListener('scroll', this._handlerBind, false);
-  this._optionsContainer.addEventListener('resize', this._handlerBind, false);
+  this._optionsContainer.addEventListener('scroll', this._requestScroll.bind(this), false);
+  this._optionsContainer.addEventListener('resize', this._requestScroll.bind(this), false);
 };
 
 Layzr.prototype._destroy = function() {
+  // possibly remove attributes, and set all sources?
+
   // unbind scroll and resize event
-  this._optionsContainer.removeEventListener('scroll', this._handlerBind, false);
-  this._optionsContainer.removeEventListener('resize', this._handlerBind, false);
+  this._optionsContainer.removeEventListener('scroll', this._requestScroll.bind(this), false);
+  this._optionsContainer.removeEventListener('resize', this._requestScroll.bind(this), false);
 };
 
 Layzr.prototype._inViewport = function(node) {
@@ -106,15 +113,15 @@ Layzr.prototype._inViewport = function(node) {
   var viewportBottom = viewportTop + this._getContainerHeight();
 
   // get node top and bottom offset
-  var nodeTop = this._getOffset(node);
-  var nodeBottom = nodeTop + this._getContainerHeight();
+  var elementTop = this._getOffset(node);
+  var elementBottom = elementTop + this._getContainerHeight();
 
   // calculate threshold, convert percentage to pixel value
   var threshold = (this._optionsThreshold / 100) * window.innerHeight;
 
-  // return if node in viewport
-  return nodeBottom >= viewportTop - threshold
-      && nodeTop <= viewportBottom + threshold
+  // return if element in viewport
+  return elementBottom >= viewportTop - threshold
+      && elementTop <= viewportBottom + threshold
       && !node.hasAttribute(this._optionsAttrHidden);
 };
 
@@ -144,7 +151,7 @@ Layzr.prototype._reveal = function(node) {
 };
 
 Layzr.prototype.updateSelector = function() {
-  // update cached list of nodes matching selector
+  // update cached list of elements matching selector
   this._nodes = document.querySelectorAll(this._optionsSelector);
 };
 
