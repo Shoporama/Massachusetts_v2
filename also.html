@@ -1,5 +1,5 @@
 <div id="site" class="">
-    <{include file="_include_header.html"}>
+    <{include file="_include_checkout-header.html"}>
 
     <div id="sitecontent">
         <section id="page-content">
@@ -27,11 +27,8 @@
 
         </div>
 
-
     </div>
     <div class="container">
-
-
 
     <{assign var="products" value=$product->getAlsoBought(4)}>
     <{if $products}>
@@ -74,10 +71,6 @@
             </div></div></div>
         </section>
     </div><!--/#sitecontent-->
-    <{include file="_include_footer.html"}>
+<{include file="_include_checkout-footer.html"}>
 
-    <button id="totop">Til toppen</button>
-    <{include file="_include_cookiepolicy.html"}>
 </div><!--/#site-->
-
-<{include file="_include_side-basket.html"}>
