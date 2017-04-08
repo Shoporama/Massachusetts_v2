@@ -1,4 +1,9 @@
 <{strip}>
+<{if $settings.globale.NyhedIndtil}>
+    <{assign var="news_until" value=$settings.globale.NyhedIndtil}>
+<{else}>
+    <{assign var="news_until" value="480}>
+<{/if}>
 <{assign var="innerproduct" value="product_cache_"|cat:$product->getProductId()}>
 <{if $settings.Caching.MaxLevetidProduktTeaser && $settings.Caching.MinLevetidProduktTeaser}>
     <{assign var="randomttl" value=$settings.Caching.MinLevetidProduktTeaser|mt_rand:$settings.Caching.MaxLevetidProduktTeaser}>
@@ -67,7 +72,7 @@
                     <{math assign="savepercent" equation='c/d*100' c=$pricedif d=$product->getPrice()}>
                     -<{$savepercent|number_format:0}>%
                 </div>
-            <{elseif $product->getOnlineHours() < 480}>
+            <{elseif $product->getOnlineHours() < $news_until}>
                 <div class="product-teaser-highlight news">NYHED</div>
             <{/if}>
 

@@ -1,5 +1,10 @@
 <{strip}>
 <{capture name="title"}><{$product->getName()}><{/capture}>
+<{if $settings.globale.NyhedIndtil}>
+<{assign var="news_until" value=$settings.globale.NyhedIndtil}>
+<{else}>
+<{assign var="news_until" value="480}>
+<{/if}>
 <{assign var="images" value=$product->getImages()}>
 
 <div id="site" class="productpage">
@@ -19,7 +24,9 @@
                </div>
                <div class="col-xs-12 col-sm-7 col-md-6">
                     <div id="product-info-container">
-                        <h1 itemprop="name"><{$product->getName()|escape}></h1>
+                        <h1 itemprop="name">
+                            <{$product->getName()|escape}><{if $product->getOnlineHours() < $news_until}> <span class="news">(NYHED)</span><{/if}>
+                        </h1>
                         <{if $product->getOwnId()}>
                             <div id="product-info-sku">Varenr. <{$product->getOwnId()}></div>
                         <{/if}>
