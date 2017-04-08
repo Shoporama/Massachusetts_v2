@@ -4,7 +4,6 @@ massachusetts.suggestivesearch = massachusetts.suggestivesearch || function () {
         suggestiveSearch();
     }
 
-
     function suggestiveSearch(){
 
         var sitesource = webshop_url + '/ajax_search';
@@ -27,5 +26,3 @@ massachusetts.suggestivesearch = massachusetts.suggestivesearch || function () {
     };
 
 }();
-
-

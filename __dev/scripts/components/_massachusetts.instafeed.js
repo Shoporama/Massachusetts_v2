@@ -1,12 +1,10 @@
 massachusetts.instafeed = massachusetts.instafeed || function () {
 
-	function init() {
-	}
+    function init() {
+    }
 
-
-
-	return {
-		init:init
-	};
+    return {
+        init:init
+    };
 
 }();

@@ -2,12 +2,11 @@ var massachusetts = massachusetts || {};
 
 massachusetts.general = massachusetts.general || function () {
 
-	function init() {
+    function init() {
+    }
 
-	}
-
-	return {
-		init:init
-	};
+    return {
+        init:init
+    };
 
 }();

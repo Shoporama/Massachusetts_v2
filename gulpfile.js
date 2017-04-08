@@ -33,8 +33,8 @@ gulp.task('less-hint', function() {
         .pipe(lesshint.failOnError()); // Use this to fail the task on lint errors
 });
 
-gulp.task('jslint', function () {
-    return gulp.src(['./__dev/scripts/scripts.mix.js', './__dev/scripts/components/*.js'])
+gulp.task('js-lint', function () {
+    return gulp.src(['./__dev/scripts/components/*.js'])
         .pipe(jslint({ /* this object represents the JSLint directives being passed down */ }))
         .pipe(jslint.reporter('default'));
 });

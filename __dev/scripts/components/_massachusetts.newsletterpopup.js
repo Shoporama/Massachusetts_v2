@@ -7,7 +7,6 @@ massachusetts.newsletterpopup = massachusetts.newsletterpopup || function () {
         }
     }
 
-
     // Cookie funtion
     function setNewsletterCookie(key, value) {
         var expires = new Date();

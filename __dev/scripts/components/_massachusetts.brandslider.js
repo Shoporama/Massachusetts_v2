@@ -1,22 +1,20 @@
 massachusetts.brandslider = massachusetts.brandslider || function () {
 
-	function init() {
+    function init() {
+        brandSliderInit();
+    }
 
-		brandSliderInit();
+    function brandSliderInit() {
+        $('#brands-slided').owlCarousel({
+            navigation: false,
+            pagination: false,
+            items: 6,
+            autoPlay: true
+        });
+    }
 
-	}
-
-	function brandSliderInit(){
-		$('#brands-slided').owlCarousel({
-			navigation: false,
-			pagination: false,
-			items: 6,
-			autoPlay: true
-		});
-	}
-
-	return {
-		init:init
-	};
+    return {
+        init:init
+    };
 
 }();
