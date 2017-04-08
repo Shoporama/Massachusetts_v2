@@ -1,11 +1,11 @@
-<div id="site" class="">
+<div id="site" class="checkout basketpage">
     <{include file="_include_checkout-header.html"}>
 
     <div id="sitecontent">
+        <{if $product}>
         <section id="page-content">
-            <div class="row" style="margin-top: 2em; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding-top: 1em; padding-bottom: 1em; margin-bottom: 2em;"><div class="col-xs-12 col-md-8 col-md-offset-2">
-            <{if $product}>
-                    <{assign var="image" value=$product->getImage()}>
+            <div class="row" style="margin-top: 2em; padding-top: 2em; padding-bottom: 1em; margin-bottom: 2em;"><div class="col-xs-12 col-md-8 col-md-offset-2">
+                <{assign var="image" value=$product->getImage()}>
 
                 <div class="col-xs-6 col-sm-8 col-md-9 left">
                     <{if $image}>
@@ -16,66 +16,60 @@
                     </div>
                     <{/if}>
                     <h4 style="font-size: 1.5em; text-align: center;" class="col-xs-8 col-sm-8 col-md-9 right">Du lagde <{$product->getName()|escape}> i kurven</h4>
-
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-3 right">
                     <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success" style="background: orange; font-size: 2em;">Gå til kassen »</a></p>
                     <p><a href="<{$product->getUrl()|escape}>">« Tilbage</a></p>
-
                 </div>
-
-
-        </div>
-
-    </div>
+            </div></div>
 
             <{include file="_include_page-persuasion.html"}>
 
-    <div class="container">
+            <div class="container">
 
+                <div class="row" style="margin-top: 2em;"><div class="col-xs-12">
 
+                    <{assign var="products" value=$product->getAlsoBought(4)}>
+                    <{if $products}>
+                        <section id="highlighted-products">
+                            <h2 class="section-header">Andre købte også:</h2>
+                            <div class="container"><div class="row">
+                                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
 
-    <{assign var="products" value=$product->getAlsoBought(4)}>
-    <{if $products}>
-        <section id="highlighted-products" style="margin-top: 1em; clear: both;">
-            <h2 class="section-header">Andre købte også:</h2>
-            <div class="container"><div class="row">
-            <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+                                    <{section name="i" loop=$products start=0 max=8}>
+                                        <{include file="_include_inner-product.html" product=$products[i]}>
+                                    <{/section}>
 
-                <{section name="i" loop=$products start=0 max=8}>
-                    <{include file="_include_inner-product.html" product=$products[i]}>
-                <{/section}>
+                                </ul>
+                            </div></div>
+                        </section>
+                    <{/if}>
 
-            </ul>
-            </div></div>
+                    <div class="clear"></div>
+
+                    <{assign var="products" value=$product->getRelatedProducts(4)}>
+                    <{if $products}>
+                        <section id="highlighted-products">
+                            <h2 class="section-header">Relaterede produkter:</h2>
+                            <div class="container"><div class="row">
+                                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+
+                                    <{section name="i" loop=$products start=0 max=8}>
+                                        <{include file="_include_inner-product.html" product=$products[i]}>
+                                    <{/section}>
+
+                                </ul>
+                            </div></div>
+                        </section>
+                    <{/if}>
+
+                    <div class="clear"></div>
+
+                </div></div>
+            </div>
         </section>
-    <{/if}>
-
-    <div class="clear"></div>
-
-    <{assign var="products" value=$product->getRelatedProducts(4)}>
-    <{if $products}>
-        <section id="highlighted-products">
-            <h2 class="section-header">Relaterede produkter:</h2>
-            <div class="container"><div class="row">
-            <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-
-                <{section name="i" loop=$products start=0 max=8}>
-                    <{include file="_include_inner-product.html" product=$products[i]}>
-                <{/section}>
-
-            </ul>
-            </div></div>
-        </section>
-    <{/if}>
-
-
-    <div class="clear"></div>
-
-<{/if}>
-            </div></div></div>
-        </section>
+        <{/if}>
     </div><!--/#sitecontent-->
-<{include file="_include_checkout-footer.html"}>
+    <{include file="_include_checkout-footer.html"}>
 
 </div><!--/#site-->
