@@ -1,58 +1,58 @@
 <div class="container"><div class="row"><div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-	<div class="checkout-pages">
+    <div class="checkout-pages">
 
-		<{if settings.globale.Logo}>
-		<div id="approve-logo">
-			<a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
-		</div>
-		<{/if}>
+        <{if settings.globale.Logo}>
+        <div id="approve-logo">
+            <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
+        </div>
+        <{/if}>
 
-		<div class="approve-section">
-			<h1>Godkend ordre</h1>
-		</div>
+        <div class="approve-section">
+            <h1>Godkend ordre</h1>
+        </div>
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="approve-section order-details">
-				<h4>Din bestilling</h4>
+            <div class="approve-section order-details">
+                <h4>Din bestilling</h4>
 
-				<ul id="basket-content-list">
-					<li class="basket-content-listitem">
-						<span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
-					</li>
+                <ul id="basket-content-list">
+                    <li class="basket-content-listitem">
+                        <span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
+                    </li>
 
-					<{section name="i" loop=$basket}>
-					<{assign var="product" value=$basket[i].product}>
-					<li class="basket-content-listitem">
-						<div class="col-xs-12 col-sm-8 col-md-9 left">
-							<input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>"/>
-							<span class="basket-content-listitem-amount"><{$basket[i].amount}> stk.</span> <strong><{$product->getName()|escape}>
-							<{assign var="attributes" value=$basket[i].attributes}>
-							<{if $attributes}>
-							<div class="basket-content-listitem-attr">
-								<{foreach from=$attributes item=a}>
-								<span><{$a.name|escape}>: <{$a.value|escape}></span>
-								<{/foreach}>
-							</div>
-							<{/if}>
-						</strong></div>
-						<div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
-					</li>
-					<{/section}>
+                    <{section name="i" loop=$basket}>
+                    <{assign var="product" value=$basket[i].product}>
+                    <li class="basket-content-listitem">
+                        <div class="col-xs-12 col-sm-8 col-md-9 left">
+                            <input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>"/>
+                            <span class="basket-content-listitem-amount"><{$basket[i].amount}> stk.</span> <strong><{$product->getName()|escape}>
+                            <{assign var="attributes" value=$basket[i].attributes}>
+                            <{if $attributes}>
+                            <div class="basket-content-listitem-attr">
+                                <{foreach from=$attributes item=a}>
+                                <span><{$a.name|escape}>: <{$a.value|escape}></span>
+                                <{/foreach}>
+                            </div>
+                            <{/if}>
+                        </strong></div>
+                        <div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
+                    </li>
+                    <{/section}>
 
-				</ul>
+                </ul>
 
-				<div id="basket-summary">
-					<span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$vat|number_format:2:",":"."}></span>
-					<span id="basket-content-shipping">Fragt : <{$webshop->getCurrency()}> <{$shipping_price|number_format:2:",":"."}></span>
-				</div>
+                <div id="basket-summary">
+                    <span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$vat|number_format:2:",":"."}></span>
+                    <span id="basket-content-shipping">Fragt : <{$webshop->getCurrency()}> <{$shipping_price|number_format:2:",":"."}></span>
+                </div>
 
-				<div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span></div>
-			</div>
+                <div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span></div>
+            </div>
 
             <div class="approve-section about-you">
 
-		        <div class="row">
+                <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <h4>Faktureringsadresse</h4>
                         <p><{$session_order.name|escape}><br/>
@@ -81,5 +81,5 @@
             </div>
         </form>
 
-	</div>
+    </div>
 </div></div></div>

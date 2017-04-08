@@ -1,15 +1,15 @@
 <{assign var="reviews" value=$product->getProductReviews()}>
 <{if $reviews}>
-<{assign var="antalreviews" value=0}>
-<{assign var="totalscore" value=0}>
-<{section name="p" loop=$reviews}>
-<{math assign="antalreviews" equation=x+1 x=$antalreviews}>
-<{math assign="totalscore" equation=x+y x=$totalscore y=$reviews[p]->getRating()}>
-<{/section}>
-<{math assign="gennemsnit" equation=x/y x=$totalscore y=$antalreviews}>
+    <{assign var="antalreviews" value=0}>
+    <{assign var="totalscore" value=0}>
+    <{section name="p" loop=$reviews}>
+        <{math assign="antalreviews" equation=x+1 x=$antalreviews}>
+        <{math assign="totalscore" equation=x+y x=$totalscore y=$reviews[p]->getRating()}>
+    <{/section}>
+    <{math assign="gennemsnit" equation=x/y x=$totalscore y=$antalreviews}>
 
-<div id="product-info-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-	<p><i class="rating-<{$gennemsnit|number_format:0:",":"."}>"></i>
-		<small itemprop="ratingValue" class=""><span itemprop="ratingValue"><{$gennemsnit|number_format:0:",":"."}></span>/5 stjerner ud af <span itemprop="reviewCount"><{$antalreviews}></span> kundeanmeldelser.</small></p>
-
-		<{/if}>
+    <div id="product-info-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+        <p><i class="rating-<{$gennemsnit|number_format:0:",":"."}>"></i>
+        <small itemprop="ratingValue" class=""><span itemprop="ratingValue"><{$gennemsnit|number_format:0:",":"."}></span>/5 stjerner ud af <span itemprop="reviewCount"><{$antalreviews}></span> kundeanmeldelser.</small></p>
+    </div>
+<{/if}>

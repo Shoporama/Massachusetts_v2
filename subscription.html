@@ -1,131 +1,131 @@
 <{if $subscription}>
 
-	<p class="right">
-		Abonnements ID: <{$subscription->getRecurringOrderId()}>
-	</p>
+    <p class="right">
+        Abonnements ID: <{$subscription->getRecurringOrderId()}>
+    </p>
 
-	<h1>Dit abonnement</h1>
+    <h1>Dit abonnement</h1>
 
-	<br/>
+    <br/>
 
-	<p><strong>Status:</strong>
+    <p><strong>Status:</strong>
 
-		<{if $subscription->getStatus() == 'active'}>
-			aktiv
-		<{elseif $subscription->getStatus() == 'closed'}>
-			lukket
-		<{/if}>
-	</p>
-	
-	<{if $subscription->getCloseAfter()}>
-		<p style="background:red; color:#fff; padding:10px;">Dette abonnement lukkes d. <{$subscription->getCloseAfter()|date_format:"%d.%m.%Y"}></p>
-	<{/if}>
+        <{if $subscription->getStatus() == 'active'}>
+            aktiv
+        <{elseif $subscription->getStatus() == 'closed'}>
+            lukket
+        <{/if}>
+    </p>
 
-	<h2>Leveringstidspunkt</h2>
-	<p>Hver
+    <{if $subscription->getCloseAfter()}>
+        <p style="background:red; color:#fff; padding:10px;">Dette abonnement lukkes d. <{$subscription->getCloseAfter()|date_format:"%d.%m.%Y"}></p>
+    <{/if}>
 
-	<{if $subscription->getDeliver() == 'daily'}>
-		dag
-	<{elseif $subscription->getDeliver() == 'weekly'}>
-		uge
-	<{elseif $subscription->getDeliver() == 'monthly'}>
-		måned
-	<{/if}>
+    <h2>Leveringstidspunkt</h2>
+    <p>Hver
 
-	</p>
+    <{if $subscription->getDeliver() == 'daily'}>
+        dag
+    <{elseif $subscription->getDeliver() == 'weekly'}>
+        uge
+    <{elseif $subscription->getDeliver() == 'monthly'}>
+        måned
+    <{/if}>
 
-	<p><strong>Første levering:</strong> <{$subscription->getFirst()|date_format:"%d.%m.%Y"}></p>
-	<{if $subscription->getNext()}>
-		<p><strong>Næste levering:</strong> <{$subscription->getNext()|date_format:"%d.%m.%Y"}></p>
+    </p>
 
-		<form action="" method="post">
-			<div>
-				<strong>Skift næste levering:</strong><br/>
+    <p><strong>Første levering:</strong> <{$subscription->getFirst()|date_format:"%d.%m.%Y"}></p>
+    <{if $subscription->getNext()}>
+        <p><strong>Næste levering:</strong> <{$subscription->getNext()|date_format:"%d.%m.%Y"}></p>
 
-				<div class="float:left;">
-					Hver
-					<input type="number" style="width:25px;" name="interval" value="<{$subscription->getInterval()}>"/>.
-					<{if $subscription->getDeliver() == "daily"}>
-						dag
-					<{elseif $subscription->getDeliver() == "weekly"}>
-						uge
-					<{elseif $subscription->getDeliver() == "monthly"}>
-						måned
-					<{/if}>
-				</div>
-				<input type="date" name="new_next" value="<{$subscription->getNext()|date_format:"%Y-%m-%d"}>" style="display:inline;float:left;"/>
-				<input type="submit" name="open" value="Ret" style="display:inline;float:left;margin:0px;padding:2px;"/>
-				<div class="clear"></div>
-			</div>
-		</form>
-	<{/if}>
+        <form action="" method="post">
+            <div>
+                <strong>Skift næste levering:</strong><br/>
 
-	<h2>Abonnementsoplysninger</h2>
+                <div class="float:left;">
+                    Hver
+                    <input type="number" style="width:25px;" name="interval" value="<{$subscription->getInterval()}>"/>.
+                    <{if $subscription->getDeliver() == "daily"}>
+                        dag
+                    <{elseif $subscription->getDeliver() == "weekly"}>
+                        uge
+                    <{elseif $subscription->getDeliver() == "monthly"}>
+                        måned
+                    <{/if}>
+                </div>
+                <input type="date" name="new_next" value="<{$subscription->getNext()|date_format:"%Y-%m-%d"}>" style="display:inline;float:left;"/>
+                <input type="submit" name="open" value="Ret" style="display:inline;float:left;margin:0px;padding:2px;"/>
+                <div class="clear"></div>
+            </div>
+        </form>
+    <{/if}>
 
-	<{assign var="products" value=$subscription->getProducts()}>
+    <h2>Abonnementsoplysninger</h2>
 
-	<ul>
-		<{section name="i" loop=$products}>
-			<li>
-				<strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
+    <{assign var="products" value=$subscription->getProducts()}>
 
-				<small><{$webshop->getCurrency()}> <{$products[i]->getRealPrice()|number_format:2:",":"."}></small>
+    <ul>
+        <{section name="i" loop=$products}>
+            <li>
+                <strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
 
-				<{*
-					<{if $products[i]->getSubscriptionFixation()}>
-						<p>Bemærk at der er en bindingsperiode på <{$products[i]->getSubscriptionFixation()}>
-						<{if $products[i]->getSubscriptionInterval() == 'monthly'}>
-							måneder.
-						<{elseif $products[i]->getSubscriptionInterval() == 'weekly'}>
-							uger.
-						<{elseif $products[i]->getSubscriptionInterval() == 'daily'}>
-							dage.
-						<{/if}>
-						<p>
-					<{/if}>
-				*}>
+                <small><{$webshop->getCurrency()}> <{$products[i]->getRealPrice()|number_format:2:",":"."}></small>
 
-				<{assign var="attributes" value=$products[i]->getAttributes()}>
-				<{if $attributes}>
-					<ul>
-						<{section name="j" loop=$attributes}>
-							<li><{$attributes[j].name}>: <{$attributes[j].val}></li>
-						<{/section}>
-					</ul>
-				<{/if}>
-			</li>
-		<{/section}>
-	</ul>
-	<br/>
+                <{*
+                    <{if $products[i]->getSubscriptionFixation()}>
+                        <p>Bemærk at der er en bindingsperiode på <{$products[i]->getSubscriptionFixation()}>
+                        <{if $products[i]->getSubscriptionInterval() == 'monthly'}>
+                            måneder.
+                        <{elseif $products[i]->getSubscriptionInterval() == 'weekly'}>
+                            uger.
+                        <{elseif $products[i]->getSubscriptionInterval() == 'daily'}>
+                            dage.
+                        <{/if}>
+                        <p>
+                    <{/if}>
+                *}>
 
-	<h3>Bestillingsadresse</h3>
-	<p><{$subscription->getOrderName()|escape}></p>
-	<p><{$subscription->getOrderCompanyName()|escape}></p>
-	<p><{$subscription->getOrderAddress()|escape}></p>
-	<p><{$subscription->getOrderZipcode()|escape}> <{$subscription->getOrderCity()|escape}></p>
-	<p><{$subscription->getOrderCountry()|escape}></p>
-	<p><{$subscription->getPhone()|escape}></p>
-	<br/>
+                <{assign var="attributes" value=$products[i]->getAttributes()}>
+                <{if $attributes}>
+                    <ul>
+                        <{section name="j" loop=$attributes}>
+                            <li><{$attributes[j].name}>: <{$attributes[j].val}></li>
+                        <{/section}>
+                    </ul>
+                <{/if}>
+            </li>
+        <{/section}>
+    </ul>
+    <br/>
 
-	<h3>Leveringsadresse</h3>
-	<p><{$subscription->getDelName()|escape}></p>
-	<p><{$subscription->getDelCompanyName()|escape}></p>
-	<p><{$subscription->getDelAddress()|escape}></p>
-	<p><{$subscription->getDelZipcode()|escape}> <{$subscription->getDelCity()|escape}></p>
-	<p><{$subscription->getDelCountry()|escape}></p>
+    <h3>Bestillingsadresse</h3>
+    <p><{$subscription->getOrderName()|escape}></p>
+    <p><{$subscription->getOrderCompanyName()|escape}></p>
+    <p><{$subscription->getOrderAddress()|escape}></p>
+    <p><{$subscription->getOrderZipcode()|escape}> <{$subscription->getOrderCity()|escape}></p>
+    <p><{$subscription->getOrderCountry()|escape}></p>
+    <p><{$subscription->getPhone()|escape}></p>
+    <br/>
 
-	<{if $subscription->getPickupAddress()}>
-		<h3>Du kan hente din pakke hos:</h3>
-		<p><{$subscription->getPickupAddress()|escape|nl2br}></p>
-	<{/if}>
+    <h3>Leveringsadresse</h3>
+    <p><{$subscription->getDelName()|escape}></p>
+    <p><{$subscription->getDelCompanyName()|escape}></p>
+    <p><{$subscription->getDelAddress()|escape}></p>
+    <p><{$subscription->getDelZipcode()|escape}> <{$subscription->getDelCity()|escape}></p>
+    <p><{$subscription->getDelCountry()|escape}></p>
 
-	<form action="" method="post">
-		<{if $subscription->getStatus() == 'active'}>
-			<input type="submit" name="cancel" value="Luk abonnement">
-			<input type="submit" name="newcard" value="Nyt kort">
-		<{elseif $subscription->getStatus() == 'closed'}>
-			<input type="submit" name="open" value="Åben abonnement igen">
-		<{/if}>
-	</form>
+    <{if $subscription->getPickupAddress()}>
+        <h3>Du kan hente din pakke hos:</h3>
+        <p><{$subscription->getPickupAddress()|escape|nl2br}></p>
+    <{/if}>
+
+    <form action="" method="post">
+        <{if $subscription->getStatus() == 'active'}>
+            <input type="submit" name="cancel" value="Luk abonnement">
+            <input type="submit" name="newcard" value="Nyt kort">
+        <{elseif $subscription->getStatus() == 'closed'}>
+            <input type="submit" name="open" value="Åben abonnement igen">
+        <{/if}>
+    </form>
 
 <{/if}>

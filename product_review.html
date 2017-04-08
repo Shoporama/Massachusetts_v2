@@ -3,94 +3,94 @@
 <{if $get.voted}>
 
 <p>
-	Takker!
+    Takker!
 </p>
 
 <{else}>
 <div class="container">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			<div class="checkout-pages">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="checkout-pages">
 
 
-				<{if settings.globale.Logo}>
-				<div id="approve-logo">
-					<a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
-				</div>
-				<{/if}>
-				<div class="approve-section">
-					<h1>Anmeld dit køb</h1>
-				</div>			
+                <{if settings.globale.Logo}>
+                <div id="approve-logo">
+                    <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
+                </div>
+                <{/if}>
+                <div class="approve-section">
+                    <h1>Anmeld dit køb</h1>
+                </div>
 
-				<{assign var="products" value=$order->getOrderProducts()}>
+                <{assign var="products" value=$order->getOrderProducts()}>
 
-				<form action="" method="post">
-					<div class="approve-section order-details">
-						<!-- <small class="right">
-							Ordre ID: <{$order->getWebshopOrderId()}>
-						</small> -->
-						<ul id="basket-content-list">
-							<{section name="i" loop=$products}>
-							<li class="basket-content-listitem">
-								<{assign var="images" value=$products[i]->getImages()}>
-								<{section name="j" loop=$images max=1}>
-								<img src="<{$images[j]->getSrc(300, 300, 'box')}>" alt=""><br>
-								<{/section}>
+                <form action="" method="post">
+                    <div class="approve-section order-details">
+                        <!-- <small class="right">
+                            Ordre ID: <{$order->getWebshopOrderId()}>
+                        </small> -->
+                        <ul id="basket-content-list">
+                            <{section name="i" loop=$products}>
+                            <li class="basket-content-listitem">
+                                <{assign var="images" value=$products[i]->getImages()}>
+                                <{section name="j" loop=$images max=1}>
+                                <img src="<{$images[j]->getSrc(300, 300, 'box')}>" alt=""><br>
+                                <{/section}>
 
-								<strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
-								<small>(<{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}>)</small>
-								<li>
-									<{assign var="attributes" value=$products[i]->getAttributes()}>
-									<{if $attributes}>
-									<ul>
-										<{section name="j" loop=$attributes}>
-										<li><{$attributes[j].name}>: <{$attributes[j].val}></li>
-										<{/section}>
-									</ul>
-								</li>
-								<{/if}>
-								<div class="row">
-									<div class="col-sm-12">
-										<br>			
-										<p>Giv os din vurdering</p>				
-										<fieldset id="rating" class="rating" style="margin-left: -4px;">
-											<input type="radio" id="star5" name="rating[<{$products[i]->getProductId()}>]" value="5" />	
-											<label class = "full" for="star5" title="Awesome - 5 stars"></label>
-											<input type="radio" id="star4" name="rating[<{$products[i]->getProductId()}>]" value="4" />
-											<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-											<input type="radio" id="star3" name="rating[<{$products[i]->getProductId()}>]" value="3" />	
-											<label class = "full" for="star3" title="Meh - 3 stars"></label>
-											<input type="radio" id="star2" name="rating[<{$products[i]->getProductId()}>]" value="2" />
-											<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-											<input type="radio" id="star1" name="rating[<{$products[i]->getProductId()}>]" value="1" />
-											<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-										</fieldset>
-									<!-- <select name="rating[<{$products[i]->getProductId()}>]">
-										<option value="1">*</option>
-										<option value="2">**</option>
-										<option value="3">***</option>
-										<option value="4">****</option>
-										<option value="5">*****</option>
-									</select> -->
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-sm-12">
-									<textarea placeholder="Skriv en anmeldelse.." name="description[<{$products[i]->getProductId()}>]"></textarea>
-								</div>
-							</div>
-						</li>
-						<{/section}>
-					</ul>
+                                <strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
+                                <small>(<{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}>)</small>
+                                <li>
+                                    <{assign var="attributes" value=$products[i]->getAttributes()}>
+                                    <{if $attributes}>
+                                    <ul>
+                                        <{section name="j" loop=$attributes}>
+                                        <li><{$attributes[j].name}>: <{$attributes[j].val}></li>
+                                        <{/section}>
+                                    </ul>
+                                </li>
+                                <{/if}>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <br>
+                                        <p>Giv os din vurdering</p>
+                                        <fieldset id="rating" class="rating" style="margin-left: -4px;">
+                                            <input type="radio" id="star5" name="rating[<{$products[i]->getProductId()}>]" value="5" />
+                                            <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="star4" name="rating[<{$products[i]->getProductId()}>]" value="4" />
+                                            <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="star3" name="rating[<{$products[i]->getProductId()}>]" value="3" />
+                                            <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                            <input type="radio" id="star2" name="rating[<{$products[i]->getProductId()}>]" value="2" />
+                                            <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="star1" name="rating[<{$products[i]->getProductId()}>]" value="1" />
+                                            <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                        </fieldset>
+                                    <!-- <select name="rating[<{$products[i]->getProductId()}>]">
+                                        <option value="1">*</option>
+                                        <option value="2">**</option>
+                                        <option value="3">***</option>
+                                        <option value="4">****</option>
+                                        <option value="5">*****</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <textarea placeholder="Skriv en anmeldelse.." name="description[<{$products[i]->getProductId()}>]"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                        <{/section}>
+                    </ul>
 
-					<br/>
+                    <br/>
 
-					<input class="btn btn-primary btn-lg" type="submit" value="Gem din anmeldelse"/>
-				</div>
-			</form>
-		</div>
-	</div>
+                    <input class="btn btn-primary btn-lg" type="submit" value="Gem din anmeldelse"/>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </div>
 

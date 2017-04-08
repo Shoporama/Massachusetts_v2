@@ -1,137 +1,137 @@
 <{if $order}>
 <{assign var="products" value=$order->getProducts()}>
 <div class="container"><div class="row"><div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-	<div class="checkout-pages">
+    <div class="checkout-pages">
 
-		<{if settings.globale.Logo}>
-			<div id="order-logo">
-				<a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
-			</div>
-		<{/if}>
-
-
-		<div class="order-section">
-			<h1>Din ordre</h1>
-			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-md-9 left">
-					<{if $order->getStatus() == "new"}>
-
-						<p>Din ordre er ikke behandlet endnu.</p>
-
-					<{elseif $order->getStatus() == "cancelled"}>
-
-						<p>Din ordre er annulleret.</p>
-
-					<{elseif $order->getStatus() == "sent"}>
-
-						<p>Din ordre er afsendt.</p>
-
-						<{if $order->getTrackingNumber()}>
-							<{assign var="shipping" value=$order->getShipping()}>
-							<p><a href="<{$order->getTrackingUrl()|escape}>" target="_blank">Følg din ordre hos <{$shipping->getName()|escape}></a>.</p>
-						<{/if}>
-
-					<{/if}>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-3 right">
-					Ordre ID: <{$order->getWebshopOrderId()}>
-
-					<{if $order->getInvoiceId()}>
-						<br/>Fakturanummer: <{$order->getInvoiceId()}>
-					<{/if}>
-				</div>
-			</div>
-
-		</div>
-
-		<{if !$order->getPaid()}>
-			<div class="order-section">
-				<p>Din ordre er endnu ikke betalt.<br> <a href="/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" class="btn btn-primary btn-lg">Gå til betaling ›</a></p>
-			</div>
-		<{/if}>
-
-		<div class="order-section order-details">
-			<h4>Din bestilling</h4>
-
-			<ul id="basket-content-list">
-				<li class="basket-content-listitem">
-					<span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
-				</li>
-
-				<{section name="i" loop=$products}>
-					<li class="basket-content-listitem">
-						<div class="col-xs-12 col-sm-8 col-md-9 left">
-							<{assign var="images" value=$products[i]->getImages()}>
-							<{section name="j" loop=$images max=1}>
-								<img src="<{$images[j]->getSrc(30, 30, 'box')}>" style="float:left;">
-							<{/section}>
-							<span class="basket-content-listitem-amount"><{$products[i]->getAmount()}> stk.</span> <strong><{$products[i]->getName()|escape}><{assign var="attributes" value=$products[i]->getAttributes()}><{if $attributes}><div class="basket-content-listitem-attr"><{section name="j" loop=$attributes}><span><{$attributes[j].name}>: <{$attributes[j].val}></span><{/section}></div><{/if}></strong></div>
-						<div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}></div>
-					</li>
-				<{/section}>
-			</ul>
-
-			<div id="basket-summary">
-				<span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$order->getVat()|number_format:2:",":"."}></span>
-				<span id="basket-content-shipping">Fragt: <{$webshop->getCurrency()}> <{$order->getShippingPrice()|number_format:2:",":"."}></span>
-			</div>
-
-			<div>
-				<{assign var="voucher" value=$order->getVoucher()}>
-				<{if $voucher}>
-					<h3>Rabatkode</h3>
-					<p>Rabatkode: <{$voucher->getCode()|escape}></p>
-					<p>Rabat: <{$voucher->getPercentDiscount()|escape}> %</p>
-					<p>Rabat: <{$order->getVoucherDiscountAmount()|escape}> <{$webshop->getCurrency()}></p>
-				<{/if}>
-			</div>
-			<div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$order->getTotalPrice()|number_format:2:",":"."}></span></div>
-
-			<{foreach from=$order->getExtras() item="value" key="key"}>
-				<p><small><{$key|escape}>: <{$value|escape}></small></p>
-			<{/foreach}>
-		</div>
-
-		<div class="order-section about-you">
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h4>Faktureringsadresse</h4>
-					<p><{$order->getOrderName()|escape}><br>
-					<{if $order->getOrderCompanyName()}><{$order->getOrderCompanyName()|escape}><br><{/if}>
-					<{$order->getOrderAddress()|escape}><br>
-					<{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}><br>
-					<{if $order->getOrderCountry()}><{$order->getOrderCountry()|escape}><br><{/if}>
-					<{if $order->getPhone()}><br>Tlf. <{$order->getPhone()|escape}><{/if}></p>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h4>Leveringsadresse</h4>
-					<p><{$order->getDelName()|escape}><br>
-					<{if $order->getDelCompanyName()}><{$order->getDelCompanyName()|escape}><br><{/if}>
-					<{$order->getDelAddress()|escape}><br>
-					<{$order->getDelZipcode()|escape}> <{$order->getDelCity()|escape}><br>
-					<{$order->getDelCountry()|escape}></p>
-				</div>
-			</div>
-
-			<div>
-				<h4>E-mail-adresse</h4>
-				<p><{$order->getEmail()|escape}></p>
-			</div>
-
-		</div>
+        <{if settings.globale.Logo}>
+            <div id="order-logo">
+                <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
+            </div>
+        <{/if}>
 
 
-		<div class="order-section">
-			<{if $order->getComments()}>
-				<h3>Kommentar</h3>
-				<p><{$order->getComments()|escape}></p>
-			<{/if}>
-			<{if $order->getPickupAddress()}>
-				<h3>Du kan hente din pakke hos:</h3>
-				<p><{$order->getPickupAddress()|escape|nl2br}></p>
-			<{/if}>
-		</div>
+        <div class="order-section">
+            <h1>Din ordre</h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-9 left">
+                    <{if $order->getStatus() == "new"}>
 
-	</div>
+                        <p>Din ordre er ikke behandlet endnu.</p>
+
+                    <{elseif $order->getStatus() == "cancelled"}>
+
+                        <p>Din ordre er annulleret.</p>
+
+                    <{elseif $order->getStatus() == "sent"}>
+
+                        <p>Din ordre er afsendt.</p>
+
+                        <{if $order->getTrackingNumber()}>
+                            <{assign var="shipping" value=$order->getShipping()}>
+                            <p><a href="<{$order->getTrackingUrl()|escape}>" target="_blank">Følg din ordre hos <{$shipping->getName()|escape}></a>.</p>
+                        <{/if}>
+
+                    <{/if}>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-3 right">
+                    Ordre ID: <{$order->getWebshopOrderId()}>
+
+                    <{if $order->getInvoiceId()}>
+                        <br/>Fakturanummer: <{$order->getInvoiceId()}>
+                    <{/if}>
+                </div>
+            </div>
+
+        </div>
+
+        <{if !$order->getPaid()}>
+            <div class="order-section">
+                <p>Din ordre er endnu ikke betalt.<br> <a href="/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" class="btn btn-primary btn-lg">Gå til betaling ›</a></p>
+            </div>
+        <{/if}>
+
+        <div class="order-section order-details">
+            <h4>Din bestilling</h4>
+
+            <ul id="basket-content-list">
+                <li class="basket-content-listitem">
+                    <span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
+                </li>
+
+                <{section name="i" loop=$products}>
+                    <li class="basket-content-listitem">
+                        <div class="col-xs-12 col-sm-8 col-md-9 left">
+                            <{assign var="images" value=$products[i]->getImages()}>
+                            <{section name="j" loop=$images max=1}>
+                                <img src="<{$images[j]->getSrc(30, 30, 'box')}>" style="float:left;">
+                            <{/section}>
+                            <span class="basket-content-listitem-amount"><{$products[i]->getAmount()}> stk.</span> <strong><{$products[i]->getName()|escape}><{assign var="attributes" value=$products[i]->getAttributes()}><{if $attributes}><div class="basket-content-listitem-attr"><{section name="j" loop=$attributes}><span><{$attributes[j].name}>: <{$attributes[j].val}></span><{/section}></div><{/if}></strong></div>
+                        <div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}></div>
+                    </li>
+                <{/section}>
+            </ul>
+
+            <div id="basket-summary">
+                <span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$order->getVat()|number_format:2:",":"."}></span>
+                <span id="basket-content-shipping">Fragt: <{$webshop->getCurrency()}> <{$order->getShippingPrice()|number_format:2:",":"."}></span>
+            </div>
+
+            <div>
+                <{assign var="voucher" value=$order->getVoucher()}>
+                <{if $voucher}>
+                    <h3>Rabatkode</h3>
+                    <p>Rabatkode: <{$voucher->getCode()|escape}></p>
+                    <p>Rabat: <{$voucher->getPercentDiscount()|escape}> %</p>
+                    <p>Rabat: <{$order->getVoucherDiscountAmount()|escape}> <{$webshop->getCurrency()}></p>
+                <{/if}>
+            </div>
+            <div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$order->getTotalPrice()|number_format:2:",":"."}></span></div>
+
+            <{foreach from=$order->getExtras() item="value" key="key"}>
+                <p><small><{$key|escape}>: <{$value|escape}></small></p>
+            <{/foreach}>
+        </div>
+
+        <div class="order-section about-you">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h4>Faktureringsadresse</h4>
+                    <p><{$order->getOrderName()|escape}><br>
+                    <{if $order->getOrderCompanyName()}><{$order->getOrderCompanyName()|escape}><br><{/if}>
+                    <{$order->getOrderAddress()|escape}><br>
+                    <{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}><br>
+                    <{if $order->getOrderCountry()}><{$order->getOrderCountry()|escape}><br><{/if}>
+                    <{if $order->getPhone()}><br>Tlf. <{$order->getPhone()|escape}><{/if}></p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h4>Leveringsadresse</h4>
+                    <p><{$order->getDelName()|escape}><br>
+                    <{if $order->getDelCompanyName()}><{$order->getDelCompanyName()|escape}><br><{/if}>
+                    <{$order->getDelAddress()|escape}><br>
+                    <{$order->getDelZipcode()|escape}> <{$order->getDelCity()|escape}><br>
+                    <{$order->getDelCountry()|escape}></p>
+                </div>
+            </div>
+
+            <div>
+                <h4>E-mail-adresse</h4>
+                <p><{$order->getEmail()|escape}></p>
+            </div>
+
+        </div>
+
+
+        <div class="order-section">
+            <{if $order->getComments()}>
+                <h3>Kommentar</h3>
+                <p><{$order->getComments()|escape}></p>
+            <{/if}>
+            <{if $order->getPickupAddress()}>
+                <h3>Du kan hente din pakke hos:</h3>
+                <p><{$order->getPickupAddress()|escape|nl2br}></p>
+            <{/if}>
+        </div>
+
+    </div>
 </div></div></div>
 <{/if}>

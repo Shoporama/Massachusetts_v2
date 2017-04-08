@@ -11,157 +11,150 @@
 
                         <{if $webshop->getStatus() == "demo"}>
 
-							<p class="error">Shoppen kører i demo-mode, så evt. betalinger går igennem som betalt.</p><br/>
+                            <p class="error">Shoppen kører i demo-mode, så evt. betalinger går igennem som betalt.</p><br/>
 
-							<form action="<{$webshop->getUrl()|escape}>/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" method="post">
+                            <form action="<{$webshop->getUrl()|escape}>/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" method="post">
 
-								<p>Du er ved at betale <{$order->getTotalPrice()|number_format:2:",":"."}> <{$webshop->getCurrency()}></p><br/>
+                                <p>Du er ved at betale <{$order->getTotalPrice()|number_format:2:",":"."}> <{$webshop->getCurrency()}></p><br/>
 
-								<input type="submit" name="next" value="Lad som om du betaler &raquo;"/>
-							</form>
+                                <input type="submit" name="next" value="Lad som om du betaler &raquo;"/>
+                            </form>
 
-							<{else}>
+                            <{else}>
 
-								<{if $order->getPaymentGateway() == "epay"}>
+                                <{if $order->getPaymentGateway() == "epay"}>
 
-									<script type="text/javascript" src="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/paymentwindow.js" charset="UTF-8"></script>
-									<script type="text/javascript">
-										$(document).ready(function() {
-											paymentwindow = new PaymentWindow({
-												<{foreach from=$params key="key" item="value"}>
-													'<{$key}>': '<{$value|escape:"javascript"}>',
-												<{/foreach}>
-												<{if $hash}>
-													'hash': '<{$hash|escape:"javascript"}>'
-												<{/if}>
-											});
-											paymentwindow.append('payment-div');
-											paymentwindow.open();
-										});
-									</script>
+                                    <script type="text/javascript" src="https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/paymentwindow.js" charset="UTF-8"></script>
+                                    <script type="text/javascript">
+                                        $(document).ready(function() {
+                                            paymentwindow = new PaymentWindow({
+                                                <{foreach from=$params key="key" item="value"}>
+                                                    '<{$key}>': '<{$value|escape:"javascript"}>',
+                                                <{/foreach}>
+                                                <{if $hash}>
+                                                    'hash': '<{$hash|escape:"javascript"}>'
+                                                <{/if}>
+                                            });
+                                            paymentwindow.append('payment-div');
+                                            paymentwindow.open();
+                                        });
+                                    </script>
 
-									<div id="payment-div" style="width:650px; height:300px;"></div>
+                                    <div id="payment-div" style="width:650px; height:300px;"></div>
 
-								<{elseif $order->getPaymentGateway() == "quickpay"}>
+                                <{elseif $order->getPaymentGateway() == "quickpay"}>
 
-									<form action="https://secure.quickpay.dk/form/" method="post">
-										<input type="hidden" name="protocol" value="<{$protocol|escape}>" />
-										<input type="hidden" name="msgtype" value="<{$msgtype|escape}>" />
-										<input type="hidden" name="merchant" value="<{$merchant|escape}>" />
-										<input type="hidden" name="language" value="<{$language|escape}>" />
-										<input type="hidden" name="ordernumber" value="<{$ordernumber|escape}>" />
-										<input type="hidden" name="amount" value="<{$amount|escape}>" />
-										<input type="hidden" name="currency" value="<{$currency|escape}>" />
-										<input type="hidden" name="continueurl" value="<{$continueurl|escape}>" />
-										<input type="hidden" name="cancelurl" value="<{$cancelurl|escape}>" />
-										<input type="hidden" name="callbackurl" value="<{$callbackurl|escape}>" />
+                                    <form action="https://secure.quickpay.dk/form/" method="post">
+                                        <input type="hidden" name="protocol" value="<{$protocol|escape}>" />
+                                        <input type="hidden" name="msgtype" value="<{$msgtype|escape}>" />
+                                        <input type="hidden" name="merchant" value="<{$merchant|escape}>" />
+                                        <input type="hidden" name="language" value="<{$language|escape}>" />
+                                        <input type="hidden" name="ordernumber" value="<{$ordernumber|escape}>" />
+                                        <input type="hidden" name="amount" value="<{$amount|escape}>" />
+                                        <input type="hidden" name="currency" value="<{$currency|escape}>" />
+                                        <input type="hidden" name="continueurl" value="<{$continueurl|escape}>" />
+                                        <input type="hidden" name="cancelurl" value="<{$cancelurl|escape}>" />
+                                        <input type="hidden" name="callbackurl" value="<{$callbackurl|escape}>" />
 
-										<input type="hidden" name="md5check" value="<{$md5}>" />
-										<input type="submit" value="Betal" />
-									</form>
+                                        <input type="hidden" name="md5check" value="<{$md5}>" />
+                                        <input type="submit" value="Betal" />
+                                    </form>
 
-								<{elseif $order->getPaymentGateway() == "paypal"}>
+                                <{elseif $order->getPaymentGateway() == "paypal"}>
 
-									<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 
-									    <input type="hidden" name="amount" value="<{$amount|escape}>"/>
-										<input type="hidden" name="item_name" value="Ordre nr. <{$ordernumber|escape}> fra <{$webshop->getName()|escape}>"/>
-										<input type="hidden" name="business" value="<{$merchant|escape}>"/>
-										<input type="hidden" name="notify_url" value="<{$callbackurl|escape}>"/>
+                                        <input type="hidden" name="amount" value="<{$amount|escape}>"/>
+                                        <input type="hidden" name="item_name" value="Ordre nr. <{$ordernumber|escape}> fra <{$webshop->getName()|escape}>"/>
+                                        <input type="hidden" name="business" value="<{$merchant|escape}>"/>
+                                        <input type="hidden" name="notify_url" value="<{$callbackurl|escape}>"/>
 
-										<input type="hidden" name="currency_code" value="<{$currency|escape}>"/>
+                                        <input type="hidden" name="currency_code" value="<{$currency|escape}>"/>
 
-										<input type="hidden" name="custom " value="<{$ordernumber|escape}>"/>
-									    <input type="hidden" name="return" value="<{$continueurl|escape}>"/>
+                                        <input type="hidden" name="custom " value="<{$ordernumber|escape}>"/>
+                                        <input type="hidden" name="return" value="<{$continueurl|escape}>"/>
 
-										<input type="hidden" name="first_name" value="<{$order->getOrderName()|escape}>"/>
-										<input type="hidden" name="last_name" value=""/>
-										<input type="hidden" name="address1" value="<{$order->getOrderAddress()|escape}>"/>
-										<input type="hidden" name="address2" value=""/>
-										<input type="hidden" name="city" value="<{$order->getOrderCity()|escape}>"/>
-										<input type="hidden" name="zip" value="<{$order->getOrderZipcode()|escape}>"/>
-										<input type="hidden" name="night_phone_a" value="<{$order->getPhone()|escape}>"/>
+                                        <input type="hidden" name="first_name" value="<{$order->getOrderName()|escape}>"/>
+                                        <input type="hidden" name="last_name" value=""/>
+                                        <input type="hidden" name="address1" value="<{$order->getOrderAddress()|escape}>"/>
+                                        <input type="hidden" name="address2" value=""/>
+                                        <input type="hidden" name="city" value="<{$order->getOrderCity()|escape}>"/>
+                                        <input type="hidden" name="zip" value="<{$order->getOrderZipcode()|escape}>"/>
+                                        <input type="hidden" name="night_phone_a" value="<{$order->getPhone()|escape}>"/>
 
-										<!--
-											<input type="hidden" name="image_url" value=""/>
-											<input type="hidden" name="cpp_headerback_color" value=""/>
-											<input type="hidden" name="cpp_payflow_color" value=""/>
-											<input type="hidden" name="cpp_headerborder_color" value=""/>
-										-->
+                                        <!--
+                                            <input type="hidden" name="image_url" value=""/>
+                                            <input type="hidden" name="cpp_headerback_color" value=""/>
+                                            <input type="hidden" name="cpp_payflow_color" value=""/>
+                                            <input type="hidden" name="cpp_headerborder_color" value=""/>
+                                        -->
 
-										<input type="hidden" name="cmd" value="_xclick"/>
+                                        <input type="hidden" name="cmd" value="_xclick"/>
 
-										<input type="submit" class="payment_button green" value="Betal"/>
-									</form>
+                                        <input type="submit" class="payment_button green" value="Betal"/>
+                                    </form>
 
-								<{elseif $order->getPaymentGateway() == "dibs"}>
+                                <{elseif $order->getPaymentGateway() == "dibs"}>
 
-									<iframe src="" style="border:1px solid #eee; width:100%; height: 400px; overflow:scroll" name="dibsframe"/></iframe>
+                                    <iframe src="" style="border:1px solid #eee; width:100%; height: 400px; overflow:scroll" name="dibsframe"/></iframe>
 
-										<form method="post" action="https://sat1.dibspayment.com/dibspaymentwindow/entrypoint" id="dibsform" target="dibsframe">
-											<{foreach from=$params key="key" item="value"}>
-												<input type="hidden" name="<{$key}>" value="<{$value|escape}>" />
-											<{/foreach}>
-											<input type="submit" value="Betal"/>
-										</form>
+                                        <form method="post" action="https://sat1.dibspayment.com/dibspaymentwindow/entrypoint" id="dibsform" target="dibsframe">
+                                            <{foreach from=$params key="key" item="value"}>
+                                                <input type="hidden" name="<{$key}>" value="<{$value|escape}>" />
+                                            <{/foreach}>
+                                            <input type="submit" value="Betal"/>
+                                        </form>
 
-										<script type="text/javascript">
-											$(document).ready(function() {
-												$("#dibsform input[type=submit]").hide();
-												$("#dibsform").submit();
-											});
-										</script>
+                                        <script type="text/javascript">
+                                            $(document).ready(function() {
+                                                $("#dibsform input[type=submit]").hide();
+                                                $("#dibsform").submit();
+                                            });
+                                        </script>
 
-								<{elseif $order->getPaymentGateway() == "ewire"}>
+                                <{elseif $order->getPaymentGateway() == "ewire"}>
 
-									<form action="<{$EWIRE->ewirePaymentBaseURL}>" target="_blank" method="post">
-										<input type="hidden" name="companyId" value="<{$EWIRE->companyId|escape}>" />
-										<input type="hidden" name="lang" value="<{$lang|escape}>" />
-										<input type="hidden" name="buyerEmail" value="<{$buyerEmail|escape}>" />
-										<input type="hidden" name="lockBuyerEmail" value="<{$lockBuyerEmail|escape}>" />
-										<input type="hidden" name="subject" value="<{$subject|escape}>" />
-										<input type="hidden" name="customerOrderId" value="<{$customerOrderId|escape}>" />
-										<input type="hidden" name="amount" value="<{$amount|escape}>" />
-										<input type="hidden" name="currency" value="<{$currency|escape}>" />
-										<input type="hidden" name="itemURL" value="<{$itemURL|escape}>" />
-										<input type="hidden" name="autoCapture" value="<{$autocapture|escape}>" />
-										<input type="hidden" name="expireDays" value="<{$expireDays|escape}>" />
-										<input type="hidden" name="annonymousPayerAllowed" value="<{$annonymousPayerAllowed|escape}>" />
-										<input type="hidden" name="acceptURL" value="<{$acceptURL|escape}>" />
-										<input type="hidden" name="declineURL" value="<{$declineURL|escape}>" />
-										<input type="hidden" name="callbackAcceptURL" value="<{$callbackAcceptURL|escape}>" />
-										<input type="hidden" name="validateMD" value="<{$validateMD|escape}>" />
-										<input type="hidden" name="testmode" value="<{$testmode|escape}>" />
-										<input type="submit" value="Betal" />
-									</form>
+                                    <form action="<{$EWIRE->ewirePaymentBaseURL}>" target="_blank" method="post">
+                                        <input type="hidden" name="companyId" value="<{$EWIRE->companyId|escape}>" />
+                                        <input type="hidden" name="lang" value="<{$lang|escape}>" />
+                                        <input type="hidden" name="buyerEmail" value="<{$buyerEmail|escape}>" />
+                                        <input type="hidden" name="lockBuyerEmail" value="<{$lockBuyerEmail|escape}>" />
+                                        <input type="hidden" name="subject" value="<{$subject|escape}>" />
+                                        <input type="hidden" name="customerOrderId" value="<{$customerOrderId|escape}>" />
+                                        <input type="hidden" name="amount" value="<{$amount|escape}>" />
+                                        <input type="hidden" name="currency" value="<{$currency|escape}>" />
+                                        <input type="hidden" name="itemURL" value="<{$itemURL|escape}>" />
+                                        <input type="hidden" name="autoCapture" value="<{$autocapture|escape}>" />
+                                        <input type="hidden" name="expireDays" value="<{$expireDays|escape}>" />
+                                        <input type="hidden" name="annonymousPayerAllowed" value="<{$annonymousPayerAllowed|escape}>" />
+                                        <input type="hidden" name="acceptURL" value="<{$acceptURL|escape}>" />
+                                        <input type="hidden" name="declineURL" value="<{$declineURL|escape}>" />
+                                        <input type="hidden" name="callbackAcceptURL" value="<{$callbackAcceptURL|escape}>" />
+                                        <input type="hidden" name="validateMD" value="<{$validateMD|escape}>" />
+                                        <input type="hidden" name="testmode" value="<{$testmode|escape}>" />
+                                        <input type="submit" value="Betal" />
+                                    </form>
 
-								<{elseif $payment_gateway_type == "quickpayv10"}>
+                                <{elseif $payment_gateway_type == "quickpayv10"}>
 
-									<form action="https://payment.quickpay.net" method="post">
-										<{foreach from=$params key="key" item="value"}>
-											<input type="hidden" name="<{$key}>" value="<{$value|escape}>" />
-										<{/foreach}>
-										<input type="submit" value="Betal" />
-									</form>
+                                    <form action="https://payment.quickpay.net" method="post">
+                                        <{foreach from=$params key="key" item="value"}>
+                                            <input type="hidden" name="<{$key}>" value="<{$value|escape}>" />
+                                        <{/foreach}>
+                                        <input type="submit" value="Betal" />
+                                    </form>
 
-								<{/if}>
+                                <{/if}>
 
-
-
-							<{/if}>
+                            <{/if}>
 
                     </div></div>
                 </section>
 
             </section><!--/#sitecontent-->
 
-
-
-			<{include file="_include_checkout-footer.html"}>
-
-
+            <{include file="_include_checkout-footer.html"}>
 
         </div><!--/#site-->
-
 
     </body>

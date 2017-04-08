@@ -2,143 +2,141 @@
 
     <div id="site" class="checkout basketpage">
 
-	<{include file="_include_checkout-header.html"}>
+    <{include file="_include_checkout-header.html"}>
 
-	<section id="sitecontent">
-		<section id="page-content">
+    <section id="sitecontent">
+        <section id="page-content">
 
-		    <{include file="_include_breadcrumbs.html"}>
+            <{include file="_include_breadcrumbs.html"}>
 
-		    <section id="checkout-content">
-		        <div class="container"><div class="row"><div class="col-xs-12">
-		            <h1>Indhold i kurven</h1>
+            <section id="checkout-content">
+                <div class="container"><div class="row"><div class="col-xs-12">
+                    <h1>Indhold i kurven</h1>
                     <{if $get.s == "NaN"}>
                         <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
                     <{/if}>
-		            <form class="form-inline" role="form" id="form" method="post" action="">
-		                <ul id="basket-content-list">
-		                    <li class="row" id="basket-content-listhead">
-		                        <span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
-		                    </li>
+                    <form class="form-inline" role="form" id="form" method="post" action="">
+                        <ul id="basket-content-list">
+                            <li class="row" id="basket-content-listhead">
+                                <span class="col-xs-6 col-sm-8 col-md-9 left">Produkt</span><span class="col-xs-6 col-sm-4 col-md-3 right">Pris</span>
+                            </li>
 
-		                    <{section name="i" loop=$basket}>
-								<{assign var="product" value=$basket[i].product}>
-								<li class="basket-content-listitem">
-									<div class="col-xs-12 col-sm-8 col-md-9 left">
-										<input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>"/>
-										<button class="removefrombasket pull-right btn btn-xs" name="remove_product" value="<{$basket[i].id}>"><i class="glyphicon glyphicon-remove"></i> <span>Fjern fra kurven</span></button>
-										<span class="basket-content-listitem-amount"><{$basket[i].amount}> stk.</span> <a href="<{$product->getUrl()|escape}>"><{$product->getName()|escape}>
-										<{assign var="attributes" value=$basket[i].attributes}>
-										<{if $attributes}>
-											<div class="basket-content-listitem-attr">
-												<{foreach from=$attributes item=a}>
-													<span><{$a.name|escape}>: <{$a.value|escape}></span>
-												<{/foreach}>
-											</div>
-										<{/if}>
-									</a>
-									<{if $product->hasBundleProducts()}>
-										<{assign var="bundle" value=$product->getBundleProducts()}>
-										<{if $bundle}>
-										<ul>
-											<{section name="j" loop=$bundle}>
-											<{assign var="b_product" value=$bundle[j]}>
-											<{assign var="id" value=$b_product->getProductId()}>
-											<li>
-												<{$b_product->getName()|escape}> <{if $basket[i].bundle.$id}> (<{$basket[i].bundle.$id.val}>)<{/if}>
-											</li>
-											<{/section}>
-										</ul>
-										<{/if}>
-									<{/if}>
-									</div>
-									<div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
-								</li>
-							<{/section}>
+                            <{section name="i" loop=$basket}>
+                                <{assign var="product" value=$basket[i].product}>
+                                <li class="basket-content-listitem">
+                                    <div class="col-xs-12 col-sm-8 col-md-9 left">
+                                        <input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>"/>
+                                        <button class="removefrombasket pull-right btn btn-xs" name="remove_product" value="<{$basket[i].id}>"><i class="glyphicon glyphicon-remove"></i> <span>Fjern fra kurven</span></button>
+                                        <span class="basket-content-listitem-amount"><{$basket[i].amount}> stk.</span> <a href="<{$product->getUrl()|escape}>"><{$product->getName()|escape}>
+                                        <{assign var="attributes" value=$basket[i].attributes}>
+                                        <{if $attributes}>
+                                            <div class="basket-content-listitem-attr">
+                                                <{foreach from=$attributes item=a}>
+                                                    <span><{$a.name|escape}>: <{$a.value|escape}></span>
+                                                <{/foreach}>
+                                            </div>
+                                        <{/if}>
+                                    </a>
+                                    <{if $product->hasBundleProducts()}>
+                                        <{assign var="bundle" value=$product->getBundleProducts()}>
+                                        <{if $bundle}>
+                                        <ul>
+                                            <{section name="j" loop=$bundle}>
+                                            <{assign var="b_product" value=$bundle[j]}>
+                                            <{assign var="id" value=$b_product->getProductId()}>
+                                            <li>
+                                                <{$b_product->getName()|escape}> <{if $basket[i].bundle.$id}> (<{$basket[i].bundle.$id.val}>)<{/if}>
+                                            </li>
+                                            <{/section}>
+                                        </ul>
+                                        <{/if}>
+                                    <{/if}>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-3 right"><{$webshop->getCurrency()}> <{$product->getRealPrice($basket[i].amount, $basket[i].attributes)|number_format:2:",":"."}></div>
+                                </li>
+                            <{/section}>
 
-		                </ul>
-		                <div id="basket-shipping-method"></div>
-		                <div id="basket-voucher-line">
-							<{if $voucher}>
+                        </ul>
+                        <div id="basket-shipping-method"></div>
+                        <div id="basket-voucher-line">
+                            <{if $voucher}>
 
-								<{if $voucher->getPercentDiscount()}>
-									Du får <{$voucher->getPercentDiscount()}> % rabat!</p>
-								<{/if}>
+                                <{if $voucher->getPercentDiscount()}>
+                                    Du får <{$voucher->getPercentDiscount()}> % rabat!</p>
+                                <{/if}>
 
-								<{if $voucher->getPriceDiscount()}>
-									Du får <{$voucher->getPriceDiscount()}> <{$webshop->getCurrency()}> rabat!</p>
-								<{/if}>
+                                <{if $voucher->getPriceDiscount()}>
+                                    Du får <{$voucher->getPriceDiscount()}> <{$webshop->getCurrency()}> rabat!</p>
+                                <{/if}>
 
-								<{if $voucher->getFreeShipping()}>
-									Du får fragten gratis!
-								<{/if}>
+                                <{if $voucher->getFreeShipping()}>
+                                    Du får fragten gratis!
+                                <{/if}>
 
-							<{/if}>
-						</div>
+                            <{/if}>
+                        </div>
 
-						<{if $countries}>
-						<div>
-							<select name="del_country_id" onchange="$('#form').submit();" id="basket-country" required>
-								<option value="" disabled>Vælg land</option>
-								<{section name="i" loop=$countries}>
-									<option value="<{$countries[i]->getCountryId()}>" <{if $session_del.country_id == $countries[i]->getCountryId()}>selected="selected"<{/if}>><{$countries[i]->getName()|escape}></option>
-								<{/section}>
-							</select>
-						</div>
-						<{/if}>
+                        <{if $countries}>
+                        <div>
+                            <select name="del_country_id" onchange="$('#form').submit();" id="basket-country" required>
+                                <option value="" disabled>Vælg land</option>
+                                <{section name="i" loop=$countries}>
+                                    <option value="<{$countries[i]->getCountryId()}>" <{if $session_del.country_id == $countries[i]->getCountryId()}>selected="selected"<{/if}>><{$countries[i]->getName()|escape}></option>
+                                <{/section}>
+                            </select>
+                        </div>
+                        <{/if}>
 
-						<div id="basket-shipping-shop-select"><div id="basket-shipping-shop-select-pos">
-							<{assign var="shippings" value=$webshop->getShippings()}>
-							<{section name="i" loop=$shippings}>
-							<label class="line" for="shipping<{$shippings[i]->getShippingId()}>">
-								<input class="shipping" type="radio" onclick="updateform();" module="<{$shippings[i]->getModule()|escape}>" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
-								<span class="shipping-name"><{$shippings[i]->getName()|escape}></span>
-								<span class="shipping-price"><{$shippings[i]->getCost()|number_format:2:",":"."}> <{$webshop->getCurrency()}></span>
-							</label>
-							<{/section}>
-						</div></div>
+                        <div id="basket-shipping-shop-select"><div id="basket-shipping-shop-select-pos">
+                            <{assign var="shippings" value=$webshop->getShippings()}>
+                            <{section name="i" loop=$shippings}>
+                            <label class="line" for="shipping<{$shippings[i]->getShippingId()}>">
+                                <input class="shipping" type="radio" onclick="updateform();" module="<{$shippings[i]->getModule()|escape}>" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
+                                <span class="shipping-name"><{$shippings[i]->getName()|escape}></span>
+                                <span class="shipping-price"><{$shippings[i]->getCost()|number_format:2:",":"."}> <{$webshop->getCurrency()}></span>
+                            </label>
+                            <{/section}>
+                        </div></div>
 
-		                <div id="basket-summary">
-							<span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$vat|number_format:2:",":"."}></span>
-							<span id="basket-content-shipping">Fragt (leveres til) <span class="country-selecter"><{assign var="countries" value=$webshop->getCountries()}>
-							<{if $countries}>
-									<select name="del_country_id" onchange="$('#form').submit();" id="basket-country" required>
-										<option value="" disabled>Vælg land</option>
-										<{section name="i" loop=$countries}>
-											<option value="<{$countries[i]->getCountryId()}>" <{if $session_del.country_id == $countries[i]->getCountryId()}>selected="selected"<{/if}>><{$countries[i]->getName()|escape}></option>
-										<{/section}>
-									</select>
-							<{/if}></span></span>
-						</div>
+                        <div id="basket-summary">
+                            <span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$vat|number_format:2:",":"."}></span>
+                            <span id="basket-content-shipping">Fragt (leveres til) <span class="country-selecter"><{assign var="countries" value=$webshop->getCountries()}>
+                            <{if $countries}>
+                                    <select name="del_country_id" onchange="$('#form').submit();" id="basket-country" required>
+                                        <option value="" disabled>Vælg land</option>
+                                        <{section name="i" loop=$countries}>
+                                            <option value="<{$countries[i]->getCountryId()}>" <{if $session_del.country_id == $countries[i]->getCountryId()}>selected="selected"<{/if}>><{$countries[i]->getName()|escape}></option>
+                                        <{/section}>
+                                    </select>
+                            <{/if}></span></span>
+                        </div>
 
+                        <div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span></div>
+                        <div id="basket-nextstep">
+                        <div id="basket-voucher">
+                            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-right">
+                              <input type="text" class="<{if $voucher}>voucher-active<{/if}>" name="voucher" value="<{$voucher|escape}>" placeholder="Gavekort-kode" />
+                              <button class="btn btn-default <{if $voucher}>voucher-active<{/if}>" type="submit" name="opdate"><{if $voucher}><i class="icon-grin"></i><{else}>Aktivér<{/if}></button>
+                            </div><!-- /input-group -->
+                        </div>
+                        <!-- /input-group --></div>
 
+                        <input type="submit" value="Gå til levering"  id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
+                        </div>
+                    </form>
 
-						<div id="basket-total">Total: <span><{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span></div>
-		                <div id="basket-nextstep">
-		                <div id="basket-voucher">
-							<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-right">
-						      <input type="text" class="<{if $voucher}>voucher-active<{/if}>" name="voucher" value="<{$voucher|escape}>" placeholder="Gavekort-kode" />
-						      <button class="btn btn-default <{if $voucher}>voucher-active<{/if}>" type="submit" name="opdate"><{if $voucher}><i class="icon-grin"></i><{else}>Aktivér<{/if}></button>
-						    </div><!-- /input-group -->
-						</div>
-		                <!-- /input-group --></div>
+                </div></div></div>
+            </section>
 
-		                <input type="submit" value="Gå til levering"  id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
-		                </div>
-		            </form>
+        </section>
+    </section><!--/#sitecontent-->
 
-		        </div></div></div>
-		    </section>
-
-		</section>
-	</section><!--/#sitecontent-->
-
-	<{include file="_include_checkout-footer.html"}>
+    <{include file="_include_checkout-footer.html"}>
 </div>
 
 <script type="text/javascript">
-	function updateform() {
-		$('#form').submit();
-	}
+    function updateform() {
+        $('#form').submit();
+    }
 </script>
 <{/strip}>

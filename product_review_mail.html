@@ -7,61 +7,61 @@ Hvad synes du om din ordre?
 <html>
 
 <head>
-	<title>Hvad synes du om din ordre?</title>
-	<style type="text/css">
-		body {
-			font-family:sans-serif;
-		}
-		a {
-			color:#00a;
-			text-decoration:none;
-		}
-		h2 {
-			margin:0px 0px 10px 0px;
-			padding:0px;
-		}
-		.left {
-			float:left;
-			margin-right:25px;
-			border:1px solid #aaa;
-			padding:10px;
-			min-width:200px;
-			text-align:center;
-		}
-		.clear {
-			clear:both;
-		}
-	</style>
+    <title>Hvad synes du om din ordre?</title>
+    <style type="text/css">
+        body {
+            font-family:sans-serif;
+        }
+        a {
+            color:#00a;
+            text-decoration:none;
+        }
+        h2 {
+            margin:0px 0px 10px 0px;
+            padding:0px;
+        }
+        .left {
+            float:left;
+            margin-right:25px;
+            border:1px solid #aaa;
+            padding:10px;
+            min-width:200px;
+            text-align:center;
+        }
+        .clear {
+            clear:both;
+        }
+    </style>
 </head>
 <body>
 
-	<p>Hej <{$order->getOrderName()|escape}>,</p>
+    <p>Hej <{$order->getOrderName()|escape}>,</p>
 
-	<p>For noget tid siden købte du:</p>
+    <p>For noget tid siden købte du:</p>
 
-	<{assign var="products" value=$order->getProducts()}>
+    <{assign var="products" value=$order->getProducts()}>
 
-	<{section name="i" loop=$products}>
+    <{section name="i" loop=$products}>
 
-	<div class="left">
+    <div class="left">
 
-		<a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
-			<{assign var="image" value=$products[i]->getImage()}>
+        <a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
+            <{assign var="image" value=$products[i]->getImage()}>
 
-			<h2><{$products[i]->getName()|escape}></h2>
+            <h2><{$products[i]->getName()|escape}></h2>
 
-			<{if $image}>
-			<img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
-			<{/if}>
-		</a>
+            <{if $image}>
+            <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
+            <{/if}>
+        </a>
 
-	</div>
+    </div>
 
-	<{/section}>
+    <{/section}>
 
-	<div class="clear"></div>
+    <div class="clear"></div>
 
-	<p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
+    <p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
 
 </body>
 
