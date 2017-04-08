@@ -49,12 +49,8 @@
                     <p><a href="<{$webshop->getUrl()}>/address"/>&laquo; gå tilbage og ret</a></p>
                     <{/if}>
 
-
-
                     <form action="" method="post" id="shippingformular">
                         <br>
-
-
                         <{assign var="shippings" value=$webshop->getShippings()}>
                         <{section name="i" loop=$shippings}>
                         <div class="line" style="">
@@ -93,12 +89,10 @@
                 </div></div>
             </section>
 
-
         </section><!--/#sitecontent-->
 
         <footer id="sitefoot">
 
         </footer><!--/#sitefoot-->
-
 
     </div><!--/#site-->
