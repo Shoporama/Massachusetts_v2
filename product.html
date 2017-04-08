@@ -41,6 +41,12 @@
                                     <div class="product-cta-current">
                                         <span itemprop="priceCurrency"><{$webshop->getCurrency()}></span> <span itemprop="price" content="<{$product->getRealPrice()|number_format:2:".":""}>"><{$product->getRealPrice()|number_format:2:",":"."}></span>
                                     </div>
+                                    <{if $product->getSalePrice()}>
+                                        <p>Spar: <{$webshop->getCurrency()}> <{$product->getSave()|number_format:2:",":"."}> (<{$product->getPercentSave()|number_format:0}>%)</p>
+                                    <{/if}>
+                                    <{if $product->getBulkDiscountOver()}>
+                                        <p><small>Køb <{$product->getBulkDiscountOver()}>+ og få den til <{$product->getBulkDiscountPrice()|number_format:2:",":"."}> pr. stk.</small></p>
+                                    <{/if}>
                                 </div>
                                 <{include file="_include_addtocart.html"}>
                             </div>
