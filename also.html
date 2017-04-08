@@ -3,7 +3,7 @@
 
     <div id="sitecontent">
         <section id="page-content">
-            <div class="row" style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding-top: 1em; padding-bottom: 1em; margin-bottom: 2em;"><div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="row" style="margin-top: 2em; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding-top: 1em; padding-bottom: 1em; margin-bottom: 2em;"><div class="col-xs-12 col-md-8 col-md-offset-2">
             <{if $product}>
                     <{assign var="image" value=$product->getImage()}>
 
@@ -28,11 +28,16 @@
         </div>
 
     </div>
+
+            <{include file="_include_page-persuasion.html"}>
+
     <div class="container">
+
+
 
     <{assign var="products" value=$product->getAlsoBought(4)}>
     <{if $products}>
-        <section id="highlighted-products">
+        <section id="highlighted-products" style="margin-top: 1em; clear: both;">
             <h2 class="section-header">Andre købte også:</h2>
             <div class="container"><div class="row">
             <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
