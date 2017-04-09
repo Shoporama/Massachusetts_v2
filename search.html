@@ -1,44 +1,49 @@
 <div id="site" class="">
 
-        <{include file="_include_header.html"}>
+    <{include file="_include_header.html"}>
 
-        <section id="sitecontent">
+    <section id="sitecontent">
 
-            <section id="product-list-head">
-                <div class="container"><div class="row"><div class="col-xs-12">
-                    <{if $get.search}>
-                        <h1>Søgeresultat for "<{$get.search|escape}>"</h1>
-                    <{else}>
-                        <h1>Søgning</h1>
+        <section id="product-list-head">
+            <div class="container"><div class="row"><div class="col-xs-12">
+                <{if $get.search}>
+                    <h1>Søgeresultat for "<{$get.search|escape}>"</h1>
+                    <{if $get.search|count_characters < 3}>
+                        <p class="alert alert-warning">Du har søgt efter "<{$get.search|escape}>". Søgemaskinen fungerer desværre kun med tre eller flere karakterer.</p>
+                        <{if $settings.Search.Besked}>
+                            <p class="alert alert-info"><{$settings.Search.Besked|escape}></p>
+                        <{/if}>
                     <{/if}>
-                    <p>Resultater: <{$count}></p>
-                </div></div></div>
-            </section>
+                <{else}>
+                    <h1>Søgning</h1>
+                <{/if}>
+                <p>Resultater: <{$count}></p>
+            </div></div></div>
+        </section>
 
-            <section id="products">
-                <div class="container"><div class="row">
-                    <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+        <section id="products">
+            <div class="container"><div class="row">
+                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
 
-                        <{section name="i" loop=$products}>
-                            <{include file="_include_inner-product.html" product=$products[i]}>
-                        <{/section}>
+                    <{section name="i" loop=$products}>
+                        <{include file="_include_inner-product.html" product=$products[i]}>
+                    <{/section}>
 
-                    </ul>
+                </ul>
 
-
-                </div></div><!--/.container .row-->
-            </section>
-
-
-        </section><!--/#sitecontent-->
-
-        <{include file="_include_footer.html"}>
+            </div></div><!--/.container .row-->
+        </section>
 
 
-        <button id="totop">Til toppen</button>
+    </section><!--/#sitecontent-->
 
-        <{include file="_include_cookiepolicy.html"}>
+    <{include file="_include_footer.html"}>
 
-    </div><!--/#site-->
 
-    <{include file="_include_side-basket.html"}>
+    <button id="totop">Til toppen</button>
+
+    <{include file="_include_cookiepolicy.html"}>
+
+</div><!--/#site-->
+
+<{include file="_include_side-basket.html"}>
