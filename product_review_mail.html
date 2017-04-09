@@ -4,38 +4,9 @@ Hvad synes du om din ordre?
 
 <{else}>
 
-<html>
+<{include file="_include_mail-header.html"}>
 
-<head>
-    <title>Hvad synes du om din ordre?</title>
-    <style type="text/css">
-        body {
-            font-family:sans-serif;
-        }
-        a {
-            color:#00a;
-            text-decoration:none;
-        }
-        h2 {
-            margin:0px 0px 10px 0px;
-            padding:0px;
-        }
-        .left {
-            float:left;
-            margin-right:25px;
-            border:1px solid #aaa;
-            padding:10px;
-            min-width:200px;
-            text-align:center;
-        }
-        .clear {
-            clear:both;
-        }
-    </style>
-</head>
-<body>
-
-    <p>Hej <{$order->getOrderName()|escape}>,</p>
+<p>Hej <{$order->getOrderName()|escape}>,</p>
 
     <p>For noget tid siden købte du:</p>
 
@@ -63,8 +34,6 @@ Hvad synes du om din ordre?
 
     <p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
 
-</body>
-
-</html>
+<{include file="_include_mail-footer.html"}>
 
 <{/if}>
