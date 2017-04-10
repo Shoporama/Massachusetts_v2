@@ -1,0 +1,7 @@
+<{if $shipping_country && intval($shipping_country->getFreeAbove())}>
+<div class="row free-shipping"><div class="col-xs-12 col-md-8 col-md-offset-2">
+    <{if $shipping_country->getFreeAbove() gt $price}>
+    <p><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Få gratis fragt ved at købe for <{math equation="x - y" x=$shipping_country->getFreeAbove() y=$price}> <{$webshop->getCurrency()|escape}> mere.<p>
+    <{/if}>
+</div></div>
+<{/if}>

@@ -7157,10 +7157,15 @@ button.voucher-active {
 }
 .free-shipping {
   background: #eeeeee;
-  font-size: 2em;
   padding-bottom: 1em;
   padding-top: 1em;
   text-align: center;
+}
+.side-basket .free-shipping {
+  font-size: 1.3em;
+}
+.also .free-shipping {
+  font-size: 2em;
 }
 /* GLOBALS
 --------------------------------------------------------*/

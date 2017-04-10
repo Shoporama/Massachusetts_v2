@@ -1,8 +1,10 @@
 <{strip}><{if $basket}>
-    <div id="basket">
+    <div id="basket" class="side-basket">
         <div id="basket-content">
 
             <h3>Indhold i kurven</h3>
+
+            <{include file="_include_free-shipping.html"}>
 
             <form class="form-inline" role="form" id="form" method="post" action="/basket">
 
