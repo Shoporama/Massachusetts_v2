@@ -52,7 +52,7 @@
                                         <{/if}>
                                     <{/if}>
                                     <{if $product->getBulkDiscountOver() && $basket[i].amount > $product->getBulkDiscountOver()}>
-                                        <p>Mængderabat v/ <{$product->getBulkDiscountOver()}>+: <del><{$webshop->getCurrency()}> <{$product->getRealPrice(1, $basket[i].attributes)|number_format:2:",":"."}></del> <{$webshop->getCurrency()}> <{$product->getBulkDiscountPrice()|number_format:2:",":"."}></p>
+                                        <p>Du får mængderabat fordi du har købt mindst <{math equation="bulk+1" bulk=$product->getBulkDiscountOver()}> stk.: <del><{$webshop->getCurrency()}> <{$product->getRealPrice(1, $basket[i].attributes)|number_format:2:",":"."}></del> <{$webshop->getCurrency()}> <{$product->getBulkDiscountPrice()|number_format:2:",":"."}></p>
                                     <{/if}>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-3 right">

@@ -6084,8 +6084,8 @@ body.toggled-basket #basket {
   padding-top: 20px;
 }
 #productpage-content h1 {
-  margin: 0;
   font-size: 30px;
+  margin: 0;
   text-align: center;
 }
 @media (min-width: 768px) {
@@ -6112,14 +6112,14 @@ body.toggled-basket #basket {
   }
 }
 #product-info-container #product-info-rating .rating-hidden {
-  visibility: hidden;
   font-size: 1px;
   position: absolute;
+  visibility: hidden;
 }
 #product-info-container #product-info-sku {
-  margin-top: 0;
-  font-size: 80%;
   color: #b3b3b3;
+  font-size: 80%;
+  margin-top: 0;
   text-align: center;
 }
 @media (min-width: 768px) {
@@ -6144,23 +6144,23 @@ body.toggled-basket #basket {
   padding: 0 0 0 15px;
 }
 #product-info-container #product-page-kpp ul li:before {
-  font-family: 'Glyphicons Halflings';
   content: '\e013';
+  font-family: 'Glyphicons Halflings';
   margin-right: 10px;
 }
 #product-info-container #product-page-cta-container {
-  padding: 2px;
-  border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 2px;
 }
 #product-info-container #product-page-cta-container #product-page-cta {
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
   border-radius: 4px;
+  padding: 20px;
 }
 #product-info-container #product-page-cta-container #product-page-cta:after {
-  content: '';
   clear: both;
+  content: '';
   display: block;
 }
 #product-info-container #product-page-cta-container #product-page-cta #product-cta-price,
@@ -6170,9 +6170,9 @@ body.toggled-basket #basket {
 @media (min-width: 768px) {
   #product-info-container #product-page-cta-container #product-page-cta #product-cta-price,
   #product-info-container #product-page-cta-container #product-page-cta #product-cta-action {
-    width: 50%;
     float: left;
     text-align: left;
+    width: 50%;
   }
 }
 #product-info-container #product-page-cta-container #product-page-cta #product-cta-price input,
@@ -6199,9 +6199,9 @@ body.toggled-basket #basket {
   }
 }
 #product-info-container #product-page-cta-container #product-page-cta #product-cta-price .product-cta-before {
+  color: #b3b3b3;
   font-size: 14px;
   text-decoration: line-through;
-  color: #b3b3b3;
 }
 @media (min-width: 992px) {
   #product-info-container #product-page-cta-container #product-page-cta #product-cta-price .product-cta-before {
@@ -6228,27 +6228,27 @@ body.toggled-basket #basket {
 }
 @media (min-width: 768px) {
   #product-info-container #product-page-cta-container #product-page-cta #product-cta-action {
-    padding: 10px 0 10px 30px;
     border-left: 1px solid #efefef;
+    padding: 10px 0 10px 30px;
   }
 }
 #product-info-container #product-page-cta-container #product-page-cta #product-cta-action .product-variant-selecter {
-  width: 100%;
-  min-height: 40px;
   margin-bottom: 10px;
+  min-height: 40px;
+  width: 100%;
 }
 #product-info-container #product-page-cta-container #product-page-cta #product-cta-action .product-variant-selecter select {
-  width: 100%;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   height: 40px;
   line-height: 40px;
   padding: 0 0 0 15px;
-  border: 1px solid #ccc;
-  background: #f5f5f5;
-  border-radius: 4px;
+  width: 100%;
 }
 #product-info-container #product-page-cta-container #product-page-persuasion {
-  padding: 10px 20px;
   font-size: 80%;
+  padding: 10px 20px;
 }
 @media (min-width: 768px) {
   #product-info-container #product-page-cta-container #product-page-persuasion {
@@ -6273,8 +6273,8 @@ body.toggled-basket #basket {
 #product-info-container #product-page-cta-container #product-page-persuasion #product-page-persuasion-inner .usp:before {
   font-size: 20px;
   line-height: 20px;
-  position: absolute;
   margin-left: -25px;
+  position: absolute;
 }
 @media (min-width: 768px) {
   #product-info-container #product-page-cta-container #product-page-persuasion #product-page-persuasion-inner .usp {
@@ -6283,8 +6283,8 @@ body.toggled-basket #basket {
   }
 }
 #product-info-container #product-page-extras {
-  text-align: center;
   padding: 10px;
+  text-align: center;
 }
 #product-page-expanded {
   margin-top: 30px;
@@ -6292,16 +6292,16 @@ body.toggled-basket #basket {
 #product-page-expanded .tab-content {
   border-bottom: 1px solid #ddd;
   border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
   border-radius: 0 0 4px 4px;
+  border-right: 1px solid #ddd;
   padding: 20px;
 }
 #related {
   padding-top: 30px;
 }
 #related h3 {
-  text-align: center;
   margin-bottom: 30px;
+  text-align: center;
 }
 #product-info-show-desc.show {
   visibility: hidden;
@@ -6316,11 +6316,14 @@ body.toggled-basket #basket {
 }
 #product-info-description #product-page-shortdescription {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 20px;
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 #remindmeform {
   clear: both;
+}
+.bulk-discount {
+  font-size: 12px;
 }
 #persuasion {
   padding-bottom: 30px;

@@ -45,7 +45,7 @@
                                         <p>Spar: <{$webshop->getCurrency()}> <{$product->getSave()|number_format:2:",":"."}> (<{$product->getPercentSave()|number_format:0}>%)</p>
                                     <{/if}>
                                     <{if $product->getBulkDiscountOver()}>
-                                        <p><small>Køb <{$product->getBulkDiscountOver()}>+ og få den til <{$product->getBulkDiscountPrice()|number_format:2:",":"."}> pr. stk.</small></p>
+                                        <p class="bulk-discount">Køb mindst <{math equation="bulk+1" bulk=$product->getBulkDiscountOver()}> og få den til <{$product->getBulkDiscountPrice()|number_format:2:",":"."}> pr. stk.</p>
                                     <{/if}>
                                 </div>
                                 <{include file="_include_addtocart.html"}>
