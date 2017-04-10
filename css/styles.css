@@ -7155,6 +7155,13 @@ button.voucher-active {
 .also .basket_link {
   font-size: 2em;
 }
+.free-shipping {
+  background: #eeeeee;
+  font-size: 2em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  text-align: center;
+}
 /* GLOBALS
 --------------------------------------------------------*/
 /* TYPOGRAPHY
