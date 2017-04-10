@@ -27,6 +27,15 @@
                 </div>
             </div></div>
 
+            <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
+            <{if $shipping_country && intval($shipping_country->getFreeAbove())}>
+                <{if $shipping_country->getFreeAbove() gt $price}>
+                    <p class="alert alert-info" role="alert"><span class="glyphicon glyphicon glyphicon-star-empty" aria-hidden="true"></span> Der er gratis fragt hvis du køber for mere end <{$shipping_country->getFreeAbove()|number_format:0:",":"."}> <{$webshop->getCurrency()|escape}>.&nbsp;
+                        Få gratis fragt ved at købe for <{math equation="x - y" x=$shipping_country->getFreeAbove() y=$price}> <{$webshop->getCurrency()|escape}> mere.<p>
+                <{/if}>
+            <{/if}>
+            </div></div>
+
             <{include file="_include_page-persuasion.html"}>
 
             <div class="container">
