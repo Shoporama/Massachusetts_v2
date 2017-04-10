@@ -7142,6 +7142,9 @@ button.voucher-active {
   padding-bottom: 1em;
   padding-top: 2em;
 }
+.also .product-added p {
+  text-align: center;
+}
 .also #highlighted-products {
   margin-top: 2em;
 }
