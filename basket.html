@@ -29,9 +29,8 @@
                                 <{assign var="product" value=$basket[i].product}>
                                 <li class="basket-content-listitem">
                                     <div class="col-xs-12 col-sm-8 col-md-9 left">
-                                        <input type="hidden" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>"/>
                                         <button class="removefrombasket pull-right btn btn-xs" name="remove_product" value="<{$basket[i].id}>"><i class="glyphicon glyphicon-remove"></i> <span>Fjern fra kurven</span></button>
-                                        <span class="basket-content-listitem-amount"><{$basket[i].amount}> stk.</span> <a href="<{$product->getUrl()|escape}>"><{$product->getName()|escape}>
+                                        <span class="basket-content-listitem-amount"><input type="text" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>" size="2" /> stk.</span> <a href="<{$product->getUrl()|escape}>"><{$product->getName()|escape}>
                                         <{assign var="attributes" value=$basket[i].attributes}>
                                         <{if $attributes}>
                                             <div class="basket-content-listitem-attr">
@@ -130,8 +129,9 @@
                         </div>
                         <!-- /input-group --></div>
 
-                        <input type="submit" value="Gå til levering"  id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
-                        </div>
+                        <input type="submit" name="update" value="Opdater ordre" class="btn btn-default" />
+                        <input type="submit" value="Gå til levering" id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
+                    </div>
                     </form>
                     <{else}>
                     <h1>Kurven er tom</h1>
