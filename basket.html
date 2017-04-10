@@ -11,6 +11,7 @@
 
             <section id="checkout-content">
                 <div class="container"><div class="row"><div class="col-xs-12">
+                    <{if $basket}>
                     <h1>Indhold i kurven</h1>
                     <{if $get.s == "NaN"}>
                         <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
@@ -129,7 +130,10 @@
                         <input type="submit" value="Gå til levering"  id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
                         </div>
                     </form>
-
+                    <{else}>
+                    <h1>Kurven er tom</h1>
+                    <a href="/" class="btn btn-primary btn-lg">Shop videre</a>
+                    <{/if}>
                 </div></div></div>
             </section>
 
