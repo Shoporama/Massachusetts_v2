@@ -3,8 +3,8 @@
 
 #site.checkout {
     #sitehead {
-        top: 0 !important;
         position: absolute !important;
+        top: 0 !important;
     }
 }
 
@@ -22,17 +22,17 @@
 
 #checkout-next-btn {
     width: 100%;
-    @media (min-width: @screen-sm) {
-        width: auto;
-        float: right;
-    }
 
+    @media (min-width: @screen-sm) {
+        float: right;
+        width: auto;
+    }
 }
 
 .checkout-pages {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
-    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 50px;
+    padding: 20px;
 
     @media (min-width: @screen-md) {
         margin: 50px;
@@ -40,9 +40,9 @@
     }
 
     textarea {
-        width: 80%;
-        max-width: 80%;
         height: 150px;
+        max-width: 80%;
+        width: 80%;
     }
 
     .rating {
@@ -55,11 +55,11 @@
     }
 
     .rating > label:before {
-        margin: 5px;
+        content: "\e006";
+        display: inline-block;
         font-size: 1.25em;
         font-family: 'Glyphicons Halflings';
-        display: inline-block;
-        content: "\e006";
+        margin: 5px;
     }
 
     .rating > label {

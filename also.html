@@ -1,10 +1,11 @@
-<div id="site" class="checkout basketpage">
+<div id="site" class="checkout also">
     <{include file="_include_checkout-header.html"}>
 
     <div id="sitecontent">
         <{if $product}>
         <section id="page-content">
-            <div class="row" style="margin-top: 2em; padding-top: 2em; padding-bottom: 1em; margin-bottom: 2em;"><div class="col-xs-12 col-md-8 col-md-offset-2">
+            <{include file="_include_breadcrumbs.html"}>
+            <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
                 <{assign var="image" value=$product->getImage()}>
 
                 <div class="col-xs-12 col-sm-8 col-md-9 left">
@@ -15,10 +16,10 @@
                         </a>
                     </div>
                     <{/if}>
-                    <h4 style="font-size: 1.5em; text-align: center;" class="col-xs-8 col-sm-8 col-md-9 right">Du lagde <{$product->getName()|escape}> i kurven</h4>
+                    <h4 class="product" class="col-xs-8 col-sm-8 col-md-9 right">Du lagde <{$product->getName()|escape}> i kurven</h4>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 right">
-                    <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success" style="background: orange; font-size: 2em;">Gå til kassen »</a></p>
+                    <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success">Gå til kassen »</a></p>
                     <p><a href="<{$product->getUrl()|escape}>">« Tilbage</a></p>
                 </div>
             </div></div>
@@ -27,7 +28,7 @@
 
             <div class="container">
 
-                <div class="row" style="margin-top: 2em;"><div class="col-xs-12">
+                <div class="row"><div class="col-xs-12">
 
                     <{assign var="products" value=$product->getAlsoBought(4)}>
                     <{if $products}>
@@ -43,9 +44,8 @@
                                 </ul>
                             </div></div>
                         </section>
+                        <div class="clear"></div>
                     <{/if}>
-
-                    <div class="clear"></div>
 
                     <{assign var="products" value=$product->getRelatedProducts(4)}>
                     <{if $products}>
@@ -61,10 +61,8 @@
                                 </ul>
                             </div></div>
                         </section>
+                        <div class="clear"></div>
                     <{/if}>
-
-                    <div class="clear"></div>
-
                 </div></div>
             </div>
         </section>

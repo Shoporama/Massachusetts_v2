@@ -6600,8 +6600,8 @@ body.toggled-basket #basket {
 /* C H E C K  O U T  F L O W
 -------------------------------*/
 #site.checkout #sitehead {
-  top: 0 !important;
   position: absolute !important;
+  top: 0 !important;
 }
 .thanksicn {
   font-size: 85px;
@@ -6617,14 +6617,14 @@ body.toggled-basket #basket {
 }
 @media (min-width: 768px) {
   #checkout-next-btn {
-    width: auto;
     float: right;
+    width: auto;
   }
 }
 .checkout-pages {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   margin-bottom: 50px;
+  padding: 20px;
   /***** CSS Magic to Highlight Stars on Hover *****/
   /* hover previous stars in list */
 }
@@ -6635,9 +6635,9 @@ body.toggled-basket #basket {
   }
 }
 .checkout-pages textarea {
-  width: 80%;
-  max-width: 80%;
   height: 150px;
+  max-width: 80%;
+  width: 80%;
 }
 .checkout-pages .rating {
   border: none;
@@ -6647,11 +6647,11 @@ body.toggled-basket #basket {
   display: none;
 }
 .checkout-pages .rating > label:before {
-  margin: 5px;
+  content: "\e006";
+  display: inline-block;
   font-size: 1.25em;
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  content: "\e006";
+  margin: 5px;
 }
 .checkout-pages .rating > label {
   color: #B2B2B2;
@@ -6693,17 +6693,17 @@ body.toggled-basket #basket {
   margin: 0;
 }
 #basket-content-list {
+  list-style-type: none;
   margin: 0 0 30px 0;
   padding: 0;
-  list-style-type: none;
 }
 #basket-content-list #basket-content-listhead {
-  text-transform: uppercase;
-  font-size: 100%;
-  padding: 15px 0;
   border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
   color: #666;
+  font-size: 100%;
+  text-transform: uppercase;
+  padding: 15px 0;
 }
 #basket-content-list .basket-content-listitem {
   padding: 15px 0;
@@ -7132,6 +7132,19 @@ button.voucher-active {
   display: none;
   padding: 30px 0 0 0;
   box-sizing: border-box;
+}
+.also .row {
+  margin-bottom: 2em;
+  margin-top: 2em;
+  padding-bottom: 1em;
+  padding-top: 2em;
+}
+.also .product {
+  font-size: 1.5em;
+  text-align: center;
+}
+.also .basket_link {
+  font-size: 2em;
 }
 /* GLOBALS
 --------------------------------------------------------*/
