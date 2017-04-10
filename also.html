@@ -17,12 +17,23 @@
                     </div>
                     <{/if}>
                     <h4 class="product" class="col-xs-8 col-sm-8 col-md-9 right">Du lagde <{$product->getName()|escape}> i kurven</h4>
+                    <{if $product->getSalePrice()}>
+                    <p>Du sparer <{$webshop->getCurrency()}> <{$product->getSave()|number_format:2:",":"."}> (<{$product->getPercentSave()|number_format:0}>%) på produktet</p>
+                    <{/if}>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 right">
                     <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success">Gå til kassen »</a></p>
                     <p><a href="<{$product->getUrl()|escape}>">« Tilbage</a></p>
                 </div>
             </div></div>
+
+            <{if $shipping_country && intval($shipping_country->getFreeAbove())}>
+            <div class="row free-shipping"><div class="col-xs-12 col-md-8 col-md-offset-2">
+                <{if $shipping_country->getFreeAbove() gt $price}>
+                    <p><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Få gratis fragt ved at købe for <{math equation="x - y" x=$shipping_country->getFreeAbove() y=$price}> <{$webshop->getCurrency()|escape}> mere.<p>
+                <{/if}>
+            </div></div>
+            <{/if}>
 
             <{include file="_include_page-persuasion.html"}>
 
