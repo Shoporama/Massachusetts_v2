@@ -17,6 +17,9 @@
                     </div>
                     <{/if}>
                     <h4 class="product" class="col-xs-8 col-sm-8 col-md-9 right">Du lagde <{$product->getName()|escape}> i kurven</h4>
+                    <{if $product->getSalePrice()}>
+                    <p>Du sparer <{$webshop->getCurrency()}> <{$product->getSave()|number_format:2:",":"."}> (<{$product->getPercentSave()|number_format:0}>%) på produktet</p>
+                    <{/if}>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 right">
                     <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success">Gå til kassen »</a></p>
