@@ -7,7 +7,7 @@
     <{math assign="buy_more" equation="x - y" x=$shipping_country->getFreeAbove() y=$price}>
     <{math assign="trigger_price" equation="price * when_to_trigger" price=$total_price when_to_trigger=$when_to_trigger}>
     <{if $trigger_price gt $buy_more}>
-    <div class="row free-shipping"><div class="col-xs-12 col-md-8">
+    <div class="row free-shipping"><div class="col-xs-12">
         <p><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Få gratis fragt ved at købe for <{$buy_more}> <{$webshop->getCurrency()|escape}> mere.<p>
     </div></div>
     <{/if}>
