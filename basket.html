@@ -16,6 +16,9 @@
                     <{if $get.s == "NaN"}>
                         <div id="outofstock-message">En eller flere varer i kurven er ikke på lager - det kan skyldes at den er blevet solgt i mellemtiden.</div>
                     <{/if}>
+
+                    <{include file="_include_free-shipping.html"}>
+
                     <form class="form-inline" role="form" id="form" method="post" action="">
                         <ul id="basket-content-list">
                             <li class="row" id="basket-content-listhead">
