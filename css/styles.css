@@ -7161,7 +7161,8 @@ button.voucher-active {
   padding-top: 1em;
   text-align: center;
 }
-.side-basket .free-shipping {
+.side-basket .free-shipping,
+.basketpage .free-shipping {
   font-size: 1.3em;
 }
 .also .free-shipping {
