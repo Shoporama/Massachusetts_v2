@@ -12,12 +12,16 @@
         feed.run();
     }
 
+
     $(window).scroll(function() {
+
         if ($('#instafeed-container').is(':visible') && !instaGramFeedHasLoaded) {
             instaFeedInit();
             instaGramFeedHasLoaded = true;
         }
+
     });
+
 
 </script>
 <style>

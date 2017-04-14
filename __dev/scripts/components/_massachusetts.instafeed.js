@@ -1,7 +1,6 @@
 massachusetts.instafeed = massachusetts.instafeed || function () {
 
     function init() {
-
     }
 
     return {
