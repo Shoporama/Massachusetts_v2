@@ -30,9 +30,7 @@
                 </div>
                <div class="col-xs-12 col-sm-7 col-md-6">
                     <div id="product-info-container">
-                        <h1 itemprop="name">
-                            <{$product->getName()|escape}>
-                        </h1>
+                        <h1 itemprop="name"><{$product->getName()|escape}></h1>
                         <{if $product->getOwnId()}>
                             <div id="product-info-sku">Varenr. <{$product->getOwnId()}></div>
                         <{/if}>
