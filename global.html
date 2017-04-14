@@ -96,16 +96,6 @@
         <{/if}>
     <{/if}>
 
-    <{if $settings.Instagramfeed.Aktivt == 'ja' }>
-        <{if
-            $current_url != "$baseurl/address" &&
-            $current_url != "$baseurl/approve" &&
-            $current_url != "$baseurl/payment"
-        }>
-            <{include file="_include_script_instafeed.html"}>
-        <{/if}>
-    <{/if}>
-
     <{if $settings.globale.Cookiepopup == 'ja' }>
         <{if
             $current_url != "$baseurl/address" &&
