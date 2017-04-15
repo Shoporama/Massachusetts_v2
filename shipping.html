@@ -1,65 +1,60 @@
-<body class="subpage shippingpage">
-    <script type="text/javascript" src="js/scripts.min.js"></script>
-    <div id="site" class="">
+<script type="text/javascript" src="js/scripts.min.js"></script>
+<div id="site" class="checkout shipping">
 
-        <{include file="_include_checkout-header.html"}>
+    <{include file="_include_checkout-header.html"}>
 
-        <section id="sitecontent">
+    <section id="sitecontent">
+        <section id="checkout-content">
+            <div class="container"><div class="row">
+                <h1>Fragt</h1>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        var check_module = function() {
+                            // Gemmer alle
+                            $(".shipping_module").hide();
 
-            <section id="checkout-content">
-                <div class="container"><div class="row">
+                            // Finder den der er checked
+                            var e = $("input[type=radio].shipping:checked");
 
-                    <h1>Fragt</h1>
-                    <script type="text/javascript">
-                        $(document).ready(function() {
+                            if (e) {
+                                var module_name = e.attr('module');
 
-                            var check_module = function() {
-
-                                // Gemmer alle
-                                $(".shipping_module").hide();
-
-                                // Finder den der er checked
-                                var e = $("input[type=radio].shipping:checked");
-
-                                if (e) {
-                                    var module_name = e.attr('module');
-
-                                    // Hvis den der er checked også har en module-attribut, så viser vi den
-                                    if (module_name) {
-                                        var module = $("#shipping_module").show();
-                                    }
+                                // Hvis den der er checked også har en module-attribut, så viser vi den
+                                if (module_name) {
+                                    var module = $(".shipping_module").show();
                                 }
                             }
+                        }
 
-                            // Loader
-                            $("input.shipping").ready(check_module).change(check_module);
-                        });
-                    </script>
+                        // Loader
+                        $("input.shipping").ready(check_module).change(check_module);
+                    });
+                </script>
 
-                    <{if $get.missing}>
+                <{if $get.missing}>
                     <p class="error">Du skal vælge leveringsmetode</p>
-                    <{/if}>
+                <{/if}>
 
-                    <{if $is_postdanmark_down_again}>
+                <{if $is_postdanmark_down_again}>
                     <p class="error">PostDanmark er desværre ikke tilgængelig i øjeblikket.</p>
-                    <{/if}>
+                <{/if}>
 
-                    <{if $shipping_module && $no_shops}>
+                <{if $shipping_module && $no_shops}>
                     <p>Vi fandt desværre ikke nogen pakkeshop - er du sikker på at din adresse er rigtig?</p>
                     <p><a href="<{$webshop->getUrl()}>/address"/>&laquo; gå tilbage og ret</a></p>
-                    <{/if}>
+                <{/if}>
 
-                    <form action="" method="post" id="shippingformular">
-                        <br>
-                        <{assign var="shippings" value=$webshop->getShippings()}>
-                        <{section name="i" loop=$shippings}>
-                        <div class="line" style="">
+                <form action="" method="post" id="shippingformular">
+                    <br>
+                    <{assign var="shippings" value=$webshop->getShippings()}>
+                    <{section name="i" loop=$shippings}>
+                        <div class="line shipping_module" style="">
                             <input class="shipping" type="radio" module="<{$shippings[i]->getModule()|escape}>" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
                             <label for="shipping<{$shippings[i]->getShippingId()}>"><{$shippings[i]->getName()|escape}> <{$shippings[i]->getCost()|number_format:2:",":"."}> <{$webshop->getCurrency()}></label><br/>
                         </div>
-                        <{/section}>
+                    <{/section}>
 
-                        <{if $shops}>
+                    <{if $shops}>
                         <div class="clear" >
                             <br>
                             <label>Hvor vi du hente din pakke? <br>
@@ -74,25 +69,25 @@
                                 </select>
                             </label>
                         </div>
-                        <{else}>
+                    <{else}>
                         <p>ingen pakkeshops</p>
-                        <{/if}>
+                    <{/if}>
 
-                        <div class="clear"></div>
-                        <br>
-                        <br>
+                    <div class="clear"></div>
+                    <br>
+                    <br>
 
-                        <input type="button" name="prev" value="&laquo; Leveringsadresse" class="btn btn-default" onclick="history.go(-1);"/>
-                        <input type="submit" name="next" value="Gå til betaling &raquo;" class="btn btn-primary" />
-                    </form>
+                    <input type="button" name="prev" value="&laquo; Leveringsadresse" class="btn btn-default btn-lg" onclick="history.go(-1);"/>
+                    <input type="submit" name="next" value="Gå til betaling &raquo;" class="btn btn-primary btn-lg" />
+                </form>
 
-                </div></div>
-            </section>
+            </div></div>
+        </section>
 
-        </section><!--/#sitecontent-->
+    </section><!--/#sitecontent-->
 
-        <footer id="sitefoot">
+    <footer id="sitefoot">
 
-        </footer><!--/#sitefoot-->
+    </footer><!--/#sitefoot-->
 
-    </div><!--/#site-->
+</div><!--/#site-->
