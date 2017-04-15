@@ -1,15 +1,7 @@
 <footer id="sitefoot">
     <div id="sitefoot-head">
         <div class="container"><div class="row"><div class="col-xs-12">
-            <{if $settings.Betalingskort.Dankort == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/dankort_22.gif" alt="Dankort"><{/if}>
-            <{if $settings.Betalingskort.VISA == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/visa-22.gif" alt="VISA"><{/if}>
-            <{if $settings.Betalingskort.VISAelektron == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/electron_22.gif" alt="VISA elektron"><{/if}>
-            <{if $settings.Betalingskort.Master == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/master_22.gif" alt="Master"><{/if}>
-            <{if $settings.Betalingskort.Maestro == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/maestro_22.gif" alt="Maestro"><{/if}>
-            <{if $settings.Betalingskort.JCB == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/jcb_22.gif" alt="JCB"><{/if}>
-            <{if $settings.Betalingskort.AmericanExpress == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/amex_22.gif" alt="American Express"><{/if}>
-            <{if $settings.Betalingskort.Mobilepay == "ja"}><img src="<{$theme_url}>/img/epay-logo-pack/mobilepay_22.gif" alt="Mobilepay"><{/if}>
-            <p><{if $settings.Betalingskort.Tekst}><{$settings.Betalingskort.Tekst}><{/if}></p>
+            <{include file="_include_paymentcards.html"}>
         </div></div></div>
     </div>
 </footer><!--/#sitefoot-->
