@@ -19,6 +19,7 @@
                                 <input type="text" name="order_name" value="" id="order_name" placeholder="Navn" required/>
                             </div>
                             <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
+                            <div class="form-row form-row-input">
                                 <div class="form-row-zip">
                                     <label for="vat_number">Evt. CVR-nummer</label>
                                     <input type="text" name="vat_number" value="" id="vat_number" placeholder="Evt. CVR-nummer">
@@ -27,6 +28,7 @@
                                     <label for="order_company_name">Evt. Firmanavn</label>
                                     <input type="text" name="order_company_name" value="" id="order_company_name" placeholder="Evt. firmanavn">
                                 </div>
+                            </div>
                             <{/if}>
                             <div class="form-row form-row-input">
                                 <label for="order_address">Adresse</label>
