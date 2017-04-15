@@ -2,11 +2,7 @@
 <{capture name="title"}><{$category->getName()}><{/capture}>
 <{assign var="cacheCategory" value=$category->getCategoryId()|cat:'_'|cat:$get.p}>
 <{assign var="cacheCategoryData" value=$category->getCategoryId()|cat:'_data_'|cat:$get.p}>
-<{if $settings.Caching.LevetidKategoriSide}>
-    <{assign var="ttl" value=$settings.Caching.LevetidKategoriSide}>
-<{else}>
-    <{assign var="ttl" value="3600"}>
-<{/if}>
+<{assign var="ttl" value=$settings.Caching.LevetidKategoriSide|default:3600}>
 
 <div id="site" class="category">
 

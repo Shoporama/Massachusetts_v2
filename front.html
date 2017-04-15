@@ -1,12 +1,7 @@
 <{strip}>
 <div id="site" class="frontpage">
     <{include file="_include_header.html"}>
-
-    <{if $settings.Caching.LevetidForside}>
-        <{assign var="ttl" value=$settings.Caching.LevetidForside}>
-    <{else}>
-        <{assign var="ttl" value="3600"}>
-    <{/if}>
+    <{assign var="ttl" value=$settings.Caching.LevetidForside|default:3600}>
     <{get_cache name="shoporama_frontpage" ttl=$ttl assign="shoporama_frontpage_data"}>
 
     <{if $shoporama_frontpage_data}>
@@ -21,10 +16,10 @@
 
         <{if $settings.forside.Forsidebillede}>
         <section id="brandidentity" style="background-image: url(<{$settings.forside.Forsidebillede->getSrc(1000, 1000, 'fit')}>);">
-            <div id="brandidentity-overlay" style="background-color:<{$settings.forside.Overlayfarve|escape}>;opacity:<{$settings.forside.Overlaygennemsigtighed|escape}>;"></div>
+            <div id="brandidentity-overlay" style="background-color:<{$settings.forside.Overlayfarve|escape|default:'#FFFFFF'}>;opacity:<{$settings.forside.Overlaygennemsigtighed|escape|default:0}>;"></div>
             <div id="brandidentity-content">
-                <{if $settings.forside.Forsidebilledtekst}><h1 style="color:<{$settings.forside.Tekstfarve|escape}>;"><{$settings.forside.Forsidebilledtekst}></h1><{/if}>
-                <{if $settings.forside.Undertekst}><h3 style="color:<{$settings.forside.Tekstfarve|escape}>;"><{$settings.forside.Undertekst}></h3><{/if}>
+                <{if $settings.forside.Forsidebilledtekst}><h1 style="color:<{$settings.forside.Tekstfarve|escape|default:'#FFFFFF'}>;"><{$settings.forside.Forsidebilledtekst}></h1><{/if}>
+                <{if $settings.forside.Undertekst}><h3 style="color:<{$settings.forside.Tekstfarve|escape|default:'#FFFFFF'}>;"><{$settings.forside.Undertekst}></h3><{/if}>
             </div>
         </section><!--/#brandidentity-->
         <{else}>
@@ -86,11 +81,7 @@
             <div class="container"><div class="row">
                 <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
                     <{assign var="products" value=$category->getOnlineProducts()}>
-                    <{if $settings.forside.KategoriAntal}>
-                        <{assign var="limit" value=$settings.forside.KategoriAntal}>
-                    <{else}>
-                        <{assign var="limit" value=8}>
-                    <{/if}>
+                    <{assign var="limit" value=$settings.forside.KategoriAntal|default:8}>
                     <{section name="i" loop=$products start=0 max=$limit}>
                         <{include file="_include_inner-product.html" product=$products[i]}>
                     <{/section}>

@@ -133,17 +133,17 @@
                             <input type="hidden" class="single-stock-amount" value="<{$product->getInStock($attributes[0].id, $attributes[0].value_id)}>">
                         <{/if}>
 
-                        <button class="product-teaser-readmore btn btn-primary" type="submit" value=" "><{$settings.Produktlister.Knaptekst_koeb}></button>
+                        <button class="product-teaser-readmore btn btn-primary" type="submit" value=" "><{$settings.Produktlister.Knaptekst_koeb|default:"Køb"}></button>
                     </div>
                 </form>
             <{else}>
                 <div class="product-teaser-cta">
-                    <a href="<{$product->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_ikkepaalager}></a>
+                    <a href="<{$product->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_ikkepaalager|default:"Ikke på lager"}></a>
                 </div>
             <{/if}>
         <{else}>
             <div class="product-teaser-cta">
-                <a href="<{$product->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_laesmere}></a>
+                <a href="<{$product->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_laesmere|default:"Læs mere"}></a>
             </div>
         <{/if}>
     </div>
