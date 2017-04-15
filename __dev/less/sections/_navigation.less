@@ -1,68 +1,71 @@
 #site {
+    left: 0;
     position: relative;
+    right: 0;
     top: 0;
     width: 100%;
-    right: 0;
-    left: 0;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
 }
 
 .takeover-close {
-    display: block;
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
     background: #333;
-    color: #fff;
     border: 0;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-family: Arial, Helvetica, 'Hevletica neue', sans-serif;
+    font-weight: 300;
     font-size: 30px;
+    height: 30px;
     line-height: 30px;
     padding: 0;
+    position: absolute;
+    right: 30px;
     text-align: center;
-    font-weight: 300;
-    font-family: Arial, Helvetica, 'Hevletica neue', sans-serif;
+    top: 30px;
+    width: 30px;
 }
 
 #sitenav {
 
     @media (max-width: @screen-sm-max) {
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        width: 95%;
+        background: rgba(255, 255, 255, .98);
+        font-size: 20px;
         height: 100%;
         left: -95%;
+        overflow-y: scroll;
         padding-bottom: 50px;
-        z-index: 1001;
-        font-size: 20px;
         position: fixed;
-        transition: all 0.5s;
-        background: rgba(255, 255, 255, .98);
+        width: 95%;
         top: 0;
+        transition: all 0.5s;
+        z-index: 1001;
+        -webkit-overflow-scrolling: touch;
     }
 
     @media (min-width: @screen-md) {
-        text-transform: uppercase;
-        font-size: 14px;
-        transform: none;
-        overflow: visible;
-        position: static;
-        width: auto;
-        height: auto;
         background: transparent;
         display: block;
+        font-size: 14px;
+        height: auto;
+        text-transform: uppercase;
+        overflow: visible;
+        position: static;
+        transform: none;
+        width: auto;
+
         .takeover-close {
             display: none;
         }
 
         padding: 0;
     }
+
     @media (min-width: @screen-lg) {
         font-size: 16px;
     }
+
     ul {
         list-style: none;
         padding: 0;
@@ -70,7 +73,13 @@
         @media (min-width: @screen-md) {
             padding: 0;
         }
+
         > li {
+            border-bottom: 1px solid #efefef;
+            display: block;
+            font-weight: 300;
+            line-height: 50px;
+
             a.tofrontpage {
                 @media (max-width: @screen-xs-max) {
                     &:after {
@@ -82,13 +91,11 @@
                     }
                 }
             }
-            display: block;
+
             @media (min-width: @screen-md) {
                 display: inline-block;
             }
-            border-bottom: 1px solid #efefef;
-            line-height: 50px;
-            font-weight: 300;
+
             > a {
                 @media (min-width: @screen-md) {
                     background: transparent;
@@ -96,16 +103,19 @@
                 }
             }
             a {
+                color: @sitehead-fontcolor;
                 cursor: pointer;
                 display: block;
                 padding-left: 20px;
-                color: @sitehead-fontcolor;
+
                 @media (min-width: @screen-md) {
                     padding: 14px 9px;
                 }
+
                 @media (min-width: @screen-lg) {
                     padding: 14px;
                 }
+
                 .transition(all 200ms ease;);
 
                 &:hover {
@@ -113,12 +123,9 @@
                     background: rgba(0, 0, 0, .1);
                     cursor: pointer;
                 }
-
             }
+
             .subnav-expander {
-                @media (min-width: @screen-md) {
-                    display: none;
-                }
                 float: right;
                 height: 50px;
                 width: 50px;
@@ -129,14 +136,20 @@
                 font-size: 180%;
                 padding: 0;
                 margin: 0;
+
                 &:before {
                     content: '+';
                 }
+
                 &.expanded {
                     &:before {
                         content: '–';
                     }
                     background: #f5f5f5;
+                }
+
+                @media (min-width: @screen-md) {
+                    display: none;
                 }
             }
             &._active {
@@ -156,10 +169,11 @@
 
 body.toggled-sitenav {
     #sitenav {
-        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 0 100px 50px rgba(0, 0, 0, .4);
         //transform: translate3d(0, 0, 0);
         left: 0;
-        box-shadow: 0 0 100px 50px rgba(0, 0, 0, .4);
+        -webkit-overflow-scrolling: touch;
+
         li._active {
             a {
                 border: 0 !important;
@@ -255,11 +269,11 @@ body.toggled-sitenav {
 }
 
 #shopon {
-    width: 100%;
     margin-bottom: 5px;
+    width: 100%;
 
     @media (min-width: @screen-sm) {
-        width: auto;
         margin-bottom: 0;
+        width: auto;
     }
 }

@@ -1,14 +1,15 @@
 
 #categorylist {
     margin-top: -70px;
+
     .category-teaser {
 
     }
 
     &.subcats {
-        border-bottom: 1px solid rgba(0, 0, 0, .05);
-        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         margin: 0 0 30px 0;
+        padding-bottom: 30px;
     }
 
     &.listcats {
@@ -31,29 +32,29 @@
         .transition(all 200ms ease;);
 
         &:hover {
-            text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+            text-decoration: none;
         }
 
         .category-teaser-image {
-            width: 100%;
-            height: auto;
             background: #efefef;
+            height: auto;
             overflow: hidden;
+            width: 100%;
         }
 
         .category-teaser-title {
-            text-align: center;
-            padding: 20px;
             font-size: 115%;
+            padding: 20px;
+            text-align: center;
         }
 
         .category-teaser-description {
+            font-size: 90%;
+            margin-top: -10px;
+            padding: 0 20px 10px 20px;
             text-align: center;
             text-transform: none;
-            font-size: 90%;
-            padding: 0 20px 10px 20px;
-            margin-top: -10px;
         }
     }
 }

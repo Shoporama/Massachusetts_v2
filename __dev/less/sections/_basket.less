@@ -13,8 +13,8 @@
     }
 
     .basket-content-listitem {
-        padding: 15px 0;
         border-bottom: 1px solid #eee;
+        padding: 15px 0;
     }
 
     .basket-content-listitem-attr {
@@ -23,14 +23,14 @@
     }
 
     .basket-content-listitem > a, .basket-content-listitem > span {
-        display: block;
         color: #333;
+        display: block;
     }
 
     .basket-content-listitem:after {
+        clear: both;
         content: '';
         display: block;
-        clear: both;
     }
 
     .basket-content-listitem .left, .basket-content-listitem .right {
@@ -52,8 +52,8 @@
 }
 
 #basket-summary {
-    text-align: right;
     margin-bottom: 30px;
+    text-align: right;
 }
 
 #basket-subtotal,
@@ -80,13 +80,9 @@
 }
 
 #basket-persuasion {
-    @media (max-width: @screen-sm) {
-        display: none;
-    }
-
-    width: 60%;
     float: right;
     padding-top: 30px;
+    width: 60%;
 
     ul {
         list-style-type: none;
@@ -99,9 +95,9 @@
             margin-left: 20px;
 
             &:before {
-                font-family: 'Glyphicons Halflings';
                 content: "\e013";
                 float: left;
+                font-family: 'Glyphicons Halflings';
                 margin-right: 5px;
             }
 
@@ -112,14 +108,18 @@
             }
         }
     }
+
+    @media (max-width: @screen-sm) {
+        display: none;
+    }
 }
 
 #basket-total {
-    font-size: 150%;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
-    padding: 10px 0;
+    font-size: 150%;
     margin: 30px 0 10px 0;
+    padding: 10px 0;
 
     span {
         float: right;
@@ -141,12 +141,12 @@
     }
 
     input {
-        width: 100%;
         background: #fafafa;
         border: 0 none;
         height: 40px;
         line-height: 40px;
         padding: 0px 15px;
+        width: 100%;
     }
 
     &::after {
@@ -156,26 +156,26 @@
     }
 
     button {
-        position: absolute;
         height: 34px;
         line-height: 34px;
-        padding: 0 10px;
-        right: 3px;
         margin: 3px 5px 0 0;
+        padding: 0 10px;
+        position: absolute;
+        right: 3px;
         top: 0;
     }
 }
 
 #basket-voucher-line {
+    color: #519310;
     font-size: 140%;
     text-align: right;
-    color: #519310;
 }
 
 .removefrombasket {
-    opacity: .6;
     background: transparent;
     border: 0 none;
+    opacity: 0.6;
 
     &:hover {
         opacity: 1;
@@ -189,8 +189,8 @@
 }
 
 input.voucher-active {
-    border-color: #519310;
     background: #c6eda3;
+    border-color: #519310;
 }
 
 button.voucher-active {
@@ -228,15 +228,15 @@ button.voucher-active {
 }
 
 #basket-shipping-shop-select {
-    width: 100%;
     margin-bottom: 30px;
+    width: 100%;
 
     .line {
         display: block;
 
         &:after {
-            content: '';
             clear: both;
+            content: '';
             display: block;
         }
 
@@ -250,49 +250,50 @@ button.voucher-active {
         }
 
         span.shipping-price {
-            font-size: 13px;
             clear: both;
             display: block;
+            font-size: 13px;
 
             @media (min-width: @screen-sm) {
-                float: right;
-                display: inline-block;
-                font-size: 16px;
                 clear: none;
+                display: inline-block;
+                float: right;
+                font-size: 16px;
             }
         }
     }
 
     #basket-shipping-shop-select-pos {
-        width: 100%;
         float: right;
+        width: 100%;
+
         @media (min-width: @screen-sm) {
             width: 340px;
         }
     }
 
     &:after {
+        clear: both;
         content: '';
         display: block;
-        clear: both;
     }
 
     @media (max-width: @screen-sm) {
         &:before {
             content: 'Vælg levering';
             font-size: 130%;
+            margin-bottom: 20px;
             text-align: center;
             width: 100%;
-            margin-bottom: 20px;
         }
     }
 }
 
 #outofstock-message {
-    display: block;
     background: #f5f4bc;
-    padding: 20px;
-    clear: both;
-    margin-bottom: 30px;
     border: 1px solid #e0df8e;
+    clear: both;
+    display: block;
+    margin-bottom: 30px;
+    padding: 20px;
 }
