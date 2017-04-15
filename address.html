@@ -1,171 +1,180 @@
 <{strip}>
+<div id="site" class="checkout addresspage">
 
-        <div id="site" class="checkout addresspage">
+    <{include file="_include_checkout-header.html"}>
 
-            <{include file="_include_checkout-header.html"}>
+    <section id="sitecontent">
+        <section id="page-content">
 
+            <section id="checkout-content">
+                <div class="container"><div class="row"><div class="col-xs-12 col-sm-6" id="addresses">
 
-            <section id="sitecontent">
-              <section id="page-content">
+                    <h1>Dine oplysninger</h1>
 
-                <section id="checkout-content">
-                    <div class="container"><div class="row">
+                    <form action="" method="post">
 
-                            <div class="col-xs-12 col-sm-6" id="addresses">
-
-                                <h1>Dine oplysninger</h1>
-
-                              <form action="" method="post">
-
-
-                                <div id="payment-address">
-                                  <div class="form-row form-row-input">
-                                    <label for="order_name">Navn</label>
-                                    <input type="text" name="order_name" value="" id="order_name" placeholder="Navn" class="" required/>
-                                  </div>
-                                  <div class="form-row form-row-input">
-                                    <label for="order_address">Adresse</label>
-                                    <input type="text" name="order_address" value="" id="order_address" placeholder="Adresse" class="" required/>
-                                  </div>
-                                  <div class="form-row form-row-input">
-                                    <div class="form-row-zip">
-                                      <label for="order_zipcode">Postnr.</label>
-                                      <input type="text" name="order_zipcode" value="" id="order_zipcode" placeholder="Postnr."  required/>
-                                    </div>
-                                    <div class="form-row-city">
-                                      <label for="order_city">By</label>
-                                      <input type="text" name="order_city" value="" id="order_city" placeholder="By"  required/>
-                                    </div>
-                                  </div>
-
-                                  <div class="form-row form-row-input">
-                                    <{assign var="countries" value=$webshop->getCountries()}>
-                                    <{if $countries}>
-                                      <{section name="i" loop=$countries}>
-                                        <{if $session_del.country_id == $countries[i]->getCountryId()}>
-                                          <label for="order_country_id_display" class="show">Land</label>
-                                          <input type="text" name="order_country_id_display" disabled value="<{$countries[i]->getName()|escape}>" id="order_country_display" class="address-select">
-                                          <input type="hidden" value="<{$countries[i]->getCountryId()}>" id="order_country" name="order_country_id">
-                                        <{/if}>
-
-                                      <{/section}>
-                                    <{/if}>
-                                    <a href="javascript:window.history.back(-1);" id="new-country-link">« Vælg andet land</a>
-                                  </div>
-
-                                  <{if $session_del.country_id != 1431}>
-                                  <{assign var="shippings" value=$webshop->getShippings()}>
-                                    <div style="display: none">
-                                      <{section name="i" loop=$shippings}>
-                                        <input class="shipping" type="radio" module="<{$shippings[i]->getModule()|escape}>" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" checked="checked"/>
-                                      <{/section}>
-                                    </div>
-                                  <{/if}>
-
-
-                                  <div class="form-row form-row-input">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" value="" id="email" placeholder="Email" class="" required/>
-                                  </div>
-                                  <div class="form-row form-row-input">
-                                    <label for="phone">Telefonnummer</label>
-                                    <input type="tel" name="phone" value="" id="phone" placeholder="Telefonnr." class="" required />
-                                  </div>
-                                  <div class="form-row form-row-textarea">
-                                    <label class="label" for="comments">Har du en kommentar?</label>
-                                    <textarea name="comments" rows="5" cols="10"><{$session_order.comments|escape}></textarea>
-                                  </div>
-                                </div>
-                                <!--/#payment-address-->
-
-
-                                <div class="checkbox" style="clear:both">
-                                  <label class="checkboxlabel">
-                                    <input type="checkbox" name="del_address" id="del_address" />
-                                    Alternativ leveringsadresse</label>
-                                </div>
-
-
-                                <div id="shipping-address" style="display:none">
-                                  <h3>Leveringsadresse</h3>
-                                  <div class="form-row form-row-input">
-                                    <label for="del_name">Navn</label>
-                                    <input type="text" name="del_name" value="" placeholder="Navn" id="del_name"/>
-                                  </div>
-                                  <div class="form-row form-row-input">
-                                    <label for="del_address">Adresse</label>
-                                    <input type="text" name="del_address" value="" placeholder="Adresse" id="del_address"/>
-                                  </div>
-                                  <div class="form-row form-row-input">
-                                    <div class="form-row-zip">
-                                      <label for="del_zipcode">Postnr.</label>
-                                      <input type="text" name="del_zipcode" value="" placeholder="Postnr." id="del_zipcode" />
-                                    </div>
-                                    <div class="form-row-city">
-                                      <label for="del_city">By</label>
-                                      <input type="text" name="del_city" value="" placeholder="By" id="del_city" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <!--/#shipping-address-->
-
-                                <div id="shipping-option" style="display:none">
-
-                                  <{assign var="shippings" value=$webshop->getShippings()}>
-                                  <{if $shippings}>
-                                      <{section name="i" loop=$shippings}>
-                                          <div class="line" style="">
-                                              <input type="radio" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
-                                              <label for="shipping<{$shippings[i]->getShippingId()}>"><{$shippings[i]->getName()|escape}> <{$shippings[i]->getCost()|number_format:2:",":"."}> <{$webshop->getCurrency()}></label><br/>
-                                          </div>
-                                      <{/section}>
-                                  <{/if}>
-                                </div>
-
-
-                                <div id="form-checks">
-                                  <div class="checkbox" style="clear:both">
-                                    <label class="checkboxlabel">
-                                      <input type="checkbox" name="mailinglist" id="mailinglist" value="1" /> Ja tak, tilmeld mig nyhedsbrevet</label>
-                                  </div>
-                                  <div class="checkbox" id="terms_accept_container"  style="clear:both">
-                                    <label class="checkboxlabel">
-                                      <input type="checkbox" name="terms_accept" id="terms_accept" required/> Ja, jeg accepterer <a href="/betingelser" target="_blank" id="terms_accept_trigger">handels- og leveringsbetingelserne</a></label>
-                                  </div>
-                                  <div id="payment-options" class="form-row">
-                                    <h3>Vælg betalingsmetode</h3>
-                                  <{assign var="gateways" value=$webshop->getPaymentGateways()}>
-                                    <{section name="i" loop=$gateways}>
-                                  <div class="radio" style="clear:both">
-                                        <label>
-                                            <input type="radio" name="payment_gateway_id" value="<{$gateways[i]->getPaymentGatewayId()}>" <{if $selected_payment_gateway == $gateways[i]->getPaymentGatewayId()}>checked="checked"<{/if}>/>
-                                            <{$gateways[i]->getName()|escape}><br>
-                                        </label>
-                                  </div>
-                                    <{/section}>
-                                  </div>
-                                </div>
-                                <!--/#form-checks-->
-
-                                <input type="hidden" name="skip_next" value="true"/>
-
-                                <button type="submit" name="next" id="checkout-next-btn" class="btn btn-primary btn-lg pull-right inactive" onClick="_gaq.push(['_trackEvent', 'Checkout', 'Nextstep', 'Approve']);" value=" " />
-                                Godkend og betaling
-                                </button>
-                              </form>
-
+                        <div id="payment-address">
+                            <div class="form-row form-row-input">
+                                <label for="order_name">Navn</label>
+                                <input type="text" name="order_name" value="" id="order_name" placeholder="Navn" required/>
                             </div>
-                            <!--/#addresses-->
+                            <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
+                                <div class="form-row-zip">
+                                    <label for="vat_number">Evt. CVR-nummer</label>
+                                    <input type="text" name="vat_number" value="" id="vat_number" placeholder="Evt. CVR-nummer">
+                                </div>
+                                <div class="form-row-city">
+                                    <label for="order_company_name">Evt. Firmanavn</label>
+                                    <input type="text" name="order_company_name" value="" id="order_company_name" placeholder="Evt. firmanavn">
+                                </div>
+                            <{/if}>
+                            <div class="form-row form-row-input">
+                                <label for="order_address">Adresse</label>
+                                <input type="text" name="order_address" value="" id="order_address" placeholder="Adresse" required/>
+                            </div>
+                            <div class="form-row form-row-input">
+                                <div class="form-row-zip">
+                                    <label for="order_zipcode">Postnr.</label>
+                                    <input type="text" name="order_zipcode" value="" id="order_zipcode" placeholder="Postnr." required/>
+                                </div>
+                                <div class="form-row-city">
+                                    <label for="order_city">By</label>
+                                    <input type="text" name="order_city" value="" id="order_city" placeholder="By" required/>
+                                </div>
+                            </div>
 
-                    </div></div>
-                </section>
+                            <div class="form-row form-row-input">
+                                <{assign var="countries" value=$webshop->getCountries()}>
+                                <{if $countries}>
+                                    <{section name="i" loop=$countries}>
+                                        <{if $session_del.country_id == $countries[i]->getCountryId()}>
+                                            <label for="order_country_id_display" class="show">Land</label>
+                                            <input type="text" name="order_country_id_display" disabled
+                                               value="<{$countries[i]->getName()|escape}>" id="order_country_id_display"
+                                               class="address-select">
+                                            <input type="hidden" value="<{$countries[i]->getCountryId()}>" id="order_country" name="order_country_id">
+                                        <{/if}>
+                                    <{/section}>
+                                <{/if}>
+                                <a href="javascript:window.history.back(-1);" id="new-country-link">« Vælg andet land</a>
+                            </div>
 
-              </section>
-            </section><!--/#sitecontent-->
+                            <{if $session_del.country_id != 1431}>
+                                <{assign var="shippings" value=$webshop->getShippings()}>
+                                <div style="display: none">
+                                    <{section name="i" loop=$shippings}>
+                                        <input class="shipping" type="radio" module="<{$shippings[i]->getModule()|escape}>"
+                                               value="<{$shippings[i]->getShippingId()}>" name="shipping_id"
+                                               id="shipping<{$shippings[i]->getShippingId()}>" checked="checked"/>
+                                    <{/section}>
+                                </div>
+                            <{/if}>
 
-            <{include file="_include_checkout-footer.html"}>
+                            <div class="form-row form-row-input">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" value="" id="email" placeholder="Email" required/>
+                            </div>
+                            <div class="form-row form-row-input">
+                                <label for="phone">Telefonnummer</label>
+                                <input type="tel" name="phone" value="" id="phone" placeholder="Telefonnr." required/>
+                            </div>
+                            <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
+                                <div class="form-row form-row-input">
+                                    <label for="ean_number">Evt. EAN-nummer</label>
+                                    <input type="text" name="ean_number" value="" id="ean_number" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura">
+                                </div>
+                            <{/if}>
+                            <div class="form-row form-row-textarea">
+                                <label class="label" for="comments">Har du en kommentar?</label>
+                                <textarea name="comments" id="comments" rows="5" cols="10"><{$session_order.comments|escape}></textarea>
+                            </div>
+                        </div>
+                        <!--/#payment-address-->
+
+                        <div class="checkbox" style="clear:both">
+                            <label class="checkboxlabel">
+                                <input type="checkbox" name="del_address" id="del_address"/> Alternativ leveringsadresse
+                            </label>
+                        </div>
+
+                        <div id="shipping-address" style="display:none">
+                            <h3>Leveringsadresse</h3>
+                            <div class="form-row form-row-input">
+                                <label for="del_name">Navn</label>
+                                <input type="text" name="del_name" value="" placeholder="Navn" id="del_name"/>
+                            </div>
+                            <div class="form-row form-row-input">
+                                <label for="del_address">Adresse</label>
+                                <input type="text" name="del_address" value="" placeholder="Adresse" id="del_address"/>
+                            </div>
+                            <div class="form-row form-row-input">
+                                <div class="form-row-zip">
+                                    <label for="del_zipcode">Postnr.</label>
+                                    <input type="text" name="del_zipcode" value="" placeholder="Postnr." id="del_zipcode"/>
+                                </div>
+                                <div class="form-row-city">
+                                    <label for="del_city">By</label>
+                                    <input type="text" name="del_city" value="" placeholder="By" id="del_city"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/#shipping-address-->
+
+                        <div id="shipping-option" style="display:none">
+                            <{assign var="shippings" value=$webshop->getShippings()}>
+                            <{if $shippings}>
+                                <{section name="i" loop=$shippings}>
+                                    <div class="line" style="">
+                                        <input type="radio" value="<{$shippings[i]->getShippingId()}>"
+                                               name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
+                                        <label for="shipping<{$shippings[i]->getShippingId()}>"><{$shippings[i]->getName()|escape}>
+                                            <{$shippings[i]->getCost()|number_format:2:",":"."}>
+                                            <{$webshop->getCurrency()}>
+                                        </label><br/>
+                                    </div>
+                                <{/section}>
+                            <{/if}>
+                        </div>
 
 
-        </div><!--/#site-->
+                        <div id="form-checks">
+                            <div class="checkbox" style="clear:both">
+                                <label class="checkboxlabel">
+                                    <input type="checkbox" name="mailinglist" id="mailinglist" value="1"/> Ja tak, tilmeld mig nyhedsbrevet
+                                </label>
+                            </div>
+                            <div class="checkbox" id="terms_accept_container" style="clear:both">
+                                <label class="checkboxlabel">
+                                    <input type="checkbox" name="terms_accept" id="terms_accept" required/> Ja, jeg accepterer <a href="/betingelser" target="_blank" id="terms_accept_trigger">handels- og leveringsbetingelserne</a>
+                                </label>
+                            </div>
+                            <div id="payment-options" class="form-row">
+                                <h3>Vælg betalingsmetode</h3>
+                                <{assign var="gateways" value=$webshop->getPaymentGateways()}>
+                                <{section name="i" loop=$gateways}>
+                                <div class="radio" style="clear:both">
+                                    <label>
+                                        <input type="radio" name="payment_gateway_id" value="<{$gateways[i]->getPaymentGatewayId()}>"
+                                            <{if $selected_payment_gateway == $gateways[i]->getPaymentGatewayId()}>checked="checked"<{/if}>/>
+                                            <{$gateways[i]->getName()|escape}><br>
+                                    </label>
+                                </div>
+                                <{/section}>
+                            </div>
+                        </div>
+                        <!--/#form-checks-->
 
+                        <input type="hidden" name="skip_next" value="true"/>
+
+                        <button type="submit" name="next" id="checkout-next-btn" class="btn btn-primary btn-lg pull-right inactive" onClick="_gaq.push(['_trackEvent', 'Checkout', 'Nextstep', 'Approve']);" value=" "/>Godkend og betaling</button>
+                    </form>
+
+                </div><!--/#addresses--></div></div>
+            </section>
+        </section>
+    </section><!--/#sitecontent-->
+
+    <{include file="_include_checkout-footer.html"}>
+
+</div><!--/#site-->
 <{/strip}>
