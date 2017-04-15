@@ -1,4 +1,14 @@
-<div id="site" class="">
+<{assign var="redirects_array" value=$settings.Søgeindstillinger.Søgninger_til_videresending|escape}>
+<{assign var="redirects" value=", "|explode:$redirects_array}>
+<{assign var="search" value=$get.search|lower}>
+
+<{if in_array($search, $redirects)}>
+<script type="text/javascript">
+    window.location = "/<{$search|escape}>";
+</script>
+<{/if}>
+
+<div id="site" class="search">
 
     <{include file="_include_header.html"}>
 
@@ -38,7 +48,6 @@
     </section><!--/#sitecontent-->
 
     <{include file="_include_footer.html"}>
-
 
     <button id="totop">Til toppen</button>
 
