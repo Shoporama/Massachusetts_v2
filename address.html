@@ -50,9 +50,9 @@
                                 <{if $countries}>
                                     <{section name="i" loop=$countries}>
                                         <{if $session_del.country_id == $countries[i]->getCountryId()}>
-                                            <label for="order_country_id_display" class="show">Land</label>
-                                            <input type="text" name="order_country_id_display" disabled
-                                               value="<{$countries[i]->getName()|escape}>" id="order_country_id_display"
+                                            <label for="order_country_display" class="show">Land</label>
+                                            <input type="text" name="order_country_id_display" disabled="disabled"
+                                               value="<{$countries[i]->getName()|escape}>" id="order_country_display"
                                                class="address-select">
                                             <input type="hidden" value="<{$countries[i]->getCountryId()}>" id="order_country" name="order_country_id">
                                         <{/if}>
