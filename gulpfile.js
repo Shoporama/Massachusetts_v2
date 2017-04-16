@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     lesshint = require('gulp-lesshint'),
     jslint = require('gulp-jslint'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('watch', function () {
     gulp.watch([ './__dev/less/styles.less', './__dev/less/theme-styling.less' ], ['less']);
@@ -17,6 +18,9 @@ gulp.task('less', function () {
         .pipe(plumber())
         .pipe(less())
         .pipe(gulp.dest('./css/'))
+        .pipe(autoprefixer({
+            cascade: false
+        }))
         .pipe(cssmin())
         .pipe(rename({
             suffix: '.min'
