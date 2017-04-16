@@ -17,10 +17,14 @@ gulp.task('less', function () {
     gulp.src([ './__dev/less/styles.less', './__dev/less/theme-styling.less' ])
         .pipe(plumber())
         .pipe(less())
-        .pipe(gulp.dest('./css/'))
         .pipe(autoprefixer({
-            cascade: false
+            cascade: false,
+            browsers: [
+                "> 1%",
+                "last 6 versions",
+                "iOS 8"]
         }))
+        .pipe(gulp.dest('./css/'))
         .pipe(cssmin())
         .pipe(rename({
             suffix: '.min'

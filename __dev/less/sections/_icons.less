@@ -2,25 +2,24 @@
 
 @font-face {
     font-family: "socialicons";
+    font-style: normal;
+    font-weight: normal;
     src: url("../fonts/socialicons.eot");
     src: url("../fonts/socialicons.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/socialicons.woff") format("woff"),
-    url("../fonts/socialicons.ttf") format("truetype"),
-    url("../fonts/socialicons.svg#socialicons") format("svg");
-    font-weight: normal;
-    font-style: normal;
-
+        url("../fonts/socialicons.woff") format("woff"),
+        url("../fonts/socialicons.ttf") format("truetype"),
+        url("../fonts/socialicons.svg#socialicons") format("svg");
 }
 
 [data-icon]:before {
-    font-family: "socialicons" !important;
     content: attr(data-icon);
-    font-style: normal !important;
-    font-weight: normal !important;
+    font-family: "socialicons" !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    line-height: 1;
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -28,12 +27,12 @@
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
     font-family: "socialicons" !important;
-    font-style: normal !important;
-    font-weight: normal !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    line-height: 1;
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

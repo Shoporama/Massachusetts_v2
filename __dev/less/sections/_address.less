@@ -87,26 +87,15 @@
     margin-top: 30px;
 }
 
-::-webkit-input-placeholder,
-:-moz-placeholder,
-::-moz-placeholder,
-:-ms-input-placeholder {
-    color: #555;
-}
-
-.focus:focus::-webkit-input-placeholder {
-    color: transparent !important;
-}
-
-.focus:focus::-moz-placeholder {
-    color: transparent !important;
-}
-
-.focus:focus:-moz-placeholder {
-    color: transparent !important;
-}
-
 #new-country-link {
     display: block;
     margin-bottom: 20px;
+}
+
+::placeholder {
+    color: #555;
+}
+
+.focus:focus {
+    color: transparent !important;
 }
