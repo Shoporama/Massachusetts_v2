@@ -5,8 +5,6 @@
 
     "importantRule": false,
 
-    "zeroUnit": false,
-
     "idSelector": false,
 
     "hexLength": false,
