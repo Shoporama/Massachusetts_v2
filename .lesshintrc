@@ -13,8 +13,6 @@
 
     "decimalZero": false,
 
-    "newlineAfterBlock": false,
-
     "singleLinePerSelector": false,
 
     "qualifyingElement": false,
