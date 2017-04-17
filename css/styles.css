@@ -4881,9 +4881,9 @@ iframe {
 .vidcontainer-embed {
   height: 0;
   margin-bottom: 15px;
+  overflow: hidden;
   padding-bottom: 56.25%;
   position: relative;
-  overflow: hidden;
 }
 .vidcontainer iframe,
 .vidcontainer-embed iframe {
@@ -4896,8 +4896,8 @@ iframe {
 .themeinfo {
   background: red;
   color: white;
-  text-align: center;
   padding: 5px;
+  text-align: center;
 }
 @font-face {
   font-family: "socialicons";
@@ -4907,28 +4907,28 @@ iframe {
   src: url("../fonts/socialicons.eot?#iefix") format("embedded-opentype"), url("../fonts/socialicons.woff") format("woff"), url("../fonts/socialicons.ttf") format("truetype"), url("../fonts/socialicons.svg#socialicons") format("svg");
 }
 [data-icon]:before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   content: attr(data-icon);
   font-family: "socialicons" !important;
+  font-style: normal !important;
   font-variant: normal !important;
   font-weight: normal !important;
-  font-style: normal !important;
   line-height: 1;
-  text-transform: none !important;
   speak: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-transform: none !important;
 }
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-family: "socialicons" !important;
+  font-style: normal !important;
   font-variant: normal !important;
   font-weight: normal !important;
-  font-style: normal !important;
   line-height: 1;
-  text-transform: none !important;
   speak: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-transform: none !important;
 }
 .icon-instagram:before {
   content: "\64";
@@ -4954,8 +4954,8 @@ iframe {
   box-sizing: border-box;
   color: #333;
   display: none;
-  height: 40px;
   font-size: 80%;
+  height: 40px;
   line-height: 40px;
   top: 0;
 }
@@ -4964,8 +4964,8 @@ iframe {
   margin-right: 20px;
   padding-left: 20px;
   position: relative;
-  vertical-align: middle;
   text-transform: uppercase;
+  vertical-align: middle;
 }
 #upper-sitehead .usp i {
   font-size: 15px;
@@ -4983,8 +4983,8 @@ iframe {
   color: #333;
   height: 80px;
   position: fixed;
-  width: 100%;
   top: 0;
+  width: 100%;
   z-index: 100;
   -webkit-transition: background 200ms ease, box-shadow 200ms ease;
   transition: background 200ms ease, box-shadow 200ms ease;
@@ -5053,8 +5053,8 @@ iframe {
   text-align: center;
 }
 #sitefoot #sitefoot-head img {
-  max-width: 100%;
   margin: 3px;
+  max-width: 100%;
 }
 #sitefoot #sitefoot-head .creditcard:before {
   font-size: 70px;
@@ -5064,9 +5064,9 @@ iframe {
   margin-top: 20px;
 }
 #sitefoot #sitefoot-foot {
-  padding: 30px 0 30px 0;
   background: #fff;
   color: #333;
+  padding: 30px 0 30px 0;
 }
 #sitefoot #sitefoot-foot a {
   color: #333;
@@ -5112,6 +5112,7 @@ iframe {
   border-bottom: 0;
 }
 #sitefoot .somelinks {
+  margin: 5px;
   text-align: center;
 }
 #sitefoot .somelinks a {
@@ -5121,7 +5122,6 @@ iframe {
   display: -ms-inline-flexbox;
   display: inline-flex;
   font-size: 45px;
-  margin: 5px;
 }
 @media (min-width: 992px) {
   #sitefoot .somelinks a {
@@ -5196,9 +5196,9 @@ iframe {
   position: relative;
   right: 0;
   top: 0;
-  width: 100%;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  width: 100%;
 }
 .takeover-close {
   background: #333;
@@ -5207,8 +5207,8 @@ iframe {
   color: #fff;
   display: block;
   font-family: Arial, Helvetica, 'Hevletica neue', sans-serif;
-  font-weight: 300;
   font-size: 30px;
+  font-weight: 300;
   height: 30px;
   line-height: 30px;
   padding: 0;
@@ -5325,8 +5325,8 @@ iframe {
   font-size: 180%;
   height: 50px;
   line-height: 50px;
-  padding: 0;
   margin: 0;
+  padding: 0;
   width: 50px;
 }
 #sitenav ul > li .subnav-expander:before {
@@ -5387,14 +5387,14 @@ body.toggled-sitenav #sitenav li._active a {
   border: 0 none;
   border-radius: 4px;
   color: #333;
-  height: 50px;
   font-size: 14px;
+  height: 50px;
   line-height: 1;
   padding: 0;
   position: absolute;
   right: 20px;
-  top: 15px;
   text-align: center;
+  top: 15px;
   width: 50px;
 }
 @media (min-width: 992px) {
@@ -5412,6 +5412,7 @@ body.toggled-sitenav #sitenav li._active a {
 }
 #basket-toggler.cartfull:after {
   background: #507502;
+  border-radius: 40px;
   color: #fff;
   content: attr(data-quantity-count);
   font-family: Helvetica, 'helvetica', Arial, sans-serif;
@@ -5420,11 +5421,10 @@ body.toggled-sitenav #sitenav li._active a {
   height: 24px;
   line-height: 24px;
   position: absolute;
-  text-align: center;
   right: -10px;
+  text-align: center;
   top: -10px;
   width: 24px;
-  border-radius: 40px;
 }
 #basket-toggler.cartempty:after {
   display: none;
@@ -5448,8 +5448,8 @@ body.toggled-sitenav #sitenav li._active a {
   }
 }
 #sitehead-sitesearch {
-  position: absolute;
   display: none;
+  position: absolute;
 }
 @media (min-width: 992px) {
   #sitehead-sitesearch {
@@ -5471,8 +5471,8 @@ body.toggled-sitenav #sitenav li._active a {
     transition: all 200ms ease;
   }
   #sitehead-sitesearch input:focus {
-    border-color: #333;
     background: rgba(255, 255, 255, 0.7);
+    border-color: #333;
   }
   #sitehead-sitesearch button {
     background: transparent;
@@ -5497,9 +5497,9 @@ body.toggled-sitenav #sitenav li._active a {
   background: #fff;
   border: 0 none;
   border-radius: 4px;
+  height: 60px;
   line-height: 60px;
   padding: 0 25px;
-  height: 60px;
   width: 100%;
 }
 #frontpage-search button {
@@ -5557,8 +5557,8 @@ body.toggled-sitenav #sitenav li._active a {
   width: 44px;
 }
 .autocompleter {
-  display: none;
   background: #fff;
+  display: none;
   width: 100%;
 }
 .autocompleter-show {
@@ -5685,8 +5685,8 @@ body.toggled-basket #basket {
 #product-list-head h1:after {
   content: '—';
   display: block;
-  font-weight: bold;
   font-size: 30px;
+  font-weight: bold;
   line-height: 0;
   margin: 15px;
 }
@@ -5931,11 +5931,11 @@ body.toggled-basket #basket {
 }
 #product-list-pagination nav span,
 #product-list-pagination nav a {
-  display: inline-block;
-  margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: 0;
   color: #333;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 #product-list-pagination nav span:first-child,
 #product-list-pagination nav a:first-child {
@@ -6195,9 +6195,9 @@ body.toggled-basket #basket {
   }
 }
 #product-info-container #product-page-cta-container #product-page-persuasion #product-page-persuasion-inner .usp {
+  display: block;
   line-height: 20px;
   vertical-align: middle;
-  display: block;
 }
 #product-info-container #product-page-cta-container #product-page-persuasion #product-page-persuasion-inner .usp:before {
   font-size: 20px;
@@ -6288,8 +6288,8 @@ body.toggled-basket #basket {
   }
 }
 #breadcrumbs ol li {
-  padding-left: 0;
   display: inline-block;
+  padding-left: 0;
 }
 #breadcrumbs ol li a {
   color: #333;
@@ -6319,9 +6319,9 @@ body.toggled-basket #basket {
   font-weight: 700;
 }
 #brandidentity {
-  box-sizing: border-box;
   background-position: center center;
   background-size: cover;
+  box-sizing: border-box;
   min-height: 350px;
   overflow: hidden;
   position: relative;
@@ -6453,13 +6453,13 @@ body.toggled-basket #basket {
   }
 }
 #brands {
-  padding: 50px 0;
-  border-top: 1px solid #ddd;
   background: #fff;
+  border-top: 1px solid #ddd;
+  padding: 50px 0;
 }
 #brands #brands-slided a {
-  text-align: center;
   display: block;
+  text-align: center;
 }
 #brands #brands-slided a img {
   max-width: 80%;
@@ -6469,19 +6469,19 @@ body.toggled-basket #basket {
   position: relative;
 }
 #instafeed-container:before {
-  width: 100%;
-  text-align: center;
   background: #ededed;
+  border-bottom: 2px solid #fff;
   color: #333;
-  font-size: 130%;
   content: '';
-  position: absolute;
+  font-size: 130%;
+  font-weight: 300;
   height: 50px;
   line-height: 50px;
-  font-weight: 300;
-  text-transform: uppercase;
   margin-top: -50px;
-  border-bottom: 2px solid #fff;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
 }
 @media (max-width: 768px) {
   #instafeed-container {
@@ -6489,11 +6489,11 @@ body.toggled-basket #basket {
   }
 }
 #instafeed-container #instafeed a {
-  position: relative;
-  display: inline-block;
-  color: #fff;
-  width: 25%;
   border: 2px solid #fff;
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  width: 25%;
 }
 @media (min-width: 992px) {
   #instafeed-container #instafeed a {
@@ -6504,16 +6504,16 @@ body.toggled-basket #basket {
   text-decoration: none;
 }
 #instafeed-container #instafeed a div {
+  background: rgba(0, 0, 0, 0.8);
+  line-height: 1;
+  padding: 5px;
   position: absolute;
   right: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 5px;
-  line-height: 1;
 }
 #instafeed-container #instafeed a img {
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 #shopmessage {
   font-size: 80%;
@@ -6580,8 +6580,8 @@ body.toggled-basket #basket {
 .checkout-pages .rating > label:before {
   content: "\e006";
   display: inline-block;
-  font-size: 1.25em;
   font-family: 'Glyphicons Halflings';
+  font-size: 1.25em;
   margin: 5px;
 }
 .checkout-pages .rating > label {
@@ -6633,8 +6633,8 @@ body.toggled-basket #basket {
   border-top: 1px solid #ddd;
   color: #666;
   font-size: 100%;
-  text-transform: uppercase;
   padding: 15px 0;
+  text-transform: uppercase;
 }
 #basket-content-list .basket-content-listitem {
   border-bottom: 1px solid #eee;
@@ -6700,8 +6700,8 @@ body.toggled-basket #basket {
   margin-right: 5px;
 }
 #basket-persuasion ul li:after {
-  content: '';
   clear: both;
+  content: '';
   display: block;
 }
 @media (max-width: 768px) {
@@ -6738,8 +6738,8 @@ body.toggled-basket #basket {
   width: 100%;
 }
 #basket-voucher::after {
-  content: '';
   clear: both;
+  content: '';
   display: block;
 }
 #basket-voucher button {
@@ -6774,8 +6774,8 @@ input.voucher-active {
   border-color: #519310;
 }
 button.voucher-active {
-  color: #519310;
   border-color: #519310;
+  color: #519310;
 }
 #basket-trust {
   margin-top: 20px;
@@ -6996,9 +6996,9 @@ button.voucher-active {
   border: 0 none;
   border-radius: 5px 5px 0 0;
   bottom: -60px;
-  position: fixed;
   height: 60px;
   line-height: 60px;
+  position: fixed;
   text-align: center;
   z-index: 799;
 }
