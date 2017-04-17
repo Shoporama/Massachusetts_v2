@@ -9,8 +9,6 @@
 
     "idSelector": false,
 
-    "propertyOrdering": false,
-
     "hexLength": false,
 
     "decimalZero": false,
