@@ -1,4 +1,5 @@
 <{strip}>
+<script type="text/javascript" src="js/scripts.min.js"></script>
 <div id="site" class="checkout addresspage">
 
     <{include file="_include_checkout-header.html"}>
@@ -20,14 +21,12 @@
                             </div>
                             <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
                             <div class="form-row form-row-input">
-                                <div class="form-row-zip">
-                                    <label for="vat_number">Evt. CVR-nummer</label>
-                                    <input type="text" name="vat_number" value="" id="vat_number" placeholder="Evt. CVR-nummer">
-                                </div>
-                                <div class="form-row-city">
-                                    <label for="order_company_name">Evt. Firmanavn</label>
-                                    <input type="text" name="order_company_name" value="" id="order_company_name" placeholder="Evt. firmanavn">
-                                </div>
+                                <label for="order_company_name">Evt. firmanavn, organisation eller institution</label>
+                                <input type="text" name="order_company_name" value="" id="order_company_name" placeholder="Evt. firmanavn">
+                            </div>
+                            <div class="form-row form-row-input" id="vat-number">
+                                <label for="vat_number">Evt. CVR-nummer</label>
+                                <input type="text" name="vat_number" value="" id="vat_number" placeholder="Evt. CVR-nummer">
                             </div>
                             <{/if}>
                             <div class="form-row form-row-input">
@@ -81,10 +80,21 @@
                                 <input type="tel" name="phone" value="" id="phone" placeholder="Telefonnr." required/>
                             </div>
                             <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
-                                <div class="form-row form-row-input">
+                                <div class="form-row form-row-input" id="ean-number">
                                     <label for="ean_number">Evt. EAN-nummer</label>
-                                    <input type="text" name="ean_number" value="" id="ean_number" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura">
+                                    <input type="text" name="ean_number" value="" id="ean_number" minlength="13" maxlength="13" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura">
                                 </div>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        console.log('Getting ready to change');
+                                        $('#order_company_name').change(function() {
+                                            $('#vat-number').toggle($(this).val().length !== 0);
+                                            $('#ean-number').toggle($(this).val().length !== 0);
+                                        });
+                                        $('#vat-number').hide();
+                                        $('#ean-number').hide();
+                                    });
+                                </script>
                             <{/if}>
                             <div class="form-row form-row-textarea">
                                 <label class="label" for="comments">Har du en kommentar?</label>
