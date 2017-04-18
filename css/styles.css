@@ -6627,6 +6627,10 @@ body.toggled-basket #basket {
   clear: both;
   margin-top: 2em;
 }
+.thanks .someicn {
+  font-size: 60px;
+  color: #507502;
+}
 #basket-content-list {
   list-style-type: none;
   margin: 0 0 30px 0;
