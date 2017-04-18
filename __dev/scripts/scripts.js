@@ -6,6 +6,7 @@ $(function () {
     // Inits
     massachusetts.general.init();
     massachusetts.brandslider.init();
+    massachusetts.instafeed.init();
     massachusetts.checkoutflow.init();
     massachusetts.validator.init();
     massachusetts.suggestivesearch.init();

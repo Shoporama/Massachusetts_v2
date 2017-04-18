@@ -7,6 +7,7 @@
     "bootstrap": "3.3.6",
     "fastclick": "1.0.2",
     "gulp": "~3.9.1",
+    "instafeed.js": "1.4.1",
     "jquery": "1.11.1",
     "jquery-autocompleter": "0.1.7",
     "jquery-scroll-lock": "",
@@ -29,7 +30,7 @@
   "scripts": {
     "setup": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy-js": "cp \"./node_modules/jquery-autocompleter/jquery.autocompleter.min.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/bootstrap/js/.\" ./__dev/scripts/bootstrap/ -a; cp \"./node_modules/fastclick/lib/fastclick.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/layzr.js/dist/layzr.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/owlcarousel-pre/owl-carousel/owl.carousel.min.js\" ./__dev/scripts/libs/owl/ -a; cp \"./node_modules/jquery-scroll-lock/jquery-scrollLock.min.js\" ./__dev/scripts/libs/ -a;",
+    "copy-js": "cp \"./node_modules/jquery-autocompleter/jquery.autocompleter.min.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/bootstrap/js/.\" ./__dev/scripts/bootstrap/ -a; cp \"./node_modules/fastclick/lib/fastclick.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/layzr.js/dist/layzr.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/owlcarousel-pre/owl-carousel/owl.carousel.min.js\" ./__dev/scripts/libs/owl/ -a; cp \"./node_modules/jquery-scroll-lock/jquery-scrollLock.min.js\" ./__dev/scripts/libs/ -a; cp \"./node_modules/instafeed.js/instafeed.min.js\" ./__dev/scripts/libs/",
     "copy-less": "cp \"./node_modules/bootstrap/less/.\" ./__dev/less/bootstrap/ -a; cp \"./node_modules/bootstrap/less/.\" ./__dev/less/bootstrap/ -a;",
     "copy-owl-less": "cp \"./node_modules/owlcarousel-pre/owl-carousel/owl.carousel.css\" ./__dev/less/owl/owl.carousel.less; cp \"./node_modules/owlcarousel-pre/owl-carousel/owl.theme.css\" ./__dev/less/owl/owl.theme.less; cp \"./node_modules/owlcarousel-pre/owl-carousel/owl.transitions.css\" ./__dev/less/owl/owl.transitions.less; cp \"./node_modules/owlcarousel-pre/owl-carousel/grabbing.png\" ./img/ -a; "
   },
