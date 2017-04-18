@@ -46,13 +46,13 @@
 
                 <form action="" method="post" id="shippingformular">
                     <div class="form-row form-row-checkbox">
-                    <{assign var="shippings" value=$webshop->getShippings()}>
-                    <{section name="i" loop=$shippings}>
+                        <{assign var="shippings" value=$webshop->getShippings()}>
+                        <{section name="i" loop=$shippings}>
                         <div class="line shipping_module">
                             <input class="shipping" type="radio" module="<{$shippings[i]->getModule()|escape}>" value="<{$shippings[i]->getShippingId()}>" name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
                             <label for="shipping<{$shippings[i]->getShippingId()}>"><{$shippings[i]->getName()|escape}> <{$shippings[i]->getCost()|number_format:2:",":"."}> <{$webshop->getCurrency()}></label><br/>
                         </div>
-                    <{/section}
+                        <{/section}
                     </div>
 
                     <{if $shops}>
