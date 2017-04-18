@@ -46,7 +46,11 @@
 
         <{if !$order->getPaid()}>
             <div class="order-section">
-                <p>Din ordre er endnu ikke betalt.<br> <a href="/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" class="btn btn-primary btn-lg">Gå til betaling ›</a></p>
+                <{if $order->getEanNumber()}>
+                <p>Du har valgt at betale via EAN på nummer: "<{$order->getEanNumber()}>", men ordren er endnu ikke betalt.</p>
+                <{else}>
+                <p>Din ordre er endnu ikke betalt.<br><br><a href="/payment?order_id=<{$order->getOrderId()}>&email=<{$order->getEmail()|escape}>" class="btn btn-primary btn-lg">Gå til betaling ›</a></p>
+                <{/if}>
             </div>
         <{/if}>
 
@@ -96,12 +100,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <h4>Faktureringsadresse</h4>
-                    <p><{$order->getOrderName()|escape}><br>
-                    <{if $order->getOrderCompanyName()}><{$order->getOrderCompanyName()|escape}><br><{/if}>
-                    <{$order->getOrderAddress()|escape}><br>
-                    <{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}><br>
-                    <{if $order->getOrderCountry()}><{$order->getOrderCountry()|escape}><br><{/if}>
-                    <{if $order->getPhone()}><br>Tlf. <{$order->getPhone()|escape}><{/if}></p>
+                    <p><{$order->getOrderName()|escape}>
+                    <{if $order->getOrderCompanyName()}><br><{$order->getOrderCompanyName()|escape}><{/if}>
+                    <br><{$order->getOrderAddress()|escape}>
+                    <br><{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}>
+                    <{if $order->getOrderCountry()}><br><{$order->getOrderCountry()|escape}><{/if}>
+                    <{if $order->getPhone()}><br>Tlf. <{$order->getPhone()|escape}><{/if}>
+                    <{if $order->getEanNumber()}><br>EAN-nummer <{$order->getEanNumber()|escape}><{/if}>
+                    </p>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <h4>Leveringsadresse</h4>
@@ -127,7 +133,11 @@
                 <p><{$order->getComments()|escape}></p>
             <{/if}>
             <{if $order->getPickupAddress()}>
+                <{if $order->getStatus() == "sent"}>
                 <h3>Du kan hente din pakke hos:</h3>
+                <{else}>
+                <h3>Du har valgt følgende Pakkeshop:</h3>
+                <{/if}>
                 <p><{$order->getPickupAddress()|escape|nl2br}></p>
             <{/if}>
         </div>
