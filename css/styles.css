@@ -6931,19 +6931,16 @@ button.voucher-active {
   display: block;
   margin-bottom: 20px;
 }
-::-webkit-input-placeholder {
-  color: #555;
-}
-::-moz-placeholder {
-  color: #555;
-}
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
 :-ms-input-placeholder {
   color: #555;
 }
-::placeholder {
-  color: #555;
-}
-.focus:focus {
+.focus:focus,
+.focus:focus::-webkit-input-placeholder,
+.focus:focus::-moz-placeholder,
+.focus:focus:-moz-placeholder {
   color: transparent !important;
 }
 #newsletterpopup {

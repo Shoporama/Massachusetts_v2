@@ -92,10 +92,16 @@
     margin-bottom: 20px;
 }
 
-::placeholder {
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
     color: #555;
 }
 
-.focus:focus {
+.focus:focus,
+.focus:focus::-webkit-input-placeholder,
+.focus:focus::-moz-placeholder,
+.focus:focus:-moz-placeholder {
     color: transparent !important;
 }
