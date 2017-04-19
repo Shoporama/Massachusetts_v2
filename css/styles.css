@@ -6464,57 +6464,6 @@ body.toggled-basket #basket {
 #brands #brands-slided a img {
   max-width: 80%;
 }
-#instafeed-container {
-  padding-top: 50px;
-  position: relative;
-}
-#instafeed-container:before {
-  background: #ededed;
-  border-bottom: 2px solid #fff;
-  color: #333;
-  content: '';
-  font-size: 130%;
-  font-weight: 300;
-  height: 50px;
-  line-height: 50px;
-  margin-top: -50px;
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
-  width: 100%;
-}
-@media (max-width: 768px) {
-  #instafeed-container {
-    display: none;
-  }
-}
-#instafeed-container #instafeed a {
-  border: 2px solid #fff;
-  color: #fff;
-  display: inline-block;
-  position: relative;
-  width: 25%;
-}
-@media (min-width: 992px) {
-  #instafeed-container #instafeed a {
-    width: 10%;
-  }
-}
-#instafeed-container #instafeed a:hover {
-  text-decoration: none;
-}
-#instafeed-container #instafeed a div {
-  background: rgba(0, 0, 0, 0.8);
-  line-height: 1;
-  padding: 5px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-#instafeed-container #instafeed a img {
-  height: auto;
-  width: 100%;
-}
 #shopmessage {
   font-size: 80%;
   padding: 5px;
