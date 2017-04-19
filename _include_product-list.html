@@ -1,0 +1,130 @@
+<{assign var="start_from" value=$start_from|default:0}>
+<{assign var="limit" value=$limit|default:1000}>
+
+<ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
+    <{assign var="news_until" value=$settings.globale.NyhedIndtil|default:480}>
+    <{section name="i" loop=$products start=$start_from max=$limit}>
+   
+    <{assign var="innerproduct" value="product_cache_"|cat:$products[i]->getProductId()}>
+    <{if isset($settings.Caching.MaxLevetidProduktTeaser) && isset($settings.Caching.MinLevetidProduktTeaser)}>
+        <{assign var="randomttl" value=$settings.Caching.MinLevetidProduktTeaser|mt_rand:$settings.Caching.MaxLevetidProduktTeaser}>
+    <{else}>
+        <{assign var="randomttl" value=43200|mt_rand:86400}>
+    <{/if}>
+
+    <{get_cache name=$innerproduct ttl=$randomttl assign="inner_product_cached_data"}>
+
+    <{if $inner_product_cached_data}>
+
+    <{$inner_product_cached_data}>
+
+    <{else}>
+
+    <{* cache name=$innerproduct *}>
+
+    <{assign var="images" value=$products[i]->getImages()}>
+    <{assign var="supplier" value=$products[i]->getSupplier()}>
+    <{assign var="stock" value=$products[i]->getInStockVariants()}>
+
+    <li rel="product" data-id="<{$products[i]->getProductId()}>"<{if $supplier}> data-brand="<{$supplier->getName()}>" <{/if}> class="col-xs-12 col-sm-4 col-md-3 product-teaser <{$products[i]->getCategoryNames("filter-"," ")}> <{if $supplier}> filter-<{$supplier->getName()|lower|replace:' ':'_'|replace:'.':'_'}><{/if}>" itemscope itemtype="http://schema.org/Product">
+    <div class="product-teaser-inner">
+        <a href="<{$products[i]->getRemoteUrl()|escape}>" title="<{$products[i]->getName()|escape}>">
+            <div class="sizes">
+                <{if $stock}>
+                <span>Varianter på lager:</span>
+                <ul>
+                    <{assign var="c" value=0}>
+                    <{section name="a" loop=$stock}>
+                    <{if $stock[a].attribute_value_id > 1}>
+                    <{if $c < 10}>
+                    <li><{$stock[a].name}></li>
+                    <{elseif $c == 10}>
+                    <li>mere...</li>
+                    <{/if}>
+                    <{/if}>
+                    <{/section}>
+                </ul>
+                <{else}>
+                <span>Produktet er i restordre:</span>
+                <ul>
+                    <li>Skriv dig op til at få besked, når vi får nye på lager.</li>
+                </ul>
+                <{/if}>
+            </div>
+            <{section name="j" loop=$images start=0 max=1}>
+            <img src="<{$theme_url}>/img/spinner.gif" data-layzr="<{$images[j]->getSrc(240,240, 'box')}>" data-layzr-retina="<{$images[j]->getSrc(500,500, 'box')}>" class="product-image" itemprop="image" content="<{$images[j]->getSrc(400,400, 'box')}>" alt="<{$images[j]->getDescription()|escape}>" />
+            <{/section}>
+
+            <{if $products[i]->getSalePrice() > 0}>
+            <div class="product-teaser-highlight offer">
+                <{math assign="pricedif" equation='a-b' a=$products[i]->getPrice() b=$products[i]->getSalePrice() }>
+                <{math assign="savepercent" equation='c/d*100' c=$pricedif d=$products[i]->getPrice()}>
+                -<{$savepercent|number_format:0}>%
+            </div>
+            <{elseif $products[i]->getOnlineHours() < $news_until}>
+            <div class="product-teaser-highlight news">NYHED</div>
+            <{/if}>
+
+            <div class="product-teaser-meta">
+                <div class="product-teaser-title" itemprop="name"><{$products[i]->getName()|escape}></div>
+                <div class="product-teaser-brand" itemprop="brand"><{if $supplier}><{$supplier->getName()}><{/if}></div>
+                <div class="product-teaser-text" itemprop="description"><{$products[i]->getListDescription()|escape}></div>
+                <div class="product-teaser-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                    <{if $products[i]->getSalePrice()}>
+                    <div class="product-teaser-price-before"><span><{$webshop->getCurrency()}></span> <span class="beforeprice"><{$products[i]->getPrice()|number_format:2:",":"."}></span></div>
+                    <{/if}>
+                    <div class="product-teaser-price-current">
+                        <span itemprop="priceCurrency" class="product-teaser-currency"><{$webshop->getCurrency()}></span>&nbsp;<span itemprop="price" class="product-teaser-price" content="<{$products[i]->getRealPrice()|number_format:2:".":""}>"><{$products[i]->getRealPrice()|number_format:2:",":"."}></span>
+                    </div>
+                    <{if $products[i]->getIsInStock()}>
+                    <span class="product-teaser-availability instock" >På lager</span>
+                    <link itemprop="availability" href="http://schema.org/InStock" />
+                    <{else}>
+                    <span class="product-teaser-availability outofstock">Ikke på lager</span>
+                    <{/if}>
+                </div>
+            </div>
+        </a>
+
+        <{if $settings.Produktlister.Laegikurvfraliste == 'ja'}>
+        <{if $products[i]->getIsInStock()}>
+        <form action="" method="post" class="putinbasketform">
+            <input type="hidden" name="product_id" value="<{$products[i]->getProductId()}>"/>
+            <input type="hidden" name="redirect" value="<{$products[i]->getMetaValue('redirect')|escape}>"/>
+            <input type="hidden" class="form-control amount-input" name="amount" value="1">
+            <div class="product-teaser-cta">
+                <{if $products[i]->hasVariant()}>
+                <{include file="_include_addtocart-select.html" stock=$stock}>
+                <{else}>
+                <input type="hidden" class="single-stock-amount" value="<{$products[i]->getInStock($attributes[0].id, $attributes[0].value_id)}>">
+                <{/if}>
+
+                <button class="product-teaser-readmore btn btn-primary" type="submit" value=" "><{$settings.Produktlister.Knaptekst_koeb|default:"Køb"}></button>
+            </div>
+        </form>
+        <{else}>
+        <div class="product-teaser-cta">
+            <a href="<{$products[i]->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_ikkepaalager|default:"Ikke på lager"}></a>
+        </div>
+        <{/if}>
+        <{else}>
+        <div class="product-teaser-cta">
+            <a href="<{$products[i]->getRemoteUrl()|escape}>" class="product-teaser-readmore btn btn-primary"><{$settings.Produktlister.Knaptekst_laesmere|default:"Læs mere"}></a>
+        </div>
+        <{/if}>
+    </div>
+    </li>
+    <{* /cache *}>
+    <{/if}>
+    <{/section}>
+
+</ul>
+
+<{if $pager}>
+    <{assign var="pages" value=$pager->render()}>
+    <{if $pages}>
+        <div id="product-list-pagination">
+            <nav class="pagination"><{$pages}></nav>
+        </div>
+    <{/if}>
+<{/if}>

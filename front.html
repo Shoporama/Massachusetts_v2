@@ -79,14 +79,8 @@
         <section id="highlighted-products">
             <h2 class="section-header"><{if $settings.forside.Forsideproduktoverskrift}><{$settings.forside.Forsideproduktoverskrift}><{/if}></h2>
             <div class="container"><div class="row">
-                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                    <{assign var="products" value=$category->getOnlineProducts()}>
-                    <{assign var="limit" value=$settings.forside.KategoriAntal|default:8}>
-                    <{section name="i" loop=$products start=0 max=$limit}>
-                        <{include file="_include_inner-product.html" product=$products[i]}>
-                    <{/section}>
-
-                </ul>
+                <{assign var="limit" value=$settings.forside.KategoriAntal|default:8}>
+                <{include file="_include_product-list.html" products=$category->getOnlineProducts() start_from=0 limit=$limit}>
              </div></div><!--/.row /.container-->
         </section><!--/#highlighted-products-->
 

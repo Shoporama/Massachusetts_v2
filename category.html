@@ -62,20 +62,9 @@
             <section id="products">
                 <div class="container"><div class="row">
                     <div id="noproducts">Vi har desværre ingen produkter der matcher dine kriterier</div>
-                    <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                        <{section name="i" loop=$products}>
-                            <{include file="_include_inner-product.html" product=$products[i]}>
-                        <{/section}>
-                    </ul>
 
-                    <{if $pager}>
-                        <{assign var="pages" value=$pager->render()}>
-                        <{if $pages}>
-                            <div id="product-list-pagination">
-                                <nav class="pagination"><{$pages}></nav>
-                            </div>
-                        <{/if}>
-                    <{/if}>
+                    <{include file="_include_product-list.html" products=$products}>
+
                 </div></div><!--/.container .row-->
             </section>
 

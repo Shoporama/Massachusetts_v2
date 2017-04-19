@@ -94,11 +94,7 @@
 
                     <h3>Relaterede</h3>
                     <div class="row">
-                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                            <{section name="i" loop=$related}>
-                            <{include file="_include_inner-product.html" product=$related[i]}>
-                            <{/section}>
-                        </ul>
+                        <{include file="_include_product-list.html" products=$related}>
                     </div>
                 </div>
             </div>
@@ -113,11 +109,7 @@
 
                     <h3>Andre kunder købte også</h3>
                     <div class="row">
-                        <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-                            <{section name="i" loop=$related}>
-                                <{include file="_include_inner-product.html" product=$related[i]}>
-                            <{/section}>
-                        </ul>
+                        <{include file="_include_product-list.html" products=$related}>
                     </div>
                 </div>
             </div>

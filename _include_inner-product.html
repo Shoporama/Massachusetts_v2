@@ -20,33 +20,23 @@
 <{assign var="splat" value=$product->getMetaValue('splat') }>
 <{assign var="images" value=$product->getImages()}>
 <{assign var="supplier" value=$product->getSupplier()}>
-<{assign var="profile" value=$product->getProfile()}>
-<{assign var="attr" value=$profile->getAttributeList()}>
+<{assign var="stock" value=$product->getInStockVariants()}>
 
 <li rel="product" data-id="<{$product->getProductId()}>"<{if $supplier}> data-brand="<{$supplier->getName()}>" <{/if}> class="col-xs-12 col-sm-4 col-md-3 product-teaser <{$product->getCategoryNames("filter-"," ")}> <{if $supplier}> filter-<{$supplier->getName()|lower|replace:' ':'_'|replace:'.':'_'}><{/if}>" itemscope itemtype="http://schema.org/Product">
     <div class="product-teaser-inner">
         <a href="<{$product->getRemoteUrl()|escape}>" title="<{$product->getName()|escape}>">
-            <{if $attr}>
             <div class="sizes">
-                <{if $product->getIsInStock() == true}>
+                <{if $stock}>
                 <span>Varianter på lager:</span>
                 <ul>
-                    <{section name="j" loop=$attr}>
-                        <{if $attr[j]->getIsVariant() && $attr[j]->getDataType() == "valuelist"}>
-                            <{assign var="values" value=$attr[j]->getValues()}>
-                            <{assign var="c" value=0}>
-                            <{section name="k" loop=$values}>
-
-                                <{if $product->getInStock($attr[j]->getAttributeId(), $values[k]->getAttributeValueId()) > 0}>
-                                    <{assign var="c" value=$c+1}>
-                                    <{if $c < 10}>
-                                        <li><{$values[k]->getVal()|escape}></li>
-                                    <{elseif $c == 10}>
-                                        <li>mere...</li>
-                                    <{/if}>
-                                <{/if}>
-
-                            <{/section}>
+                    <{assign var="c" value=0}>
+                    <{section name="a" loop=$stock}>
+                        <{if $stock[a].attribute_value_id > 1}>
+                            <{if $c < 10}>
+                                <li><{$stock[a].name}></li>
+                            <{elseif $c == 10}>
+                                <li>mere...</li>
+                            <{/if}>
                         <{/if}>
                     <{/section}>
                 </ul>
@@ -57,7 +47,6 @@
                 </ul>
                 <{/if}>
             </div>
-            <{/if}>
             <{section name="j" loop=$images start=0 max=1}>
                 <img src="<{$theme_url}>/img/spinner.gif" data-layzr="<{$images[j]->getSrc(240,240, 'box')}>" data-layzr-retina="<{$images[j]->getSrc(500,500, 'box')}>" class="product-image" itemprop="image" content="<{$images[j]->getSrc(400,400, 'box')}>" alt="<{$images[j]->getDescription()|escape}>" />
             <{/section}>
@@ -93,7 +82,6 @@
             </div>
         </a>
 
-
         <{if $settings.Produktlister.Laegikurvfraliste == 'ja'}>
             <{if $product->getIsInStock()}>
                 <form action="" method="post" class="putinbasketform">
@@ -102,33 +90,7 @@
                     <input type="hidden" class="form-control amount-input" name="amount" value="1">
                     <div class="product-teaser-cta">
                         <{if $product->hasVariant()}>
-                                <{section name="j" loop=$attr}>
-                                    <{if $attr[j]->getIsVariant()}>
-                                        <{if $attr[j]->getDataType() == "valuelist"}>
-                                            <{assign var="values" value=$attr[j]->getValues()}>
-                                            <select name="attributes[<{$attr[j]->getAttributeId()}>]" id="a<{$attr[j]->getAttributeId()}>" class="product-variant-selectbox" required>
-                                                <option value="" disabled="disabled" selected>Vælg variant</option>
-                                                <{section name="k" loop=$values}>
-                                                    <{assign var="attribute_price" value=$product->getAttributePrice($values[k]->getAttributeValueId())}>
-                                                    <{if $product->getInStock($attr[j]->getAttributeId(), $values[k]->getAttributeValueId()) > 0}>
-                                                        <option value="<{$values[k]->getAttributeValueId()}>" data-stockamount="<{$product->getInStock($attr[j]->getAttributeId(), $values[k]->getAttributeValueId())}>">
-                                                            <{$values[k]->getVal()|escape}>
-                                                            <{if $attribute_price}>
-                                                                &nbsp;(<{$attribute_price|number_format:2:",":"."}> <{$webshop->getCurrency()}>)
-                                                            <{/if}>
-                                                        </option>
-                                                    <{/if}>
-                                                <{/section}>
-                                            </select>
-                                        <{elseif $attr[j]->getDataType() == "string"}>
-                                            <input type="text" name="attributes[<{$attr[j]->getAttributeId()}>]" id="a<{$attr[j]->getAttributeId()}>" class="attribute"/>
-                                        <{elseif $attr[j]->getDataType() == "integer"}>
-                                            <input type="text" name="attributes[<{$attr[j]->getAttributeId()}>]" id="a<{$attr[j]->getAttributeId()}>" class="attribute"/>
-                                        <{elseif $attr[j]->getDataType() == "boolean"}>
-                                            <input type="checkbox" name="attributes[<{$attr[j]->getAttributeId()}>]" value="1" id="a<{$attr[j]->getAttributeId()}>" class="attribute"/>
-                                        <{/if}>
-                                    <{/if}>
-                                <{/section}>
+                            <{include file="_include_addtocart-select.html" stock=$stock}>
                         <{else}>
                             <input type="hidden" class="single-stock-amount" value="<{$product->getInStock($attributes[0].id, $attributes[0].value_id)}>">
                         <{/if}>

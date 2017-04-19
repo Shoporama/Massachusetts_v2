@@ -1,0 +1,30 @@
+<{if $stock}>
+    <{if $stock[1].attribute_id && $stock[1].attribute_id == 0}>
+        <{assign var="key" value="2"}>
+    <{elseif $stock[0].attribute_id == 0}>
+        <{assign var="key" value="1"}>
+    <{else}>
+        <{assign var="key" value="0"}>
+    <{/if}>
+
+    <{if $stock[$key].data_type == "valuelist"}>
+        <select name="attributes[<{$stock[$key].attribute_id}>]" id="a<{$stock[$key].attribute_id}>" class="product-variant-selectbox" required="required">
+            <option value="" disabled="disabled" selected>Vælg variant</option>
+            <{section name="j" loop=$stock start=$key}>
+                <{assign var="attribute_price" value=$stock[j].variant_price_incl_vat)}>
+                <option value="<{$stock[j].attribute_value_id}>" data-stockamount="<{$stock[j].cnt}>">
+                    <{$stock[j].name}> (<{$stock[j].cnt}> på lager)
+                    <{if $attribute_price > 0}>
+                        &nbsp;(<{$attribute_price|number_format:2:",":"."}> <{$webshop->getCurrency()}>)
+                    <{/if}>
+                </option>
+            <{/section}>
+        </select>
+    <{elseif $stock[$key].data_type == "string"}>
+        <input type="text" name="attributes[<{$stock[$key].attribute_id}>]" id="a<{$stock[$key].attribute_id}>" class="attribute"/>
+    <{elseif $stock[$key].data_type == "integer"}>
+        <input type="text" name="attributes[<{$stock[$key].attribute_id}>]" id="a<{$stock[$key].attribute_id}>" class="attribute"/>
+    <{elseif $stock[$key].data_type == "boolean"}>
+        <input type="checkbox" name="attributes[<{$stock[$key].attribute_id}>]" value="1" id="a<{$stock[$key].attribute_id}>" class="attribute"/>
+    <{/if}>
+<{/if}>

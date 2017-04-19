@@ -40,13 +40,7 @@
                         <section id="highlighted-products">
                             <h2 class="section-header">Andre købte også:</h2>
                             <div class="container"><div class="row">
-                                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-
-                                    <{section name="i" loop=$products start=0 max=8}>
-                                        <{include file="_include_inner-product.html" product=$products[i]}>
-                                    <{/section}>
-
-                                </ul>
+                                <{include file="_include_product-list.html" products=$products}>
                             </div></div>
                         </section>
                         <div class="clear"></div>
@@ -57,13 +51,7 @@
                         <section id="highlighted-products">
                             <h2 class="section-header">Relaterede produkter:</h2>
                             <div class="container"><div class="row">
-                                <ul class="product-list" itemscope itemtype="http://schema.org/ItemList">
-
-                                    <{section name="i" loop=$products start=0 max=8}>
-                                        <{include file="_include_inner-product.html" product=$products[i]}>
-                                    <{/section}>
-
-                                </ul>
+                                <{include file="_include_product-list.html" products=$products}>
                             </div></div>
                         </section>
                         <div class="clear"></div>
