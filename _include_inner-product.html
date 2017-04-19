@@ -1,5 +1,5 @@
 <{strip}>
-<{assign var="news_until" value=$settings.globale.NyhedIndtil|default:480}>
+<{assign var="news_until" value=$settings.Produkter.NyhedIndtil|default:480}>
 <{assign var="innerproduct" value="product_cache_"|cat:$product->getProductId()}>
 <{if isset($settings.Caching.MaxLevetidProduktTeaser) && isset($settings.Caching.MinLevetidProduktTeaser)}>
     <{assign var="randomttl" value=$settings.Caching.MinLevetidProduktTeaser|mt_rand:$settings.Caching.MaxLevetidProduktTeaser}>

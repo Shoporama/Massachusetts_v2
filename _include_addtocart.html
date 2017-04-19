@@ -56,9 +56,12 @@
 
                                             <{if $in_stock > 0}>
                                                 <option value="<{$values[k]->getAttributeValueId()}>" data-stockamount="<{$product->getInStock($attr[j]->getAttributeId(), $values[k]->getAttributeValueId())}>">
-                                                    <{$values[k]->getVal()|escape}> (<{$in_stock|escape}> på lager)
+                                                    <{$values[k]->getVal()|escape}>
+                                                    <{if $settings.Produkter.VisLagerStatus=="altid" || $settings.Produkter.VisLagerStatus=="under" && $settings.Produkter.VisLagerStatusNaarUnder > $in_stock}>
+                                                    &nbsp;(<{if $settings.Produkter.VisLagerPrefix}><{$settings.Produkter.VisLagerPrefix}> <{/if}><{$in_stock|escape}> på lager)
+                                                    <{/if}>
                                                     <{if $attribute_price}>
-                                                        &nbsp;(<{$attribute_price|number_format:2:",":"."}> <{$webshop->getCurrency()}>)
+                                                    &nbsp;(<{$attribute_price|number_format:2:",":"."}> <{$webshop->getCurrency()}>)
                                                     <{/if}>
                                                 </option>
                                             <{/if}>

@@ -1,6 +1,6 @@
 <{strip}>
 <{capture name="title"}><{$product->getName()}><{/capture}>
-<{assign var="news_until" value=$settings.globale.NyhedIndtil|default:480}>
+<{assign var="news_until" value=$settings.Produkter.NyhedIndtil|default:480}>
 <{assign var="images" value=$product->getImages()}>
 
 <div id="site" class="productpage">
