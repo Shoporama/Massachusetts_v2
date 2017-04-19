@@ -2744,7 +2744,7 @@ massachusetts.brandslider = massachusetts.brandslider || function () {
     function brandSliderInit() {
         $('#brands-slided').owlCarousel({
             navigation: false,
-            pagination: false,
+            pagination: true,
             items: 6,
             autoPlay: true
         });
