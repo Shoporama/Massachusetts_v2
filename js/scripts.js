@@ -2809,7 +2809,7 @@ massachusetts.checkoutflow = massachusetts.checkoutflow || function () {
 
     function checkOutFlowForm(){
         if($('#payment-address')){
-            $('#del_address').change(function() {
+            $('#show_del_address').change(function() {
                 if($(this).is(':checked')){
                     $('#shipping-address').show('fast');
                 }
