@@ -1,15 +1,10 @@
 <{if $subject}>
 
-Hvad synes du om din ordre?
+Hvad synes du om din produkterne?
 
 <{else}>
 
-<html>
-
-<head>
-    <title>Hvad synes du om din ordre?</title>
-</head>
-<body>
+    <{include file="_include_mails-header.html" title="Hvad synes du om din produkterne?"}>
 
     <p>Hej <{$order->getOrderName()|escape}>,</p>
 
@@ -17,7 +12,7 @@ Hvad synes du om din ordre?
 
     <{assign var="products" value=$order->getProducts()}>
 
-    <{section name="i" loop=$products}>
+    <{section name="i" loop=$products start=0 max=4}>
 
     <div class="left">
 
@@ -39,8 +34,6 @@ Hvad synes du om din ordre?
 
     <p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
 
-</body>
-
-</html>
+    <{include file="_include_mails-footer.html"}>
 
 <{/if}>

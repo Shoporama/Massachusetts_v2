@@ -24,13 +24,11 @@
 		
 		
 	<{/section}>
-	
-	<div class="clear"></div>	
-	
-	<p>Derfor tænkte vi, at det måske kunne være interessant med:</p>
 
-		<{assign var="loop" value=$webshop->getAfterPurchase($products)}>
+	<{assign var="loop" value=$webshop->getAfterPurchase($products)}>
 
+	<{if $loop}>
+		<p>Derfor tænkte vi, at det måske kunne være interessant med:</p>
 		<{section name="i" loop=$loop}>	
 
 			<div class="left">
@@ -48,6 +46,8 @@
 			</div>
 
 		<{/section}>
+
+	<{/if}>
 
 	<{include file="_include_mails-footer.html"}>
 

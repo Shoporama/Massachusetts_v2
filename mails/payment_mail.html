@@ -14,14 +14,14 @@
 		<{assign var="image" value=$products[i]->getImage()}>
 
 		<{if $image}>
-			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt=""/></a>
+			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt="<{$products[i]->getName()}>"/></a>
 		<{/if}>
 
 	<{/section}>
 
 	<p>Skriv meget gerne, hvis du har spørgsmål, eller der skete en eller anden fejl undervejs i din bestilling, så du ikke kunne betale ordren.</p>
 
-	<p><a href="<{$payment_url|escape}>">Gå til betalingen</a></p>
+	<{include file="_include_mails-cta.html" cta="Gå til betalingen" url=$payment_url|escape}>
 
 	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
 

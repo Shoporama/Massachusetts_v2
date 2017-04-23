@@ -6,19 +6,29 @@
 
 	<p>Hej</p>
 
-	<p>Vi har bemærket at du har lagt varer i kurven hos <a href="<{$basket_url|escape}>"><{$webshop->getName()|escape}></a>, men ikke gennemført ordren endeligt.</p>
+	<p>Jeg er en robot, der holder øje med webshoppen <a href="<{$basket_url|escape}>"><{$webshop->getName()|escape}></a>. Jeg har lagt mærke til, at du har lagt varer i kurven hos <a href="<{$basket_url|escape}>">kurven</a>, men af en eller anden grund lykkedes det ikke at gennemføre ordren.</p>
+
+	<p>Du skal vide, at vi meget gerne personligt vil hjælpe dig, hvis noget gik galt, du blev i tvivl om noget eller har brug for hjælp til noget. Du kan kontakte os
+		<{if $settings.Footer.Email && $settings.Footer.Telefon}>
+		på <{$settings.Footer.Telefon}> eller <{$settings.Footer.Email}>
+		<{else}>
+		eller ved at svare på denne e-mail
+		<{/if}>.
+	</p>
+
+	<p>Du har lagt følgende i kurven:</p>
 
 	<{section name="i" loop=$basket}>
 		<{assign var="product" value=$basket[i].product}>
 		<{assign var="image" value=$product->getImage()}>
 
 		<{if $image}>
-			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt=""/></a>
+			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt="<{$product->getName()|escape}>"/></a>
 		<{/if}>
 
 	<{/section}>
 
-	<p>Skete der et eller andet undervejs i din bestilling? Kontakt os endelig, hvis du har spørgsmål eller er i tvivl om noget.</p>
+	<p>Kontakt os endelig, hvis du har spørgsmål eller er i tvivl om noget.</p>
 
 	<{include file="_include_mails-cta.html" cta="Se til din kurv" url=$basket_url|escape}>
 
