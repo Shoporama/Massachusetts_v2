@@ -1,0 +1,46 @@
+<{if $subject}>
+
+Hvad synes du om din ordre?
+
+<{else}>
+
+<html>
+
+<head>
+    <title>Hvad synes du om din ordre?</title>
+</head>
+<body>
+
+    <p>Hej <{$order->getOrderName()|escape}>,</p>
+
+    <p>Vi vil blive rigtig glade, hvis du vil <a href="<{$order->getPublicUrl('product_review')}>">skrive en anmeldelse af de produkter</a>, du har købt hos os:</p>
+
+    <{assign var="products" value=$order->getProducts()}>
+
+    <{section name="i" loop=$products}>
+
+    <div class="left">
+
+        <a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
+            <{assign var="image" value=$products[i]->getImage()}>
+
+            <h4><{$products[i]->getName()|escape}></h4>
+
+            <{if $image}>
+            <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
+            <{/if}>
+        </a>
+
+    </div>
+
+    <{/section}>
+
+    <div class="clear"></div>
+
+    <p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
+
+</body>
+
+</html>
+
+<{/if}>
