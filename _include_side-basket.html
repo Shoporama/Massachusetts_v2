@@ -39,7 +39,7 @@
                     <span id="basket-vat">Moms udgør: <{$webshop->getCurrency()}> <{$vat|number_format:2:",":"."}></span><span id="basket-shipping">Levering: <{$webshop->getCurrency()}> <{$shipping_price|number_format:2:",":"."}></span><span id="basket-total">Total: <{$webshop->getCurrency()}> <{$total_price|number_format:2:",":"."}></span>
                 </div>
 
-                <a href="" id="shopon" class="btn btn-default btn-lg">Shop videre</a> <a href="<{$webshop->getUrl()}>/basket" id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">Gå til bestilling</a>
+                <a href="" id="shopon" class="btn btn-default btn-lg">Shop videre</a> <a href="<{$webshop->getUrl()}>/basket" id="checkout-next-btn" class="btn btn-primary btn-lg" name="next"><{$settings.CheckoutFlow.TekstPopupKurvTilBestilling|default:"Gå til bestilling"}></a>
 
             </form>
 

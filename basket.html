@@ -123,14 +123,14 @@
                         <div id="basket-nextstep">
                         <div id="basket-voucher">
                             <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-right">
-                              <input type="text" class="<{if $voucher}>voucher-active<{/if}>" name="voucher" value="<{$voucher|escape}>" placeholder="Gavekort-kode" />
+                              <input type="text" class="<{if $voucher}>voucher-active<{/if}>" name="voucher" value="<{$voucher|escape}>" placeholder="<{$settings.CheckoutFlow.GavekortTekst|default:"Gavekort-kode"}>" />
                               <button class="btn btn-default <{if $voucher}>voucher-active<{/if}>" type="submit" name="opdate"><{if $voucher}><i class="icon-grin"></i><{else}>Aktivér<{/if}></button>
                             </div><!-- /input-group -->
                         </div>
                         <!-- /input-group --></div>
 
                         <input type="submit" name="update" value="Opdater ordre" class="btn btn-default" />
-                        <input type="submit" value="Gå til levering" id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
+                        <input type="submit" value="<{$settings.CheckoutFlow.KurvTilLeveringTekst|default:"Gå til levering"}>" id="checkout-next-btn" class="btn btn-primary btn-lg" name="next">
                     </div>
                     </form>
                     <{else}>

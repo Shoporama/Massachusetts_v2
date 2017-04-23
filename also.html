@@ -22,7 +22,7 @@
                     <{/if}>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 right">
-                    <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success">Gå til kassen »</a></p>
+                    <p><a href="<{$webshop->getUrl()|escape}>/basket" class="basket_link btn btn-success"><{$settings.CheckoutFlow.MersalgGaaTilKurvTekst|default:"Gå til kassen"}> »</a></p>
                     <p><a href="<{$product->getUrl()|escape}>">« Tilbage</a></p>
                 </div>
             </div></div>

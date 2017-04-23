@@ -28,6 +28,25 @@
                                 <label for="vat_number">Evt. CVR-nummer</label>
                                 <input type="text" name="vat_number" value="" id="vat_number" placeholder="Evt. CVR-nummer">
                             </div>
+                            <div class="form-row form-row-input" id="ean-number">
+                                <label for="ean_number">Evt. EAN-nummer</label>
+                                <input type="text" name="ean_number" value="" id="ean_number" minlength="13" maxlength="13" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura" autocomplete="off">
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#order_company_name').on('keyup touchend input', function() {
+                                        $('#vat-number').toggle($(this).val().length !== 0);
+                                        $('#ean-number').toggle($(this).val().length !== 0);
+                                        if ($('#order_company_name').val().length === 0) {
+                                            $('#ean_number').val("");
+                                        }
+                                    });
+                                    if ($('#order_company_name').val().length === 0) {
+                                        $('#vat-number').hide();
+                                        $('#ean-number').hide();
+                                    }
+                                });
+                            </script>
                             <{/if}>
                             <div class="form-row form-row-input">
                                 <label for="order_address">Adresse</label>
@@ -79,27 +98,6 @@
                                 <label for="phone">Telefonnummer</label>
                                 <input type="tel" name="phone" value="" id="phone" placeholder="Telefonnr." autocomplete="home tel" required/>
                             </div>
-                            <{if $settings.CheckoutFlow.FirmaOgEANOplysninger == 'ja'}>
-                                <div class="form-row form-row-input" id="ean-number">
-                                    <label for="ean_number">Evt. EAN-nummer</label>
-                                    <input type="text" name="ean_number" value="" id="ean_number" minlength="13" maxlength="13" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura" autocomplete="off">
-                                </div>
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        $('#order_company_name').on('keyup touchend input', function() {
-                                            $('#vat-number').toggle($(this).val().length !== 0);
-                                            $('#ean-number').toggle($(this).val().length !== 0);
-                                            if ($('#order_company_name').val().length === 0) {
-                                                $('#ean_number').val("");
-                                            }
-                                        });
-                                        if ($('#order_company_name').val().length === 0) {
-                                            $('#vat-number').hide();
-                                            $('#ean-number').hide();
-                                        }
-                                    });
-                                </script>
-                            <{/if}>
                             <div class="form-row form-row-textarea">
                                 <label class="label" for="comments">Har du en kommentar?</label>
                                 <textarea name="comments" id="comments" rows="5" cols="10"><{$session_order.comments|escape}></textarea>
@@ -140,6 +138,9 @@
                             <{assign var="shippings" value=$webshop->getShippings()}>
                             <{if $shippings}>
                                 <{section name="i" loop=$shippings}>
+                                    <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>
+                                        <{assign var="chosen_shipping" value=$shippings[i]}>
+                                    <{/if}>
                                     <div class="line" style="">
                                         <input type="radio" value="<{$shippings[i]->getShippingId()}>"
                                                name="shipping_id" id="shipping<{$shippings[i]->getShippingId()}>" <{if $session_del.shipping_id == $shippings[i]->getShippingId()}>checked="checked"<{/if}>/>
@@ -156,7 +157,7 @@
                         <div id="form-checks">
                             <div class="checkbox" style="clear:both">
                                 <label class="checkboxlabel">
-                                    <input type="checkbox" name="mailinglist" id="mailinglist" value="1"/> Ja tak, tilmeld mig nyhedsbrevet
+                                    <input type="checkbox" name="mailinglist" id="mailinglist" value="1"/> <{$settings.CheckoutFlow.AddressTilmeldNyhedsbrevTekst|default:"Ja, tak, tilmeld mig nyhedsbrevet"}>
                                 </label>
                             </div>
                             <div class="checkbox" id="terms_accept_container" style="clear:both">
@@ -182,7 +183,12 @@
 
                         <input type="hidden" name="skip_next" value="true"/>
 
-                        <button type="submit" name="next" id="checkout-next-btn" class="btn btn-primary btn-lg pull-right inactive" onClick="_gaq.push(['_trackEvent', 'Checkout', 'Nextstep', 'Approve']);" value=" "/>Godkend og betaling</button>
+                        <{if $chosen_shipping->getModule()}>
+                            <button type="submit" name="next" id="checkout-next-btn" class="btn btn-primary btn-lg pull-right inactive" onClick="_gaq.push(['_trackEvent', 'Checkout', 'Nextstep', 'Approve']);" value=" "/><{$settings.CheckoutFlow.AddressGodkendVaelgPakkeshopTekst|default:"Godkend og vælg pakkeshop"}></button>
+                        <{else}>
+                            <button type="submit" name="next" id="checkout-next-btn" class="btn btn-primary btn-lg pull-right inactive" onClick="_gaq.push(['_trackEvent', 'Checkout', 'Nextstep', 'Approve']);" value=" "/><{$settings.CheckoutFlow.AddressGodkendTekst|default:"Godkend og betal"}></button>
+                        <{/if}>
+
                     </form>
 
                 </div><!--/#addresses--></div></div>
