@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <br>
-                                        <p>Giv os din vurdering</p>
+                                        <p>Giv din vurdering af <{$products[i]->getName()|escape}></p>
                                         <fieldset id="rating" class="rating" style="margin-left: -4px;">
                                             <input type="radio" id="star5" name="rating[<{$products[i]->getProductId()}>]" value="5" />
                                             <label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -77,7 +77,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <textarea placeholder="Skriv en anmeldelse.." name="description[<{$products[i]->getProductId()}>]"></textarea>
+                                    <textarea placeholder="Skriv en anmeldelse af <{$products[i]->getName()|escape}>" name="description[<{$products[i]->getProductId()}>]"></textarea>
                                 </div>
                             </div>
                         </li>
