@@ -81,6 +81,12 @@ gulp.task('build-required-mails', function () {
         .pipe(headerfooter.footer('./__dev/mails/partials/_include_mail-footer.html'))
         .pipe(rename("./invoice.html"))
         .pipe(gulp.dest('./'));
+
+    gulp.src('./__dev/mails/order_sent.html')
+        .pipe(headerfooter.header('./__dev/mails/partials/_include_mail-header.html'))
+        .pipe(headerfooter.footer('./__dev/mails/partials/_include_mail-footer.html'))
+        .pipe(rename("./order_sent.html"))
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('build-optional-mails', function () {

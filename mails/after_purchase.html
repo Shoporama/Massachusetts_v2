@@ -19,9 +19,7 @@
 	<{assign var="products" value=$order->getProducts()}>
 	
 	<{section name="i" loop=$products}>	
-	
 
-	
 			<a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
 				<{assign var="image" value=$products[i]->getImage()}>
 			

@@ -1,0 +1,39 @@
+<table class="row">
+    <tr>
+        <td class="wrapper last">
+
+            <table class="twelve columns">
+                <tr>
+                    <td align="center" style="text-align:center"><{if $settings.globale.Logo}><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" style="width:180px;" /><{/if}></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>Din ordre er sendt</h1>
+                        <p>Vi har nu sendt din ordre, der har nr. <{$order->getWebshopOrderId()}></p>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+
+<{if $order->getTrackingNumber()}>
+<{assign var="shipping" value=$order->getShipping()}>
+<table class="row callout">
+    <tr>
+        <td class="wrapper last">
+
+            <table class="twelve columns">
+                <tr>
+                    <td class="panel" style="text-align:center;">
+                        <p><a href="<{$order->getTrackingUrl()|escape}>" target="_blank">Følg din ordre hos <{$shipping->getName()|escape}></a>.</p>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+<{/if}>
