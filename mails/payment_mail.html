@@ -1,0 +1,30 @@
+<{if $subject}>
+
+	Manglende betaling for ordre
+	
+<{else}>
+
+	<p>Hej</p>
+
+	<p>Du har en ordre liggende hos os, som endnu ikke er betalt. Du har bestilt de følgende produkter.</p>
+
+	<{assign var="products" value=$order->getProducts()}>
+	<{section name="i" loop=$products}>
+
+		<{assign var="image" value=$products[i]->getImage()}>
+
+		<{if $image}>
+			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt=""/></a>
+		<{/if}>
+
+	<{/section}>
+
+	<p>Skriv meget gerne, hvis du har spørgsmål, eller der skete en eller anden fejl undervejs i din bestilling, så du ikke kunne betale ordren.</p>
+
+	<p><a href="<{$payment_url|escape}>">Gå til betalingen</a></p>
+
+	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
+
+	<p>P.S. Hvis du ikke længere ønsker ordren, er du meget velkommen til at skrive og annullere den.</p>
+
+<{/if}>
