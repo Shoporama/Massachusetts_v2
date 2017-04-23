@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     jslint = require('gulp-jslint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    headerfooter = require('gulp-headerfooter');
 
 gulp.task('watch', function () {
     gulp.watch([ './__dev/less/styles.less', './__dev/less/theme-styling.less' ], ['less']);
@@ -73,5 +74,43 @@ gulp.task('build-js', function() {
         .pipe(uglify())
         .pipe(gulp.dest('./js/'));
 });
+
+gulp.task('build-required-mails', function () {
+    gulp.src('./__dev/mails/invoice.html')
+        .pipe(headerfooter.header('./__dev/mails/partials/_include_mail-header.html'))
+        .pipe(headerfooter.footer('./__dev/mails/partials/_include_mail-footer.html'))
+        .pipe(rename("./invoice.html"))
+        .pipe(gulp.dest('./'));
+
+    gulp.src('./__dev/mails/order_sent.html')
+        .pipe(headerfooter.header('./__dev/mails/partials/_include_mail-header.html'))
+        .pipe(headerfooter.footer('./__dev/mails/partials/_include_mail-footer.html'))
+        .pipe(rename("./order_sent.html"))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('build-optional-mails', function () {
+    gulp.src('./__dev/mails/after_purchase.html')
+        .pipe(rename('./after_purchase.html'))
+        .pipe(gulp.dest('./mails/'));
+
+    gulp.src('./__dev/mails/basket_mail.html')
+        .pipe(rename('./basket_mail.html'))
+        .pipe(gulp.dest('./mails/'));
+
+    gulp.src('./__dev/mails/in_stock_mail.html')
+        .pipe(rename('./in_stock_mail.html'))
+        .pipe(gulp.dest('./mails/'));
+
+    gulp.src('./__dev/mails/payment_mail.html')
+        .pipe(rename('./payment_mail.html'))
+        .pipe(gulp.dest('./mails/'));
+
+    gulp.src('./__dev/mails/product_review_mail.html')
+        .pipe(rename('./product_review_mail.html'))
+        .pipe(gulp.dest('./mails/'));
+});
+
+gulp.task('build-mails', ['build-required-mails', 'build-optional-mails']);
 
 gulp.task('default', ['less', 'watch']);
