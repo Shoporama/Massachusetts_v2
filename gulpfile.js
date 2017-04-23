@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     jslint = require('gulp-jslint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    headerfooter = require('gulp-headerfooter');
 
 gulp.task('watch', function () {
     gulp.watch([ './__dev/less/styles.less', './__dev/less/theme-styling.less' ], ['less']);
@@ -72,6 +73,13 @@ gulp.task('build-js', function() {
         .pipe(rename('scripts.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./js/'));
+});
+
+gulp.task('build-required-mails', function () {
+    gulp.src('./__dev/mails/invoice.html', {base: "./"})
+        .pipe(headerfooter.header('./__dev/mails/partials/_include_mail-header.html'))
+        .pipe(headerfooter.footer('./__dev/mails/partials/_include_mail-footer.html'))
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('default', ['less', 'watch']);
