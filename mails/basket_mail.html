@@ -1,0 +1,27 @@
+<{if $subject}>
+
+	Kan vi hjælpe med noget?
+	
+<{else}>
+
+	<p>Hej</p>
+
+	<p>Vi har bemærket at du har lagt varer i kurven hos <a href="<{$basket_url|escape}>"><{$webshop->getName()|escape}></a>, men ikke gennemført ordren endeligt.</p>
+
+	<{section name="i" loop=$basket}>
+		<{assign var="product" value=$basket[i].product}>
+		<{assign var="image" value=$product->getImage()}>
+
+		<{if $image}>
+			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt=""/></a>
+		<{/if}>
+
+	<{/section}>
+
+	<p>Skete der et eller andet undervejs i din bestilling? Kontakt os endelig, hvis du har spørgsmål eller er i tvivl om noget.</p>
+
+	<p><a href="<{$basket_url|escape}>">Se til din kurv</a>.</p>
+
+	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
+
+<{/if}>
