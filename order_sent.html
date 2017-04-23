@@ -1,7 +1,5 @@
 <{include file="_include_mails-header.html"}>
 
-          <table class="outer"><tr><td>
-
           <table class="container">
             <tr>
               <td>
@@ -36,7 +34,8 @@
                       <table class="twelve columns">
                         <tr>
                           <td class="panel" style="text-align:center;">
-                            <p><a href="<{$order->getTrackingUrl()|escape}>" target="_blank">Følg din ordre hos <{$shipping->getName()|escape}></a>.</p>
+                              <{assign var="cta" value="Følg din ordre hos "|cat:$shipping->getName()}>
+                              <{include file="_include_mails-cta.html" cta=$cta url=$order->getTrackingUrl()}>
                           </td>
                         </tr>
                       </table>
@@ -50,5 +49,4 @@
             </tr>
           </table>
 
-          </td></tr></table>
 <{include file="_include_mails-footer.html"}>
