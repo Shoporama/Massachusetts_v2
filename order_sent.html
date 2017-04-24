@@ -1,52 +1,18 @@
 <{include file="_include_mails-header.html"}>
 
-          <table class="container">
-            <tr>
-              <td>
+<p>Hej <{$order->getOrderName()|escape}>,</p>
 
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
+<h4>Din ordre er sendt!</h4>
 
-                      <table class="twelve columns">
-                        <tr>
-                          <td align="center" style="text-align:center"><{if $settings.globale.Logo}><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" style="width:180px;" /><{/if}></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h1>Din ordre er sendt</h1>
-                            <p>Vi har nu sendt din ordre, der har nr. <{$order->getWebshopOrderId()}></p>
-                          </td>
-                        </tr>
-                      </table>
+<p>Vi har nu sendt din ordre. Ordren har nr. #<{$order->getWebshopOrderId()}>. Vi håber, at hele oplevelsen med at handle hos os, lever op til forventningerne.</p>
 
-                    </td>
-                  </tr>
-                </table>
+<{if $order->getTrackingNumber()}>
+    <{assign var="shipping" value=$order->getShipping()}>
 
+    <{assign var="cta" value="Følg din ordre hos "|cat:$shipping->getName()}>
+    <{include file="_include_mails-cta.html" cta=$cta url=$order->getTrackingUrl()}>
+<{/if}>
 
-                <{if $order->getTrackingNumber()}>
-                <{assign var="shipping" value=$order->getShipping()}>
-                <table class="row callout">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td class="panel" style="text-align:center;">
-                              <{assign var="cta" value="Følg din ordre hos "|cat:$shipping->getName()}>
-                              <{include file="_include_mails-cta.html" cta=$cta url=$order->getTrackingUrl()}>
-                          </td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-                <{/if}>
-              <!-- container end below -->
-              </td>
-            </tr>
-          </table>
+<p>Med venlig hilsen<br><{$webshop->getName()}></p>
 
 <{include file="_include_mails-footer.html"}>

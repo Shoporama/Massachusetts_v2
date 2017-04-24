@@ -7,13 +7,13 @@
 
     <{include file="_include_mails-header.html" title="Hvad synes du om din produkterne?"}>
 
-    <p>Hej <{$order->getOrderName()|escape}>,</p>
+    <p>Hej,</p>
 
-    <p>Vi vil blive rigtig glade, hvis du vil <a href="<{$order->getPublicUrl('product_review')}>">skrive en anmeldelse af de produkter</a>, du har købt hos os:</p>
+    <p>Vi bliver rigtig glade, hvis du vil <a href="<{$order->getPublicUrl('product_review')}>">skrive en anmeldelse af de produkter</a>, du har købt hos os:</p>
 
     <{include file="_include_mails-productlist.html" products=$order->getProducts()}>
 
-    <{include file="_include_mails-cta.html" cta="Del din anmeldelse" url=$order->getPublicUrl('product_review')}>
+    <{include file="_include_mails-cta.html" cta="Del din anmeldelse og gør andre klogere" url=$order->getPublicUrl('product_review')}>
 
     <p>Med venlig hilsen<br><{$webshop->getName()}></p>
 

@@ -1,100 +1,13 @@
 <{include file="_include_mails-header.html"}>
 
-          <table class="container">
-            <tr>
-              <td>
+<p>Hej <{$order->getOrderName()|escape}>,</p>
 
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
+<h4>Mange tak for din ordre!</h4>
 
-                      <table class="twelve columns">
-                        <tr>
-                          <td align="center" style="text-align:center"><{if $settings.globale.Logo}><img src="<{$webshop->getUrl()}><{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" style="width:180px;" /><{/if}></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h1>Kære, <{$order->getOrderName()|escape}></h1>
-                            <p class="lead">Mange tak for din ordre!</p>
-                          </td>
-                        </tr>
-                      </table>
+<p>Mange tak for din ordre på <{$webshop->getName()|escape}>. Kontakt os endelig, hvis du har spørgsmål.</p>
 
-                    </td>
-                  </tr>
-                </table>
+<{include file="_include_mails-cta.html" cta="Følg din ordre" url=$order->getPublicUrl()|escape}>
 
-                <table class="row">
-                  <tr>
-                    <td>
-                      <table class="twelve columns">
-                        <tr>
-                          <td class="" style="">
-                            <h2>Ordreoplysninger</h2>
+<p>Med venlig hilsen<br><{$webshop->getName()}></p>
 
-                            <h3>Varer</h3>
-                            <{assign var="products" value=$order->getProducts()}>
-
-                            <ul>
-                                <{section name="i" loop=$products}>
-                                    <li>
-                                        <strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
-                                        <{assign var="attributes" value=$products[i]->getAttributes()}>
-                                        <{if $attributes}>
-                                            <ul>
-                                                <{section name="j" loop=$attributes}>
-                                                    <li><{$attributes[j].name}>: <{$attributes[j].val}></li>
-                                                <{/section}>
-                                            </ul>
-                                        <{/if}>
-                                    </li>
-                                <{/section}>
-                            </ul>
-                            <br/>
-
-                            <h3>Pris</h3>
-                            <p><{$order->getPrice()|number_format:2:",":"."}> <{$webshop->getCurrency()}></p>
-                            <br/>
-
-                            <h3>Bestillingsadresse</h3>
-                            <p><{$order->getOrderName()|escape}></p>
-                            <p><{$order->getOrderAddress()|escape}></p>
-                            <p><{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}></p>
-                            <p><{$order->getOrderCountry()|escape}></p>
-                            <br/>
-
-                            <h3>Leveringsadresse</h3>
-                            <p><{$order->getDelName()|escape}></p>
-                            <p><{$order->getDelAddress()|escape}></p>
-                            <p><{$order->getDelZipcode()|escape}> <{$order->getDelCity()|escape}></p>
-                            <p><{$order->getDelCountry()|escape}></p>
-
-
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-
-                <table class="row callout">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td class="panel" style="text-align:center;">
-                            <p><a href="<{$order->getPublicUrl()|escape}>">Du kan følge din ordre på dette link</a></p>
-                          </td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-
-              <!-- container end below -->
-              </td>
-            </tr>
-          </table>
-<{include file="_include_mails-footer.html" title="For noget tid siden købte du ..."}>
+<{include file="_include_mails-footer.html"}>
