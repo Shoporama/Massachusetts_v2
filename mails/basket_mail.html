@@ -5,6 +5,8 @@
 	
 <{else}>
 
+	<{include file="_include_mails-header.html" title=$subject_text}>
+
 	<p>Hej,</p>
 
 	<p>Jeg er en robot, der holder øje med webshoppen <a href="<{$basket_url|escape}>"><{$webshop->getName()|escape}></a>. Jeg har lagt mærke til, at du har lagt varer i kurven hos <a href="<{$basket_url|escape}>">kurven</a>, men af en eller anden grund lykkedes det ikke at gennemføre ordren.</p>
@@ -29,5 +31,7 @@
 	<{include file="_include_mails-cta.html" cta="Se til din kurv" url=$basket_url|escape}>
 
 	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
+
+	<{include file="_include_mails-footer.html"}>
 
 <{/if}>

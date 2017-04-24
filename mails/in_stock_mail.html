@@ -5,6 +5,8 @@
 
 <{else}>
 
+	<{include file="_include_mails-header.html" title=$subject_text}>
+
 	<p>Hej,</p>
 
 	<p>Vi har nu <a href="<{$product->getRemoteUrl()|escape}>?utm_source=shoporama&utm_medium=email&utm_campaign=in_stock_email"><{$product->getName()|escape}></a> på lager igen, men kun en begrænset mængde, så skynd dig at bestil den i dag.</p>
@@ -18,4 +20,6 @@
 	<{include file="_include_mails-cta.html" cta="Bestil" url=$product->getRemoteUrl()|cat:"?utm_source=shoporama&utm_medium=email&utm_campaign=in_stock_email"|escape}>
 
 	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
+
+	<{include file="_include_mails-footer.html"}>
 <{/if}>

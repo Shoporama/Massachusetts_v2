@@ -5,6 +5,8 @@
 	
 <{else}>
 
+	<{include file="_include_mails-header.html" title=$subject_text}>
+
 	<p>Hej,</p>
 
 	<p>Du har en ordre liggende hos os, som endnu ikke er betalt. Du har bestilt de følgende produkter.</p>
@@ -19,4 +21,5 @@
 
 	<p>P.S. Hvis du ikke længere ønsker ordren, er du meget velkommen til at skrive og annullere den.</p>
 
+	<{include file="_include_mails-footer.html"}>
 <{/if}>
