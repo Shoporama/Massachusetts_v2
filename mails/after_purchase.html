@@ -21,7 +21,7 @@
 	<{assign var="loop" value=$webshop->getAfterPurchase($products)}>
 
 	<{if $loop}>
-		<p>P.S. Måske kunne du også være interesseret i følgende produkter:</p>
+		<p>P.S. Måske kunne du også være interesseret i følgende:</p>
 
 		<{include file="_include_mails-products-upsell.html" products=$loop}>
 	<{/if}>
