@@ -1,11 +1,12 @@
 <{section name="i" loop=$products}>
-
-<a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
+    <{strip}>
     <{assign var="image" value=$products[i]->getImage()}>
-
-    <{if $image}>
-    <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
-    <{/if}>
-</a>
-
+    <a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
+        <{if $image}>
+            <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
+        <{else}>
+            <{$products[i]->getName|escape}>
+        <{/if}>
+    </a>
+    <{/strip}>
 <{/section}>
