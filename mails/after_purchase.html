@@ -1,10 +1,11 @@
+<{assign var="subject_text" value="For noget tid siden købte du..."}>
 <{if $subject}>
 
-	For noget tid siden købte du ...
+	<{$subject_text}>
 
 <{else}>
 
-	<{include file="_include_mails-header.html" title="For noget tid siden købte du ..."}>
+	<{include file="_include_mails-header.html" title=$subject_text}>
 
 	<p>Hej <{$order->getOrderName()|escape}>,</p>
 

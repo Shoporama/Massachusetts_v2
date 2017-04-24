@@ -1,6 +1,7 @@
+<{assign var="subject_text" value="Vi har nu "|cat:$product->getName()|cat:" på lager igen"}>
 <{if $subject}>
 
-	Vi har nu <{$product->getName()}> på lager igen
+	 <{$subject_text}>
 
 <{else}>
 
