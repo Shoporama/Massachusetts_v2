@@ -32,21 +32,6 @@
                                 <label for="ean_number">Evt. EAN-nummer</label>
                                 <input type="text" name="ean_number" value="" id="ean_number" minlength="13" maxlength="13" placeholder="EAN-nummer - skal KUN udfyldes hvis der betales via EAN faktura" autocomplete="off">
                             </div>
-                            <script type="text/javascript">
-                                $(document).ready(function() {
-                                    $('#order_company_name').on('keyup touchend input', function() {
-                                        $('#vat-number').toggle($(this).val().length !== 0);
-                                        $('#ean-number').toggle($(this).val().length !== 0);
-                                        if ($('#order_company_name').val().length === 0) {
-                                            $('#ean_number').val("");
-                                        }
-                                    });
-                                    if ($('#order_company_name').val().length === 0) {
-                                        $('#vat-number').hide();
-                                        $('#ean-number').hide();
-                                    }
-                                });
-                            </script>
                             <{/if}>
                             <div class="form-row form-row-input">
                                 <label for="order_address">Adresse</label>
