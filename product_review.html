@@ -1,17 +1,38 @@
-<{if $order}>
+<{if $order && $order->getStatus() != 'cancelled'}>
 
 <{if $get.voted}>
 
-<p>
-    Takker!
-</p>
-
-<{else}>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
+<div class="container" id="checkout-content">
+    <div class="row" class="checkout thanks">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
             <div class="checkout-pages">
 
+                <{if settings.globale.Logo}>
+                <div id="approve-logo">
+                    <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
+                </div>
+                <{/if}>
+
+                <div class="thanksicn"><i class="glyphicon glyphicon-thumbs-up"></i></div>
+
+                <h1>Tak for din anmeldelse</h1>
+
+                <p>Du vil modtage en ordrebekræftelse på e-mail og din bestilling hurtigst muligt.</p>
+                <p><strong>Ha' en fantastisk dag!</strong></p>
+
+                <{include file="_include_socialicons.html"}>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<{else}>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+            <div class="checkout-pages">
 
                 <{if settings.globale.Logo}>
                 <div id="approve-logo">
@@ -32,27 +53,28 @@
                         <ul id="basket-content-list">
                             <{section name="i" loop=$products}>
                             <li class="basket-content-listitem">
+                                <div class="row">
+                                <div class="col-lg-4">
                                 <{assign var="images" value=$products[i]->getImages()}>
                                 <{section name="j" loop=$images max=1}>
-                                <img src="<{$images[j]->getSrc(300, 300, 'box')}>" alt=""><br>
+                                <img src="<{$images[j]->getSrc(175, 175, 'box')}>" alt="<{$products[i]->getName()}>"><br>
                                 <{/section}>
+                                </div>
+                                <div class="col-lg-8">
+                                <h4>
+                                    <{$products[i]->getName()|escape}>
+                                    <small>(<{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}>)</small>
+                                </h4>
 
-                                <strong><{$products[i]->getAmount()}> stk. <{$products[i]->getName()|escape}></strong>
-                                <small>(<{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}>)</small>
-                                <li>
-                                    <{assign var="attributes" value=$products[i]->getAttributes()}>
-                                    <{if $attributes}>
+                                <{assign var="attributes" value=$products[i]->getAttributes()}>
+                                <{if $attributes}>
                                     <ul>
                                         <{section name="j" loop=$attributes}>
                                         <li><{$attributes[j].name}>: <{$attributes[j].val}></li>
                                         <{/section}>
                                     </ul>
-                                </li>
                                 <{/if}>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <br>
-                                        <p>Giv din vurdering af <{$products[i]->getName()|escape}></p>
+                                        <p style="margin-top: 1em;"><strong>Hvor mange stjerner skal produktet have?</strong></p>
                                         <fieldset id="rating" class="rating" style="margin-left: -4px;">
                                             <input type="radio" id="star5" name="rating[<{$products[i]->getProductId()}>]" value="5" />
                                             <label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -72,11 +94,11 @@
                                         <option value="4">****</option>
                                         <option value="5">*****</option>
                                     </select> -->
-                                </div>
+
                             </div>
-                            <br>
+
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" style="margin-top: 3em; clear: both;">
                                     <textarea placeholder="Skriv en anmeldelse af <{$products[i]->getName()|escape}>" name="description[<{$products[i]->getProductId()}>]"></textarea>
                                 </div>
                             </div>
@@ -96,4 +118,29 @@
 
 <{/if}>
 
+<{else}>
+<div class="container" id="checkout-content">
+    <div class="row" class="checkout thanks">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+            <div class="checkout-pages">
+
+                <{if settings.globale.Logo}>
+                <div id="approve-logo">
+                    <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
+                </div>
+                <{/if}>
+
+                <div class="thanksicn"><i class="glyphicon glyphicon-star"></i></div>
+
+                <h1>Der er ingen produkter at anmelde</h1>
+
+                <p>Du har ikke fået denne ordre, og derfor kan du ikke anmelde produkterne.</p>
+                <p><strong><a href="/">Shop on</a></strong></p>
+
+                <{include file="_include_socialicons.html"}>
+
+            </div>
+        </div>
+    </div>
+</div>
 <{/if}>
