@@ -10,29 +10,11 @@ Hvad synes du om din produkterne?
 
     <p>Vi vil blive rigtig glade, hvis du vil <a href="<{$order->getPublicUrl('product_review')}>">skrive en anmeldelse af de produkter</a>, du har købt hos os:</p>
 
-    <{assign var="products" value=$order->getProducts()}>
+    <{include file="_include_mails-productlist.html" products=$order->getProducts()}>
 
-    <{section name="i" loop=$products start=0 max=4}>
+    <{include file="_include_mails-cta.html" cta="Del din anmeldelse" url=$order->getPublicUrl('product_review')}>
 
-    <div class="left">
-
-        <a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
-            <{assign var="image" value=$products[i]->getImage()}>
-
-            <h4><{$products[i]->getName()|escape}></h4>
-
-            <{if $image}>
-            <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
-            <{/if}>
-        </a>
-
-    </div>
-
-    <{/section}>
-
-    <div class="clear"></div>
-
-    <p>Vi ville blive rigtig glade hvis du ville skrive en <a href="<{$order->getPublicUrl('product_review')}>">anmeldelse af dem</a>.</p>
+    <p>Med venlig hilsen<br><{$webshop->getName()}></p>
 
     <{include file="_include_mails-footer.html"}>
 

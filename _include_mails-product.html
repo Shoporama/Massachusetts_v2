@@ -1,0 +1,5 @@
+<{assign var="image" value=$product->getImage()}>
+
+<{if $image}>
+    <a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt="<{$product->getName()|escape}>"/></a>
+<{/if}>

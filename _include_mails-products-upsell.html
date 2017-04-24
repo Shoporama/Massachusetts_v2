@@ -1,0 +1,17 @@
+<{section name="i" loop=$loop}>
+
+<div class="left">
+
+    <a href="<{$webshop->getUrl()|escape}>/<{$loop[i]->getUrl()|escape}>">
+        <{assign var="image" value=$loop[i]->getImage()}>
+
+        <h4><{$loop[i]->getName()|escape}></h4>
+
+        <{if $image}>
+        <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
+        <{/if}>
+    </a>
+
+</div>
+
+<{/section}>

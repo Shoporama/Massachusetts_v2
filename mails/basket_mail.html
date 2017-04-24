@@ -19,13 +19,7 @@
 	<p>Du har lagt følgende i kurven:</p>
 
 	<{section name="i" loop=$basket}>
-		<{assign var="product" value=$basket[i].product}>
-		<{assign var="image" value=$product->getImage()}>
-
-		<{if $image}>
-			<a href="<{$basket_url|escape}>"><img src="<{$webshop->getUrl()}><{$image->getSrc(250, 100, 'fit')}>" alt="<{$product->getName()|escape}>"/></a>
-		<{/if}>
-
+		<{include file="_include_mails-product.html" product=$basket[i].product}>
 	<{/section}>
 
 	<p>Kontakt os endelig, hvis du har spørgsmål eller er i tvivl om noget.</p>
