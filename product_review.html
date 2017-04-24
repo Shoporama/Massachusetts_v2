@@ -119,13 +119,13 @@
 <{/if}>
 
 <{else}>
-<div class="container" id="checkout-content">
-    <div class="row" class="checkout thanks">
+<div class="container">
+    <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-            <div class="checkout-pages">
+            <div id="checkout-content" class="checkout-pages thanks">
 
                 <{if settings.globale.Logo}>
-                <div id="approve-logo">
+                <div id="approve-logo" style="margin-bottom: 2em;">
                     <a href="/" id="logo" title="<{$webshop->getName()|escape}>"><img src="<{$settings.globale.Logo->getSrc(350, 100, 'fit')}>" id="logo-img" alt="<{$webshop->getName()|escape}>"></a>
                 </div>
                 <{/if}>
