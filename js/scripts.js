@@ -2834,8 +2834,16 @@ massachusetts.checkoutflow = massachusetts.checkoutflow || function () {
                     // Hurrah - det blev accepteret
                 }
                 else{
-                    alert('Du skal acceptere handels-og-leveringsbetingelserne');
+                    alert('Du skal acceptere handels- og leveringsbetingelserne');
                     return false;
+                }
+            });
+
+            $('#order_company_name').on('keyup touchend input', function() {
+                $('#vat-number').toggle($(this).val().length !== 0);
+                $('#ean-number').toggle($(this).val().length !== 0);
+                if ($('#order_company_name').val().length === 0) {
+                    $('#ean_number').val("");
                 }
             });
 
@@ -2850,6 +2858,11 @@ massachusetts.checkoutflow = massachusetts.checkoutflow || function () {
                     $(this).removeClass('focus');
                 }
             });
+
+            if ($('#order_company_name').val().length === 0) {
+                $('#vat-number').hide();
+                $('#ean-number').hide();
+            }
         }
     }
 
