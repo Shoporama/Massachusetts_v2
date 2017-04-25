@@ -2,7 +2,7 @@
 <{if $loop[i]->getIsInStock()}>
 <div class="left">
 
-    <a href="<{$webshop->getUrl()|escape}>/<{$loop[i]->getUrl()|escape}>">
+    <a href="<{$loop[i]->getRemoteUrl()|escape}>">
         <{assign var="image" value=$loop[i]->getImage()}>
 
         <h4><{$loop[i]->getName()|escape}></h4>
