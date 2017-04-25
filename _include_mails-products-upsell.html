@@ -1,5 +1,5 @@
 <{section name="i" loop=$loop}>
-
+<{if $loop[i]->getIsInStock()}>
 <div class="left">
 
     <a href="<{$webshop->getUrl()|escape}>/<{$loop[i]->getUrl()|escape}>">
@@ -13,5 +13,5 @@
     </a>
 
 </div>
-
+<{/if}>
 <{/section}>
