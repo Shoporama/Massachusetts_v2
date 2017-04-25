@@ -1,7 +1,7 @@
 <{section name="i" loop=$products}>
     <{strip}>
     <{assign var="image" value=$products[i]->getImage()}>
-    <a href="<{$webshop->getUrl()|escape}>/<{$products[i]->getUrl()|escape}>">
+    <a href="<{<{$products[i]->getRemoteUrl()|escape}>">
         <{if $image}>
             <img src="<{$webshop->getUrl()|escape}>/<{$image->getSrc(200, 100, 'fit')}>" alt="<{$image->getDescription()|escape}>" title="<{$image->getDescription()|escape}>" <{$image->getHtmlSize(200, 100, 'fit')}>/>
         <{else}>
