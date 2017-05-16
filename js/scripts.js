@@ -2859,9 +2859,11 @@ massachusetts.checkoutflow = massachusetts.checkoutflow || function () {
                 }
             });
 
-            if ($('#order_company_name') && $('#order_company_name').val().length === 0) {
-                $('#vat-number').hide();
-                $('#ean-number').hide();
+            if ($('#order_company_name').val()) {
+                if ($('#order_company_name').val().length === 0) {
+                    $('#vat-number').hide();
+                    $('#ean-number').hide();
+                }
             }
         }
     }
@@ -2878,13 +2880,13 @@ massachusetts.validator = massachusetts.validator || function () {
         variantValidator();
     }
 
-    function variantValidator(){
+    function variantValidator() {
         if ($('.product-variant-selecter').length > 0) {
             $('.putinbasket').click(function() {
-                if( $('.product-variant-selecter option:selected').is(':disabled')){
+                if ($('.product-variant-selecter option:selected').is(':disabled')) {
                     alert('Du skal lige vælge variant ;-)');
                     return false;
-                } else if( Number($('#amount-input').val()) > Number($('select.variant').find(':selected').data('stockamount'))){
+                } else if (Number($('#amount-input').val()) > Number($('select.variant').find(':selected').data('stockamount'))) {
                     alert('Vi har desværre ikke så mange på lager af denne variant');
                     return false;
                 }
@@ -2893,7 +2895,7 @@ massachusetts.validator = massachusetts.validator || function () {
 
         if ($('#single-stock-amount').length > 0) {
             $('.putinbasket').click(function() {
-                if( Number($('#amount-input').val()) > Number($('#single-stock-amount').val())){
+                if (Number($('#amount-input').val()) > Number($('#single-stock-amount').val())) {
                     alert('Vi har desværre ikke så mange på lager af denne vare');
                     return false;
                 }

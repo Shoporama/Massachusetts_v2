@@ -56,9 +56,11 @@ massachusetts.checkoutflow = massachusetts.checkoutflow || function () {
                 }
             });
 
-            if ($('#order_company_name') && $('#order_company_name').val().length === 0) {
-                $('#vat-number').hide();
-                $('#ean-number').hide();
+            if ($('#order_company_name').val()) {
+                if ($('#order_company_name').val().length === 0) {
+                    $('#vat-number').hide();
+                    $('#ean-number').hide();
+                }
             }
         }
     }
