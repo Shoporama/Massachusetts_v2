@@ -6597,10 +6597,6 @@ body.toggled-basket #basket {
   border-bottom: 1px solid #eee;
   padding: 15px 0;
 }
-#basket-content-list .basket-content-listitem-attr {
-  font-style: italic;
-  font-weight: 80%;
-}
 #basket-content-list .basket-content-listitem > a,
 #basket-content-list .basket-content-listitem > span {
   color: #333;
@@ -6615,9 +6611,17 @@ body.toggled-basket #basket {
 #basket-content-list .basket-content-listitem .right {
   padding: 0;
 }
+#basket-content-list .basket-content-listitem-attr {
+  font-style: italic;
+  font-weight: 600;
+}
 #basket-content-list .basket-content-listitem-amount {
   float: left;
   margin-right: 10px;
+}
+#basket-content-list .outofstock {
+  color: red;
+  font-weight: 600;
 }
 .left {
   text-align: left;

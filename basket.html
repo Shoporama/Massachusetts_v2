@@ -31,9 +31,6 @@
                                     <div class="col-xs-12 col-sm-8 col-md-9 left">
                                         <button class="removefrombasket pull-right btn btn-xs" name="remove_product" value="<{$basket[i].id}>"><i class="glyphicon glyphicon-remove"></i> <span>Fjern fra kurven</span></button>
                                         <span class="basket-content-listitem-amount"><input type="text" name="amount[<{$basket[i].id}>]" value="<{$basket[i].amount}>" size="2" /> stk.</span> <a href="<{$product->getUrl()|escape}>"><{$product->getName()|escape}>
-                                        <{if !$basket[i].in_stock}>
-                                            <div class="basket-content-listitem-stockinfo outofstock">Denne vare er ikke længere på lager</div>
-                                        <{/if}>
                                         <{assign var="attributes" value=$basket[i].attributes}>
                                         <{if $attributes}>
                                             <div class="basket-content-listitem-attr">
@@ -41,6 +38,18 @@
                                                     <span><{$a.name|escape}>: <{$a.value|escape}></span>
                                                 <{/foreach}>
                                             </div>
+                                        <{/if}>
+                                        <{if !$basket[i].in_stock}>
+                                            <{if $attributes}>
+                                                <{assign var="stock_count" value=$product->getInStock($attributes[0].id, $attributes[0].value_id)}>
+                                                <{if $stock_count < 1}>
+                                                    <div class="basket-content-listitem-stockinfo outofstock">Denne vare er ikke længere på lager</div>
+                                                <{else}>
+                                                    <div class="basket-content-listitem-stockinfo outofstock">Der er kun <{$stock_count}> på lager</div>
+                                                <{/if}>
+                                            <{else}>
+                                                <div class="basket-content-listitem-stockinfo outofstock">Denne vare er ikke længere på lager</div>
+                                            <{/if}>
                                         <{/if}>
                                     </a>
                                     <{if $product->hasBundleProducts()}>
