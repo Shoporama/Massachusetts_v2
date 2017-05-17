@@ -30,7 +30,7 @@
         <{/if}>
         <meta property="og:title" content="<{if $meta_title}><{$meta_title|escape}><{elseif $smarty.capture.title}><{$smarty.capture.title|escape}><{else}><{$webshop->getName()|escape}><{/if}>"/>
         <meta property="og:description" content="<{$meta_description|escape}>" />
-        <meta property="og:image" content="<{if $product}><{assign var='productimages' value=$product->getImages()}><{section name='o' loop=$productimages start=0 max=1}>/<{$productimages[o]->getSrc(770, 15000, 'fit')}><{/section}><{else}><{if $settings.OpenGraph.Standardbillede}><{$baseurl}><{$settings.OpenGraph.Standardbillede->getSrc(1000, 800, 'fit')}><{/if}><{/if}>"/>
+        <meta property="og:image" content="<{if $product}><{assign var='productimages' value=$product->getImages()}><{section name='o' loop=$productimages start=0 max=1}><{$webshop->getUrl()|escape}><{$productimages[o]->getSrc(770, 770, 'fit')}><{/section}><{else}><{if $settings.OpenGraph.Standardbillede}><{$baseurl}><{$settings.OpenGraph.Standardbillede->getSrc(1000, 800, 'fit')}><{/if}><{/if}>"/>
         <meta property="og:site_name" content="<{$webshop->getName()|escape}>" />
         <meta property="og:url" content="<{$current_url}>" />
         <{if $product}>
