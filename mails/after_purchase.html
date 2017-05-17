@@ -16,10 +16,13 @@
 
 	<p>Vi er meget interesseret i at høre, om vi kunne have gjort noget bedre - eller du har nogen spørgsmål?</p>
 
+	<{if $settings.Anmeldelse.Aktiv == 'ja'}>
+		<{include file="_include_shop-review.html"}>
+	<{/if}>
+
 	<p>Med venlig hilsen<br><{$webshop->getName()}></p>
 
 	<{assign var="loop" value=$webshop->getAfterPurchase($products)}>
-
 	<{if $loop}>
 		<p>P.S. Måske kunne du også være interesseret i følgende:</p>
 
