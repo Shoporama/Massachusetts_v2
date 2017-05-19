@@ -1,3 +1,8 @@
+<{if $landing_page->getMetaValue("template")}>
+<{assign var="template" value=$landing_page->getMetaValue("template")}>
+<{assign var="template_name" value="_template_$template.html")}>
+<{include file="$template_name"}>
+<{else}>
 <{strip}>
 <{capture name="title"}><{$landing_page->getName()}><{/capture}>
 <{assign var="cacheLandingPage" value=$landing_page->getLandingPageId()|cat:'_'|cat:$get.p}>
@@ -113,3 +118,4 @@
 
 <{include file="_include_side-basket.html"}>
 <{/strip}>
+<{/if}>

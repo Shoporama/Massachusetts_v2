@@ -1,3 +1,8 @@
+<{if $category->getMetaValue("template")}>
+<{assign var="template" value=$category->getMetaValue("template")}>
+<{assign var="template_name" value="_template_$template.html")}>
+<{include file="$template_name"}>
+<{else}>
 <{strip}>
 <{capture name="title"}><{$category->getName()}><{/capture}>
 <{assign var="cacheCategory" value=$category->getCategoryId()|cat:'_'|cat:$get.p}>
@@ -103,3 +108,4 @@
 
     <{include file="_include_side-basket.html"}>
 <{/strip}>
+<{/if}>
