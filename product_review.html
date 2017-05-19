@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-            <p id="checkout-content" class="checkout-pages thanks">
+            <div id="checkout-content" class="checkout-pages thanks">
 
                 <{if settings.globale.Logo}>
                 <div id="approve-logo" style="margin-bottom: 2em;">
@@ -20,17 +20,18 @@
                 <p>Vi glæder os til at læse den.</p>
                 <p><strong>Ha' en fantastisk dag!</strong></p>
 
+                <{include file="_include_socialicons.html"}>
+
                 <{if $settings.Anmeldelse.Aktiv == 'ja'}>
                     <{if $get.ratings==1 || $get.ratings==2}>
                         <p>P.S.Hvorfor levede produktet ikke op til dine forventninger? Vi vil rigtig gerne høre fra dig, hvis du vil dele din oplevelse:</p>
                         <p><a class="btn btn-lg btn-primary" href="mailto:<{$settings.Footer.Email}>">Send os en mail</a></p>
                     <{/if}>
                     <{if $get.ratings==5}>
-                        <p>P.S. Vi vil blive rigtig glade, hvis du vil dele din oplevelse. Det tager kun 2 minutter og betyder meget for os:</p>
+                        <p>P.S. Vi vil blive rigtig glade, hvis du vil dele din oplevelse med at handle hos os. Det tager kun 2 minutter og betyder meget for os:</p>
                         <{include file="_include_shop-review.html"}>
                     <{/if}>
                 <{/if}>
-                <{include file="_include_socialicons.html"}>
             </div>
         </div>
     </div>

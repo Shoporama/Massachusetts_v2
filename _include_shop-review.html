@@ -2,19 +2,18 @@
 <{assign var="minuttal" value=$tempdato|date_format:"%M"}>
 <{assign var="timetal" value=$tempdato|date_format:"%H"}>
 
-
 <{if $minuttal%2 == 0 && $timetal%2 == 0 && $settings.Anmeldelse.Facebook}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.Facebook}>" title="Anmeld på Facebook">Facebook</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.Facebook}>" title="Anmeld på Facebook">Del din oplevelse på Facebook</a></p>
 <{elseif $minuttal%2 == 0 && $timetal%2 != 0 && $settings.Anmeldelse.Trustpilot}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.Trustpilot}>" title="Anmeld på Trustpilot">Trustpilot</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.Trustpilot}>" title="Anmeld på Trustpilot">Del din oplevelse på Trustpilot</a></p>
 <{elseif $minuttal%2 != 0 && $timetal%2 == 0 && $settings.Anmeldelse.GooglePlus}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.GooglePlus}>" title="Anmeld på Google+">Google+</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.GooglePlus}>" title="Anmeld på Google+">Del din oplevelse på Google+</a></p>
 <{elseif $settings.Anmeldelse.Trustpilot}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.Trustpilot}>" title="Anmeld på Trustpilot">Trustpilot</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.Trustpilot}>" title="Anmeld på Trustpilot">Del din oplevelse på Trustpilot</a></p>
 <{elseif $settings.Anmeldelse.Facebook}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.Facebook}>" title="Anmeld på Facebook">Facebook</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.Facebook}>" title="Anmeld på Facebook">Del din oplevelse på Facebook</a></p>
 <{elseif $settings.Anmeldelse.GooglePlus}>
-<p>Del din oplevelse på <a href="<{$settings.Anmeldelse.GooglePlus}>" title="Anmeld på Google+">Google+</a></p>
+<p><a class="btn btn-lg btn-primary" href="<{$settings.Anmeldelse.GooglePlus}>" title="Anmeld på Google+">Del din oplevelse på Google+</a></p>
 <{elseif $settings.Footer.Email}>
 <p>Vi håber at du vil skrive til <a href="mailto:<{$settings.Footer.Email}>"><{$settings.Footer.Email}></a> og fortælle, hvordan du har oplevet at handle hos os.</p>
 <{else}>
