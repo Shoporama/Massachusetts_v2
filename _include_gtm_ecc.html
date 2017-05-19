@@ -1,0 +1,139 @@
+<{strip}>
+<{if $product}>
+<{assign var="brand" value=$product->getSupplier()}>
+<{assign var=productcat value=$product->getMainCategory()}>
+<!-- Google Tag Manager (Product dataLayer start) -->
+<!-- Google Tag Manager (Product Details dataLayer start) -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageCategory' : 'product-page',
+        'event' : 'eecDetail',
+        'ecommerce': {
+            'currencyCode': '<{$webshop->getCurrency()}>',
+            'detail': {
+                'id': '<{$product->getOwnId()}>',
+                'name': '<{$product->getName()}>',
+                'category': '<{if $product->getMainCategory()}><{$productcat->getName()}><{/if}>',
+                'brand': '<{if $brand}><{$brand->getName()}><{else}>Missing brand<{/if}>',
+                'price': '<{$product->getRealPrice()|number_format:2:".":""}>'
+            }
+        }
+    });
+</script>
+<!-- Google Tag Manager (Product Details dataLayer end) -->
+<!-- Google Tag Manager (Product AddToCart dataLayer start) -->
+<script>
+
+    var quantityAmount = document.getElementById('quantity-js').value;
+    console.log('before: ' + quantityAmount);
+
+    function changeQuantityAmount(){
+        quantityAmount = document.getElementById('quantity-js').value;
+        console.log('changed to: ' + quantityAmount);
+    }
+
+    function addToCart(){
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event' : 'addToCart',
+            'ecommerce': {
+                'currencyCode': '<{$webshop->getCurrency()}>',
+                'add': {
+                    'products': [{
+                        'id': '<{$product->getOwnId()}>',
+                        'name': '<{$product->getName()}>',
+                        'category': '<{if $product->getMainCategory()}><{$productcat->getName()}><{/if}>',
+                        'brand': '<{if $brand}><{$brand->getName()}><{else}>Missing brand<{/if}>',
+                        'price': '<{$product->getRealPrice()|number_format:2:".":""}>',
+                        'variant': '<{if $product->hasVariants()}><{assign var="attri" value=$product->getAttributes()}><{if $attributes}><{section name="j" loop=$attri}><{$attri[j].val}><{/section}><{/if}><{/if}>',
+                        'quantity': quantityAmount
+                    }]
+                }
+            }
+        });
+    }
+</script>
+<!-- Google Tag Manager (Product AddToCart dataLayer end) -->
+<!-- Google Tag Manager (Product dataLayer end) -->
+<{/if}>
+<{if $category}>
+<{if $category->isFront()}>
+<!-- Google Tag Manager (Front dataLayer start) -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageCategory' : 'front-page'
+    });
+</script>
+<!-- Google Tag Manager (Front dataLayer end) -->
+<{else}>
+<!-- Google Tag Manager (Category dataLayer start) -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageCategory' : 'category-page'
+    });
+</script>
+<!-- Google Tag Manager (Category dataLayer end) -->
+<{/if}>
+<{elseif $landing_page}>
+<!-- Google Tag Manager (Landingpage dataLayer start) -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageCategory' : 'landing-page'
+    });
+</script>
+<!-- Google Tag Manager (Landingpage dataLayer end) -->
+<{elseif $page}>
+<!-- Google Tag Manager (Page dataLayer start) -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageCategory' : 'static-page'
+    });
+</script>
+<!-- Google Tag Manager (Page dataLayer end) -->
+<{elseif $inc == "thanks.html"}>
+<!-- Google Tag Manager (Thanks dataLayer start) -->
+<{*if !$order->getTrackingCalled()*}>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+                'pageCategory' : 'thanks-page',
+                'event' : 'eecPurchase',
+                'ecommerce': {
+                    'currencyCode': '<{$webshop->getCurrency()}>',
+                    'purchase': {
+                        'actionField': {
+                            'id': '<{if $order->getWebshopOrderId()}><{$order->getWebshopOrderId()}><{/if}>',
+                            'revenue': '<{if $order->getPrice()}><{$order->getPrice()|number_format:2:".":""}><{/if}>',
+                            'tax':'<{if $order->getVat()}><{$order->getVat()|number_format:2:".":""}><{/if}>',
+                            'shipping': '<{if $order->getShippingPrice()}><{$order->getShippingPrice()|number_format:2:".":""}><{/if}>',
+                            'coupon': '<{if $order->getVoucherCode() }><{$order->getVoucherCode()}><{/if}>'
+                        },
+                        'products': [
+                        <{strip}>
+                        <{assign var="products" value=$order->getProducts()}>
+                <{section name="i" loop=$products}>
+            {
+                'name': '<{if $products[i]->getName()}><{$products[i]->getName()|escape:"javascript"}><{/if}>',
+                'id': '<{if $products[i]->getProductId()}><{$products[i]->getProductId()}><{/if}>',
+                'price': '<{if $products[i]->getUnitPrice()}><{$products[i]->getUnitPrice()|number_format:2:".":""}><{/if}>',
+                'brand': '<{if $products[i]->getBrand()}><{assign var=brand value=$products[i]->getBrand()}><{$brand->getName()}><{/if}>',
+                'category': '<{if $products[i]->getMainCategory()}><{assign var=productcat value=$products[i]->getMainCategory()}><{$productcat->getName()}><{/if}>',
+                'variant': '<{if $products[i]->hasVariants()}><{assign var="attributes" value=$products[i]->getAttributes()}><{if $attributes}><{section name="j" loop=$attributes}><{$attributes[j].val}><{/section}><{/if}><{/if}>',
+                'quantity': <{if $products[i]->getAmount()}><{$products[i]->getAmount()|number_format:2:".":""}><{/if}>,
+    },
+    <{/section}>
+    <{/strip}>
+    ]
+    }
+    }
+    });
+</script>
+
+<!-- Google Tag Manager (Thanks dataLayer end) -->
+<{/if}>
+<{/strip}>
