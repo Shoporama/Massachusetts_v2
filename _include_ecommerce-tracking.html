@@ -53,3 +53,27 @@
     <{/if}>
 
 <{/if}>
+
+<script type="text/javascript">
+    if (fbq) {
+        fbq('track', 'Purchase', {value: '<{$order->getPrice()|number_format:2:".":""}>', currency: 'DKK'});
+    }
+</script>
+<{assign var="products" value=$order->getProducts()}>
+<{assign var="k" value=0}>
+<{section name="i" loop=$products}>
+<{if $k==0}>
+<{assign var="ecommtracking" value="'"|cat:$products[i]->getOwnId()|cat:"'"}>
+<{assign var="k" value=1}>
+<{else}>
+<{assign var="ecommtracking" value=$ecommtracking|cat:",'"|cat:$products[i]->getOwnId()|cat:"'"}>
+<{/if}>
+<{/section}>
+<script type="text/javascript">
+    var google_tag_params = {
+        ecomm_prodid: [<{$ecommtracking}>],
+    ecomm_pagetype: 'purchase',
+            ecomm_totalvalue: '<{$order->getPrice()|number_format:2:".":","}>'
+    };
+
+</script>

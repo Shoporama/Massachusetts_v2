@@ -163,4 +163,25 @@
         $('#form').submit();
     }
 </script>
+<{if $basket}>
+<{assign var="k" value=0}>
+<{section name="i" loop=$basket}>
+<{assign var="product" value=$basket[i].product}>
+<{if $k==0}>
+<{assign var="ecommtracking" value="'"|cat:$product->getOwnId()|cat:"'"}>
+<{assign var="k" value=1}>
+<{else}>
+<{assign var="ecommtracking" value=$ecommtracking|cat:",'"|cat:$product->getOwnId()|cat:"'"}>
+<{/if}>
+<{/section}>
+
+<script type="text/javascript">
+    var google_tag_params = {
+        ecomm_prodid: [<{$ecommtracking}>],
+    ecomm_pagetype: 'cart',
+            ecomm_totalvalue: '<{$total_price|number_format:2:".":","}>'
+    };
+
+</script>
+<{/if}>
 <{/strip}>

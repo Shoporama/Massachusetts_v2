@@ -125,5 +125,38 @@
             <{include file="_include_newsletterpopup.html"}>
         <{/if}>
     <{/if}>
+    <{if $category}>
+    <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_pagetype: 'category',
+            ecomm_category: '<{$category->getName()|escape}>'
+        };
+    </script>
+    <{/if}>
+
+    <{if $landing_page}>
+    <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_pagetype: 'category',
+            ecomm_category: '<{$landing_page->getName()|escape}>'
+        };
+    </script>
+    <{/if}>
+
+    <{if $search}>
+    <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_pagetype: 'search'
+        };
+    </script>
+    <{/if}>
+
+    <{if $page}>
+    <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_pagetype: 'other'
+        };
+    </script>
+    <{/if}>
     </body>
 </html><{/strip}>

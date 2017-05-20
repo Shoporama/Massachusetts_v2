@@ -1,0 +1,69 @@
+<?xml version="1.0"?><rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+    <channel>
+        <title>Alle varer</title>
+        <link><{$landing_page->getRemoteUrl()}></link>
+        <description></description>
+
+        <{assign var="products" value=$landing_page->getProducts()}>
+        <{section name="i" loop=$products}>
+        <{assign var="images" value=$products[i]->getImages()}>
+        <{assign var="supplier" value=$products[i]->getBrand()}>
+        <item>
+            <title><{$products[i]->getName()|escape}></title>
+            <link><{$products[i]->getRemoteUrl()}></link>
+
+            <g:id><{$products[i]->getProductId()}></g:id>
+
+            <{if $products[i]->getSalePrice()}>
+            <g:price><{$products[i]->getPrice(null, null, true)|number_format:2:".":","}> DKK</g:price>
+            <g:sale_price><{$products[i]->getSalePrice(null, null, true)|number_format:2:".":","}> DKK</g:sale_price>
+            <{else}>
+            <g:price><{$products[i]->getPrice(null, null, true)|number_format:2:".":","}> DKK</g:price>
+            <{/if}>
+            <g:availability>in stock</g:availability>
+            <{section name="j" loop=$images max=1 start=0}>
+            <g:image_link><{$webshop->getUrl()}><{$images[j]->getSrc(800,800, 'fit')}></g:image_link>
+            <{/section}>
+
+            <g:condition>new</g:condition>
+
+            <{assign var=hovedkat value=$products[i]->getMainCategory()}>
+            <{if $hovedkat}>
+            <{if $hovedkat->getMetaValue('g:google_product_category')}>
+            <g:google_product_category><{$hovedkat->getMetaValue('g:google_product_category')}></g:google_product_category>
+            <{/if}>
+            <{/if}>
+
+            <{if $products[i]->hasVariants()}>
+            <{assign var="profile" value=$products[i]->getProfile()}>
+            <{assign var="attr" value=$profile->getAttributeList()}>
+
+            <{section name="h" loop=$attr}>
+            <{if $attr[h]->getDataType() == "valuelist"}>
+
+            <{assign var="values" value=$attr[h]->getValues()}>
+            <{assign var="tempgtin" value=0}>
+            <{section name="k" loop=$values}>
+            <{if $tempgtin == 0}>
+            <{if $products[i]->getInStock($attr[h]->getAttributeId(), $values[k]->getAttributeValueId()) > 0}>
+            <g:gtin><{$products[i]->getGtin($values[k]->getAttributeValueId(),$attr[h]->getAttributeId())}></g:gtin>
+            <{assign var="tempgtin" value=1}>
+            <{/if}>
+            <{/if}>
+            <{/section}>
+
+            <{/if}>
+            <{/section}>
+
+            <{else}>
+            <g:gtin><{$products[i]->getGtin()}></g:gtin>
+            <{/if}>
+            <{if $supplier}>
+            <g:brand><{$supplier->getName()}></g:brand>
+            <{/if}>
+
+            <g:product_type></g:product_type>
+        </item>
+        <{/section}>
+    </channel>
+</rss>

@@ -135,5 +135,16 @@
 </div><!--/#site-->
 
 <{include file="_include_side-basket.html"}>
-
+<script>
+    if(typeof(fbq) != 'undefined' && fbq != null) {
+        fbq.push('track', 'ViewContent', {content_ids: ['<{$product->getProductId()}>'], content_type: 'product'});
+    }
+</script>
 <{/strip}>
+<script type="text/javascript">
+    var google_tag_params = {
+        ecomm_prodid: ['<{$product->getProductId()}>'],
+        ecomm_pagetype: 'product',
+        ecomm_totalvalue: '<{$product->getRealPrice()|number_format:2:".":""}>'
+    };
+</script>
