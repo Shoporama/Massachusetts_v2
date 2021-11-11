@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <style type="text/css">
+            body{
+                font-family: 'Open Sans', sans-serif;
+                padding: 10mm;
+                font-size: 11px;
+            }
+            .page{
+                clear:both;
+                page-break-after: always;
+                width: 100%;
+            }
+            .page:last-child{
+                page-break-after: auto !important;
+            }
+            .linebottom{
+                border-bottom: 1px solid #ccc;
+            }
+            .tableheader{
+                font-weight: bold;
+                font-size: 120%;
+            }
+            .totalrow{
+                font-weight: bold;
+                font-size: 160%;
+            }
+            td{
+                padding: 2mm;
+            }
+            h1,h2,h3,h4{
+                font-weight: bold;
+            }
+            .logo{
+                width: 30mm;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="page">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td colspan="2" align="center"><img src="<{if $settings.globale.Logo}><{$settings.globale.Logo->getSrc(350, 100, 'fit')}><{/if}>" class="logo"></td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    
+                    <h4>Ordrenr. <{$order->getWebshopOrderId()}></h4>
+                    <p><{$order->getTime()|date_format:"%d/%m-%Y"}></p>
+                </td>
+                <td valign="top" align="right">
+                    <p><{$webshop->getName()}><br><br>
+                    <{t section="Printed invoice"}>Adresse linje 1<{/t}><br>
+                    <{t section="Printed invoice"}>Adresse linje 2<{/t}><br><br>
+
+                    <{t section="Printed invoice"}>Evt. tlf. nr<{/t}><br>
+                    <{t section="Printed invoice"}>Evt. email<{/t}><br><br>
+
+                    <{t section="Printed invoice"}>Evt. land eller CVR nr<{/t}></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+
+                    <h2>Ordreoplysninger</h2>
+
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="linebottom tableheader">Produkt</td>
+                            <td class="linebottom tableheader">Antal/stk.pris</td>
+                            <{*
+                                <td class="linebottom tableheader" align="right">Subtotal</td>
+                            *}>
+                        </tr>
+                        <{assign var="products" value=$order->getOrderProducts()}>
+                        <{section name="i" loop=$products}>
+                            <tr>
+                                <td valign="top"><{$products[i]->getName()|escape}><br>
+                                <{assign var="attributes" value=$products[i]->getAttributes()}>
+                                <{if $attributes}>(
+                                    <{assign var="tempcount" value=0}>
+                                    <{section name="j" loop=$attributes}>
+                                        <{math assign="tempcount" equation="x+1" x=$tempcount}>
+                                        <{$attributes[j].val}>
+                                    <{/section}>)
+                                <{/if}>
+                                
+                                </td>
+                                <td valign="top">
+                                <{$products[i]->getAmount()}> stk. <{*á <{$webshop->getCurrency()}> <{$products[i]->getUnitPrice()|number_format:2:",":"."}> *}>
+                                </td>
+                                <{*
+                                <td valign="top" align="right">
+                                        <{math assign="subtotal" equation="x*y" x=$products[i]->getAmount() y=$products[i]->getUnitPrice()}>
+                                        <{$webshop->getCurrency()}> <{$subtotal|number_format:2:",":"."}>
+                                    </td>
+                                *}>
+                            </tr>
+                        <{/section}>
+                        <tr><td colspan="3" class="linebottom"></td></tr>
+                        <{*
+                        <{if $order->getVoucherCode()}>
+                            <tr>
+                                <td class="linebottom">Rabatkode (<{$order->getVoucherCode()|escape}>)</td>
+                                <td class="linebottom" colspan="2" align="right">
+                                    <p>Rabat: <{$order->getVoucherDiscount()|escape}></p>
+                                </td>
+                            </tr>
+                        <{/if}>
+
+                            <tr>
+                                <td class="linebottom" colspan="3" align="right">
+                                    <{t section="Printed invoice"}>Moms udgør: <{/t}><{$webshop->getCurrency()}> <{$order->getVat()|number_format:2:",":"."}><br>
+                                    
+                                    <{t section="Printed invoice"}>Fragt:<{/t}> <{$webshop->getCurrency()|escape}> <{$order->getShippingPrice()|number_format:2:",":"."}>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="linebottom totalrow" colspan="3" align="right">
+                                    Total: <{$webshop->getCurrency()|escape}> <{$order->getTotalPrice()|number_format:2:",":"."}>
+                                </td>
+                            </tr>
+                        *}>
+
+                    </table>
+                    <{if $order->getComments()|escape}>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h4><{t section="Printed invoice"}>Kommentarer<{/t}></h4>
+                                    <div><{$order->getComments()|escape}></div>
+                                </td>
+                            </tr>
+                        </table>
+                    <{/if}>
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td width="33%" valign="top">
+                                <h4><{t section="Printed invoice"}>Bestillingsadresse<{/t}></h4>
+
+                                <p><{if $order->getOrderCompanyName()}><{$order->getOrderCompanyName()|escape}><br/><{/if}><{$order->getOrderName()|escape}><br/>
+                                <{$order->getOrderAddress()|escape}><br/>
+                                <{$order->getOrderZipcode()|escape}> <{$order->getOrderCity()|escape}><br/>
+                                <{$order->getOrderCountry()|escape}><br/>
+                                <{if $order->getPhone()}><br/>Tlf. <{$order->getPhone()|escape}><{/if}></p>
+                            </td>
+                            <td width="33%" valign="top">
+                                <h4>Leveringsadresse</h4>
+                                <p><{if $order->getDelCompanyName()}><{$order->getDelCompanyName()|escape}><br/><{/if}>
+                                <{$order->getDelName()|escape}><br/>
+                                <{$order->getDelAddress()|escape}><br/>
+                                <{$order->getDelZipcode()|escape}> <{$order->getDelCity()|escape}><br/>
+                                <{$order->getDelCountry()|escape}></p>
+                            </td>
+                            <td width="33%" valign="top">
+                                
+                            </td>
+                            
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
