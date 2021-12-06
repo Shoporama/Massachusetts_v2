@@ -11,7 +11,7 @@
 
 
         <div class="order-section">
-            <h1>Din ordre</h1>
+            <h1><{t section="Order confirmation"}>Din ordre<{/t}></h1>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-md-9 left">
                     <{if $order->getStatus() == "new"}>
@@ -37,7 +37,7 @@
                     Ordre ID: <{$order->getWebshopOrderId()}>
 
                     <{if $order->getInvoiceId()}>
-                        <br/>Fakturanummer: <{$order->getInvoiceId()}>
+                        <br/><{t section="Order confirmation"}>Fakturanummer<{/t}>: <{$order->getInvoiceId()}>
                     <{/if}>
                 </div>
             </div>
