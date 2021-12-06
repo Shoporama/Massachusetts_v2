@@ -141,6 +141,10 @@
                 <p><{$order->getPickupAddress()|escape|nl2br}></p>
             <{/if}>
         </div>
+        <div class="order-section">
+            <{if $settings.Footer.Navn}><{$settings.Footer.Navn|escape}><{/if}> · <{if $settings.Footer.Adresse}><{$settings.Footer.Adresse|escape}><{/if}> · <{if $settings.Footer.Postnr}><{$settings.Footer.Postnr|escape}><{/if}> <{if $settings.Footer.By}><{$settings.Footer.By|escape}><{/if}> · <{if $settings.Footer.CVR}><{$settings.Footer.CVR|escape}><{/if}>
+                    </div>
+                   
 
     </div>
 </div></div></div>
